@@ -1,0 +1,126 @@
+%{
+	#include <iostream>
+	#include "output.hpp"
+	using namespace std;
+
+	int yylex();
+	void yyerror(const char*);
+
+	ScopesTable* globalScopesTable;
+
+%}
+
+%nonassoc	VOID
+%nonassoc	INT
+%nonassoc	BYTE
+%nonassoc	B
+%nonassoc	BOOL
+%nonassoc	TRUE
+%nonassoc	FALSE
+%nonassoc	RETURN
+%nonassoc	IF
+%left	RPAREN
+%nonassoc	ELSE
+%nonassoc	WHILE
+%nonassoc	BREAK
+%nonassoc	CONTINUE
+%nonassoc	SC
+%nonassoc	COMMA
+%left	LPAREN
+%nonassoc	LBRACE
+%nonassoc	RBRACE
+%nonassoc	NUM
+%nonassoc	ID
+%nonassoc	STRING
+%right		ASSIGN
+%left		OR
+%left		AND
+%left		EQUALITY
+%nonassoc	RELOP
+%left		PLUS_OP
+%left		MUL_OP
+%right		NOT
+
+%%
+
+Program 	: Funcs															{output::printProductionRule(1);}
+			;
+Funcs		: /*epsilon*/													{output::printProductionRule(2);}
+			| FuncDecl Funcs												{output::printProductionRule(3);}
+			;
+FuncDecl	: RetType ID                                                    {OpenScope($1,$2,globalScopesTable);}
+                LPAREN
+                    Formals
+                RPAREN
+                LBRACE
+                    Statements
+                RBRACE		                                                {CloseScope();}}
+			;
+RetType		: Type															{output::printProductionRule(5);}
+			| VOID															{output::printProductionRule(6);}
+			;
+Formals		: /*epsilon*/													{addEmptyParametersList(globalScopesTable);}
+			| FormalsList													{addParametersList($1, globalScopesTable);}
+			;
+FormalsList	: FormalDecl													{output::printProductionRule(9);}
+			| FormalDecl COMMA FormalsList									{output::printProductionRule(10);}
+			;
+FormalDecl	: Type ID														{output::printProductionRule(11);}
+			;
+Statements	: Statement														{output::printProductionRule(12);}
+			| Statements Statement											{output::printProductionRule(13);}
+			;
+Statement : IF LPAREN Exp RPAREN Statement								{output::printProductionRule(21);}
+      |  IF LPAREN Exp RPAREN Statement ELSE Statement					{output::printProductionRule(22);}
+      |  WHILE LPAREN Exp RPAREN Statement								{output::printProductionRule(23);}
+      |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				{output::printProductionRule(24);}
+      | LBRACE Statements RBRACE										{output::printProductionRule(14);}
+			| Type ID SC													{semantics15($1,$2,$3, globalScopesTable);}
+			| Type ID ASSIGN Exp SC											{output::printProductionRule(16);}
+			| ID ASSIGN Exp SC												{output::printProductionRule(17);}
+			| Call SC														{output::printProductionRule(18);}
+			| RETURN SC														{output::printProductionRule(19);}
+			| RETURN Exp SC													{output::printProductionRule(20);}
+			| BREAK SC														{output::printProductionRule(25);}
+			| CONTINUE SC													{output::printProductionRule(26);}
+			;
+Call		: ID LPAREN ExpList RPAREN												{output::printProductionRule(27);}
+			| ID LPAREN RPAREN												{output::printProductionRule(28);}
+			;
+ExpList		: Exp															{output::printProductionRule(29);}
+			| Exp COMMA ExpList												{output::printProductionRule(30);}
+			;
+Type		: INT															{$$ = semanticsTypeInt();}
+			| BYTE															{$$ = semanticsTypeByte();}
+			| BOOL															{$$ = semanticsTypeBool();}
+			;
+Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
+			| Exp MUL_OP Exp												{output::printProductionRule(35);}
+			| Exp PLUS_OP Exp												{output::printProductionRule(35);}
+			| ID															{output::printProductionRule(36);}
+			| Call															{output::printProductionRule(37);}
+			| NUM															{output::printProductionRule(38);}
+			| NUM B															{output::printProductionRule(39);}
+			| STRING														{output::printProductionRule(40);}
+			| TRUE															{$$ = semanticsTrue();}
+			| FALSE															{$$ = semanticsFalse();}
+			| NOT Exp														{output::printProductionRule(43);}
+			| Exp AND Exp													{output::printProductionRule(44);}
+			| Exp OR Exp													{output::printProductionRule(45);}
+			| Exp RELOP Exp													{output::printProductionRule(46);}
+			| Exp EQUALITY Exp												{output::printProductionRule(46);}
+			;
+%%
+
+int main(){
+    globalScopesTable = new ScopesTable();
+	return yyparse();
+}
+
+
+void yyerror(const char*){
+	extern int yylineno;
+	output::errorSyn(yylineno);
+	exit (0);
+}	
+
