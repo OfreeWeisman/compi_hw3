@@ -32,3 +32,24 @@ ScopesTable::ScopesTable() {
     relativeLocation = -1;
 }
 
+Scope::Scope(Scope *fatherScope) : fatherScope(fatherScope){
+    mySymbols = nullptr;
+    innerScopes = nullptr;
+    parametersListSize = 0;
+}
+
+int Scope::getParametersListSize() const {
+    return parametersListSize;
+}
+
+void Scope::incParametersListSize() {
+    Scope::parametersListSize++;
+}
+
+Scope *Scope::getFatherScope() {
+    return fatherScope;
+}
+
+Symbol *Scope::getLastSymbol() {
+    return mySymbols->back();
+}

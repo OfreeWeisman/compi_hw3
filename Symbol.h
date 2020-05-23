@@ -13,6 +13,7 @@ using namespace std;
 
 class Symbol {
 private:
+
     string name;
     TypesEnum type;
     int relativeLocation;
@@ -32,6 +33,7 @@ private:
     list<TypesEnum>* parametersList;
 public:
     FunctionSymbol(const string &name, TypesEnum type, int relativeLocation,int relativeLocationInScope, list<TypesEnum> *parametersList);
+    void setParametersList(list<TypesEnum>* list);
 
 };
 

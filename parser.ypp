@@ -11,6 +11,7 @@
 
 	ScopesTable* globalScopesTable;
 
+
 %}
 
 %nonassoc	VOID
@@ -57,18 +58,18 @@ FuncDecl	: RetType ID                                                    {OpenSc
                 RPAREN
                 LBRACE
                     Statements
-                RBRACE		                                                {CloseScope();}}
+                RBRACE		                                                {CloseScope();}
 			;
-RetType		: Type															{output::printProductionRule(5);}
-			| VOID															{output::printProductionRule(6);}
+RetType		: Type															{$$ = semantics5($1);}
+			| VOID															{$$ = semantics6();}
 			;
-Formals		: /*epsilon*/													{addEmptyParametersList(globalScopesTable);}
-			| FormalsList													{addParametersList($1, globalScopesTable);}
+Formals		: /*epsilon*/													{$$ = addEmptyParametersList(globalScopesTable);}
+			| FormalsList													{$$ = addParametersList($1, globalScopesTable);}
 			;
-FormalsList	: FormalDecl													{output::printProductionRule(9);}
-			| FormalDecl COMMA FormalsList									{output::printProductionRule(10);}
+FormalsList	: FormalDecl													{semantics9($1);}
+			| FormalDecl COMMA FormalsList									{semantics10($1,$2,$3,globalScopesTable);}
 			;
-FormalDecl	: Type ID														{output::printProductionRule(11);}
+FormalDecl	: Type ID														{semantics11($1,$2,globalScopesTable);}
 			;
 Statements	: Statement														{output::printProductionRule(12);}
 			| Statements Statement											{output::printProductionRule(13);}
@@ -102,8 +103,8 @@ Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
 			| Exp PLUS_OP Exp												{output::printProductionRule(35);}
 			| ID															{output::printProductionRule(36);}
 			| Call															{output::printProductionRule(37);}
-			| NUM															{output::printProductionRule(38);}
-			| NUM B															{output::printProductionRule(39);}
+			| NUM															{$$ = semantics38();}
+			| NUM B															{$$ = semantics39($1,$2);}
 			| STRING														{output::printProductionRule(40);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}

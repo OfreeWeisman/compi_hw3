@@ -15,6 +15,8 @@ private:
     list<Scope*> innerScopes;
     list<Symbol*>* mySymbols;
     Scope* fatherScope;
+    int parametersListSize;
+
 
     bool symbolExistsAux(string symbolName, Scope* scope){
 
@@ -34,6 +36,8 @@ private:
     }
 
 public:
+    Scope(Scope *fatherScope);
+
     bool symbolExists(string symbolName){
         //assumption: we are looking for the symbol in the current scope and the scopes that contain the current scope
         return symbolExistsAux(symbolName, this);
@@ -42,6 +46,14 @@ public:
     list<Symbol *>* getMySymbols() const {
         return mySymbols;
     }
+
+    int getParametersListSize() const;
+
+    void incParametersListSize();
+
+    Scope *getFatherScope();
+
+    Symbol* getLastSymbol();
     //add/remove to my symbols and inner scopes while reading the code
 };
 

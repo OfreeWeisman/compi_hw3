@@ -47,11 +47,11 @@ SPACES			([\t\n\r ])
 
 %%
 
-{VOID}			{return VOID;}
+{VOID}			{yylval = new Type(VOID_ENUM); return VOID;}
 {INT}			{yylval = new Type(INT_ENUM); return INT;}
-{BYTE}			{return BYTE;}
-{B}				{return B;}
-{BOOL}			{return BOOL;}
+{BYTE}			{yylval = new Type(BYTE_ENUM); return BYTE;}
+{B}				{yylval = new Type(BYTE_ENUM); return B;}
+{BOOL}			{yylval = new Type(BOOL_ENUM); return BOOL;}
 {AND}			{return AND;}
 {OR}			{return OR;}
 {NOT}			{return NOT;}
@@ -75,7 +75,7 @@ SPACES			([\t\n\r ])
 {MUL_OP}		{return MUL_OP;}
 {PLUS_OP}		{return PLUS_OP;}
 {ID}			{return ID;}
-{NUM}			{return NUM;}
+{NUM}			{yylval = new Num(yytext); return NUM}
 {STRING}		{return STRING;}
 {COMMENT}		;
 {SPACES}		;

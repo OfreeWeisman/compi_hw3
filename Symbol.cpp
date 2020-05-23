@@ -41,3 +41,7 @@ FunctionSymbol::FunctionSymbol(const string &name, TypesEnum type, int relativeL
                                list<TypesEnum> *parametersList) {
 
 }
+
+void FunctionSymbol::setParametersList(list<TypesEnum> *list) {
+    parametersList = list;
+}

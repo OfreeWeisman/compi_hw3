@@ -16,5 +16,23 @@ public:
     bool canExpBeBool(Node* node);
 };
 
+class NonTerminalNum : public Node {
+private:
+    int value;
+    TypesEnum type;
+public:
+    NonTerminalNum();
+    NonTerminalNum(int value);
+};
+
+class NonTerminalByte : public Node{
+private:
+    int value;
+    TypesEnum type;
+public:
+    NonTerminalByte();
+    NonTerminalByte(int value);
+};
+
 
 #endif //COMPI3_NONTERMINALS_H
