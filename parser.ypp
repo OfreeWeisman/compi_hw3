@@ -1,6 +1,9 @@
 %{
 	#include <iostream>
 	#include "output.hpp"
+	#include "Semantics.h"
+	#include "ScopesTable.h"
+	#include "Tokens.h"
 	using namespace std;
 
 	int yylex();
