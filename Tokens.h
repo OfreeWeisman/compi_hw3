@@ -4,7 +4,6 @@
 
 #ifndef COMPI3_TYPES_H
 #define COMPI3_TYPES_H
-#define YYSTYPE Node*
 
 #include <string>
 #include <list>
@@ -81,6 +80,7 @@ public:
 };
 
 
+#define YYSTYPE Node*
 
 
 #endif //COMPI3_TYPES_H
