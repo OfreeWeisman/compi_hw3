@@ -74,11 +74,11 @@ FormalDecl	: Type ID														{semantics11($1,$2,globalScopesTable);}
 Statements	: Statement														{output::printProductionRule(12);}
 			| Statements Statement											{output::printProductionRule(13);}
 			;
-Statement : IF LPAREN Exp RPAREN Statement								{output::printProductionRule(21);}
-      |  IF LPAREN Exp RPAREN Statement ELSE Statement					{output::printProductionRule(22);}
-      |  WHILE LPAREN Exp RPAREN Statement								{output::printProductionRule(23);}
-      |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				{output::printProductionRule(24);}
-      | LBRACE Statements RBRACE										{output::printProductionRule(14);}
+Statement : IF LPAREN Exp RPAREN Statement								    {output::printProductionRule(21);}
+      |  IF LPAREN Exp RPAREN Statement ELSE Statement					    {output::printProductionRule(22);}
+      |  WHILE LPAREN Exp RPAREN Statement								    {output::printProductionRule(23);}
+      |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				    {output::printProductionRule(24);}
+      | LBRACE Statements RBRACE										    {output::printProductionRule(14);}
 			| Type ID SC													{semantics15($1,$2,$3, globalScopesTable);}
 			| Type ID ASSIGN Exp SC											{output::printProductionRule(16);}
 			| ID ASSIGN Exp SC												{output::printProductionRule(17);}
@@ -103,7 +103,7 @@ Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
 			| Exp PLUS_OP Exp												{output::printProductionRule(35);}
 			| ID															{output::printProductionRule(36);}
 			| Call															{output::printProductionRule(37);}
-			| NUM															{$$ = semantics38();}
+			| NUM															{$$ = semantics38(); std::cout <<$1->getValue()<<endl;}
 			| NUM B															{$$ = semantics39($1,$2);}
 			| STRING														{output::printProductionRule(40);}
 			| TRUE															{$$ = semanticsTrue();}
