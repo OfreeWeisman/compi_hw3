@@ -47,11 +47,11 @@ SPACES			([\t\n\r ])
 
 %%
 
-{VOID}			{yylval = new Node(VOID_ENUM); return VOID;}
-{INT}			{yylval = new Node(INT_ENUM); return INT;}
-{BYTE}			{yylval = new Node(BYTE_ENUM); return BYTE;}
-{B}				{yylval = new Node(BYTE_ENUM); return B;}
-{BOOL}			{yylval = new Node(BOOL_ENUM); return BOOL;}
+{VOID}			{yylval = new Type(VOID_ENUM); return VOID;}
+{INT}			{yylval = new Type(INT_ENUM); return INT;}
+{BYTE}			{yylval = new Type(BYTE_ENUM); return BYTE;}
+{B}				{yylval = new Type(BYTE_ENUM); return B;}
+{BOOL}			{yylval = new Type(BOOL_ENUM); return BOOL;}
 {AND}			{return AND;}
 {OR}			{return OR;}
 {NOT}			{return NOT;}
