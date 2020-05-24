@@ -14,8 +14,8 @@ using namespace std;
 
 class Node{
 public:
-    Node() = default;
-    ~Node(){}
+    Node(){};
+    virtual ~Node(){}
 };
 
 class Type : public Node{
