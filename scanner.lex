@@ -1,6 +1,8 @@
 %{
 	#include "output.hpp"
     #include "parser.tab.hpp"
+    #include "Tokens.h"
+    #define YYSTYPE Node*
 	void errorHandler(int);
 	
 
