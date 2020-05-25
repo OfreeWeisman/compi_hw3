@@ -11,21 +11,28 @@
 
 using namespace std;
 
-struct Symbol {
+class Symbol {
+public:
+    Symbol(const string &type, int offset, const string &name);
+
+private:
     string type;
     int offset;
     string name;
+public:
+
 };
 
 class DataStructures {
     stack<int>* offsetsTable;
     stack<list<Symbol*>*>* symbolsTable;
 
-public:
 
+public:
     DataStructures();
-    void pushNewScope();
     void popScope();
+    void pushNewScope();
+    void pushNewSymbol(Symbol* s);
 };
 
 

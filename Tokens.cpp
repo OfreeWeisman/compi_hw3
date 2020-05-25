@@ -20,21 +20,6 @@ const string &Id::getIdName() const {
 
 Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {}
 
-Parameters::Parameters(TypesEnum type) {
-    parametersList->push_back(type);
-}
-
-list<TypesEnum> *Parameters::getParametersList() {
-    return parametersList;
-}
-
-void Parameters::setParametersList(list<TypesEnum> *parameters) {
-    Parameters::parametersList = parameters;
-}
-
-Parameters::Parameters(list<TypesEnum> *list) {
-    parametersList = list;
-}
 
 Num::Num(char* strValue) : strValue(strValue) {
     value = atoi(strValue);
@@ -75,4 +60,29 @@ bool Byte::isValidByte() {
     }
     return false;
 
+}
+
+const string &Parameter::getId() {
+    return id;
+}
+
+Parameter::Parameter(const string &type, const string &id) : type(type), id(id) {
+    names = new list<string>();
+    types = new list<string>();
+}
+
+list<string> *Parameter::getNames() {
+    return names;
+}
+
+void Parameter::setNames(list<string> *names) {
+    Parameter::names = names;
+}
+
+list<string> *Parameter::getTypes()  {
+    return types;
+}
+
+void Parameter::setTypes(list<string> *types) {
+    Parameter::types = types;
 }

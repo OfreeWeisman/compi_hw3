@@ -20,13 +20,18 @@ private:
 public:
     Node(){};
     virtual ~Node(){}
-
     TypesEnum getType() const {
         return type;
     }
-
     void setType(TypesEnum type) {
         Node::type = type;
+    }
+    string getTypeAsString(TypesEnum t){
+        switch (t) {
+            case INT_ENUM : return "int";
+            case BOOL_ENUM : return "bool";
+            case BYTE_ENUM : return "byte";
+        }
     }
 };
 
@@ -77,15 +82,27 @@ private:
     BoolEnum boolEnum;
 };
 
-class Parameters : public Node {
+class Parameter : public Node {
 private:
-    list<TypesEnum>* parametersList;
+    string type;
+    string id;
+    list<string>* names;
+    list<string>* types;
+
 public:
-    Parameters() {}
-    Parameters(TypesEnum type);
-    Parameters(list<TypesEnum>* list);
-    list<TypesEnum> *getParametersList();
-    void setParametersList(list<TypesEnum> *parameters);
+    Parameter() {}
+
+    Parameter(const string &type, const string &id);
+
+    const string &getId();
+
+    list<string> *getNames();
+
+    void setNames(list<string> *names);
+
+    list<string> *getTypes() ;
+
+    void setTypes(list<string> *types);
 
 };
 

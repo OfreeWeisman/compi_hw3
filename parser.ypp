@@ -9,6 +9,7 @@
 	void yyerror(const char*);
 
 	DataStructures* globalTables;
+	vector<string>* funcArgs;
 
 
 %}
@@ -49,16 +50,16 @@
 Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
 Marker1     : /*epsilon*/                                                   {setup(globalTables);}
-Funcs		: /*epsilon*/													{output::printProductionRule(2);}
+Funcs		: /*epsilon*/													{}
 			| FuncDecl Funcs												{output::printProductionRule(3);}
 			;
-FuncDecl	: RetType ID                                                    {OpenScope($1,$2,globalScopesTable);}
+FuncDecl	: RetType ID                                                    {openScope($1,$2,globalTables,funcArgs);}
                 LPAREN
                     Formals
                 RPAREN
                 LBRACE
                     Statements
-                RBRACE		                                                {CloseScope();}
+                RBRACE		                                                {closeScope();}
 			;
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
@@ -66,8 +67,8 @@ RetType		: Type															{$$ = semantics5($1);}
 Formals		: /*epsilon*/													{$$ = addEmptyParametersList(globalScopesTable);}
 			| FormalsList													{$$ = addParametersList($1, globalScopesTable);}
 			;
-FormalsList	: FormalDecl													{semantics9($1);}
-			| FormalDecl COMMA FormalsList									{semantics10($1,$2,$3,globalScopesTable);}
+FormalsList	: FormalDecl													{semantics9($1,funcArgs);}
+			| FormalDecl COMMA FormalsList									{semantics10($1,$2,$3,globalTables, funcArgs);}
 			;
 FormalDecl	: Type ID														{semantics11($1,$2,globalScopesTable);}
 			;

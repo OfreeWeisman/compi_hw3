@@ -25,7 +25,7 @@ void setup(DataStructures* globalTables);
 void cleanup (DataStructures* globalTables);
 
 //rule 4 : FuncDecl -> 𝑅𝑒𝑡𝑇𝑦𝑝𝑒 𝐼𝐷 𝐿𝑃𝐴𝑅𝐸𝑁 𝐹𝑜𝑟𝑚𝑎𝑙𝑠 𝑅𝑃𝐴𝑅𝐸𝑁 𝐿𝐵𝑅𝐴𝐶𝐸 𝑆𝑡𝑎𝑡𝑒𝑚𝑒𝑛𝑡𝑠 𝑅𝐵𝑅𝐴𝐶
-void OpenScope(Node* type, Node* id, ScopesTable* scopesTable);
+void openScope(Node* type, Node* id, DataStructures* globalTables, vector<string>* funcArgs);
 
 //rule 5 : RetType -> TYPE
 Node* semantics5(Node* type);
@@ -34,22 +34,19 @@ Node* semantics5(Node* type);
 Node* semantics6();
 
 //rule 7 : Formals -> epsilon
-Node* addEmptyParametersList(ScopesTable* scopesTable);
+Node* addEmptyParametersList() {};
 
 //rule 8 : Formals -> FormalsList
-Node* addParametersList(Node* formalsList ,ScopesTable* scopesTable);
+Node* addParametersList(Node* formalsList ,DataStructures* tables, vector<string>* funcArgs);
 
 //rule 9 : FormalsList -> FormalsDecl
 Node* semantics9(Node* formalsDecl);
 
 //rule 10 : FormalList -> FormalDecl COMMA FormalsList
-Node* semantics10(Node* formalsDecl, Node* comma, Node* formalsList, ScopesTable* scopesTable);
+Node* semantics10(Node* formalsDecl, Node* comma, Node* formalsList, DataStructures* tables, vector<string>* funcArgs);
 
 //rule 11 : FormalDecl -> TYPE ID
-Node* semantics11(Node *type, Node *id, ScopesTable *scopesTable);
-
-
-
+Node* semantics11(Node *type, Node *id, DataStructures *tables);
 
 //rule 15 : Statements -> TYPE ID SC
 void semantics15(Node* type, Node* id, Node* sc, ScopesTable* scopesTable);
