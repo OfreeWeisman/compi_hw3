@@ -3,7 +3,7 @@
 	#include "parser.tab.hpp"
     #include "Tokens.h"
 	void errorHandler(int);
-
+	#include "Enums.h"
 %}
 
 %option yylineno
