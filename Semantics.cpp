@@ -109,6 +109,12 @@ void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* fun
 }
 
 
+void closeScope(DataStructures* globalTables){
+    globalTables->popScope();
+}
+
+
+
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
     list<string>* names = p->getNames();

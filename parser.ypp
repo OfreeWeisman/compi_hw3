@@ -61,7 +61,7 @@ FuncDecl	: RetType ID                                                    {openSc
                 RPAREN
                 LBRACE
                     Statements
-                RBRACE		                                                {closeScope();}
+                RBRACE		                                                {closeScope(globalTables);}
 			;
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
