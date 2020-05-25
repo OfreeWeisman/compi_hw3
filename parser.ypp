@@ -106,7 +106,7 @@ Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
 			| Exp PLUS_OP Exp												{output::printProductionRule(35);}
 			| ID															{output::printProductionRule(36);}
 			| Call															{output::printProductionRule(37);}
-			| NUM															{$$ = semantics38($1); std::cout <<$1->getValue()<<endl;}
+			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
 			| STRING														{output::printProductionRule(40);}
 			| TRUE															{$$ = semanticsTrue();}
