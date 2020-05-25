@@ -17,6 +17,14 @@ const string &Id::getIdName() const {
 
 Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {}
 
+BoolEnum Bool::getBoolEnum() const {
+    return boolEnum;
+}
+
+void Bool::setBoolEnum(BoolEnum boolEnum) {
+    Bool::boolEnum = boolEnum;
+}
+
 
 Num::Num(char* strValue) : strValue(strValue) {
     value = atoi(strValue);
