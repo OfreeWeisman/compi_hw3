@@ -1,7 +1,7 @@
 //
 // Created by Ofree on 5/21/2020.
 //
-
+/*
 #include "Symbol.h"
 
 Symbol::Symbol() {}
@@ -45,3 +45,4 @@ FunctionSymbol::FunctionSymbol(const string &name, TypesEnum type, int relativeL
 void FunctionSymbol::setParametersList(list<TypesEnum> *list) {
     parametersList = list;
 }
+*/
