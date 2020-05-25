@@ -3,7 +3,6 @@
 	#include "parser.tab.hpp"
     #include "Tokens.h"
 	void errorHandler(int);
-	#include "Enums.h"
 %}
 
 %option yylineno
@@ -47,16 +46,16 @@ SPACES			([\t\n\r ])
 
 %%
 
-{VOID}			{yylval = new Type(VOID_ENUM); return VOID;}
-{INT}			{yylval = new Type(INT_ENUM); return INT;}
-{BYTE}			{yylval = new Type(BYTE_ENUM); return BYTE;}
-{B}				{yylval = new Type(BYTE_ENUM); return B;}
-{BOOL}			{yylval = new Type(BOOL_ENUM); return BOOL;}
+{VOID}			{yylval = new Type(yytext); return VOID;}
+{INT}			{yylval = new Type(yytext); return INT;}
+{BYTE}			{yylval = new Type(yytext); return BYTE;}
+{B}				{yylval = new Type(yytext); return B;}
+{BOOL}			{yylval = new Type(yytext); return BOOL;}
 {AND}			{return AND;}
 {OR}			{return OR;}
 {NOT}			{return NOT;}
-{TRUE}			{yylval = new Bool(TRUE_ENUM); return TRUE;}
-{FALSE}			{yylval = new Bool(FALSE_ENUM); return FALSE;}
+{TRUE}			{yylval = new Bool(yytext); return TRUE;}
+{FALSE}			{yylval = new Bool(yytext); return FALSE;}
 {RETURN}		{return RETURN;}
 {IF}			{return IF;}
 {ELSE}			{return ELSE;}
