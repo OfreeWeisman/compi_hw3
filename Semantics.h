@@ -11,7 +11,6 @@
 #include "Tokens.h"
 #include "ScopesTable.h"
 #include "hw3_output.hpp"
-#include "output.hpp"
 #include "DataStructures.h"
 
 extern int yylineno;
@@ -37,7 +36,7 @@ Node* semantics5(Node* type);
 Node* semantics6();
 
 //rule 7 : Formals -> epsilon
-Node* addEmptyParametersList() {};
+Node* addEmptyParametersList() {}
 
 //rule 8 : Formals -> FormalsList
 Node* addParametersList(Node* formalsList ,DataStructures* tables, vector<string>* funcArgs);
@@ -70,10 +69,10 @@ Node* semantics38(Node* num);
 Node* semantics39(Node* num, Node* b);
 
 //rule 41 : Exp -> TRUE
-Node* semanticsTrue();
+Node* semanticsTrue(){}
 
 //rule 42 : Exp -> FALSE
-Node* semanticsFalse();
+Node* semanticsFalse(){}
 
 
 #endif //COMPI3_SEMANTICS_H
