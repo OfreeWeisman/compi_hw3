@@ -63,8 +63,8 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
-    list::iterator it1 = names->begin();
-    list::iterator it2 = types->begin();
+    list::iterator<string> it1 = names->begin();
+    list::iterator<string> it2 = types->begin();
 
     int offset = -1;
     int length = names->size();

@@ -1,7 +1,7 @@
 //
 // Created by Ofree on 5/21/2020.
 //
-
+/*
 #include "ScopesTable.h"
 
 list<Scope *>* ScopesTable::getScopes()  {
@@ -53,3 +53,5 @@ Scope *Scope::getFatherScope() {
 Symbol *Scope::getLastSymbol() {
     return mySymbols->back();
 }
+
+ */

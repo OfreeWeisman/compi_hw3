@@ -9,7 +9,7 @@
 #include "Symbol.h"
 
 using namespace std;
-
+/*
 class Scope {
 private:
     list<Scope*> innerScopes;
@@ -72,6 +72,6 @@ public:
 
     list<Scope *> *getScopes();
 };
-
+*/
 
 #endif //COMPI3_SCOPESTABLE_H
