@@ -6,6 +6,8 @@
 	#include "Tokens.h"
 	using namespace std;
 	int yylex();
+	extern int yylineno;
+
 	void yyerror(const char*);
 
 	DataStructures* globalTables;

@@ -17,7 +17,7 @@ void DataStructures::pushNewScope() {
 }
 
 void DataStructures::popScope() {
-    list<Symbol*> temp = symbolsTable->top();
+    list<Symbol*> temp = *symbolsTable->top();
     for(Symbol* s : temp){
         delete(s);
     }
@@ -33,4 +33,46 @@ void DataStructures::pushNewSymbol(Symbol *s) {
     symbolsTable->push(temp);
 }
 
+stack<int> *DataStructures::getOffsetsTable() const {
+    return offsetsTable;
+}
+
+void DataStructures::setOffsetsTable(stack<int> *offsetsTable) {
+    DataStructures::offsetsTable = offsetsTable;
+}
+
+stack<list<Symbol *> *> *DataStructures::getSymbolsTable() const {
+    return symbolsTable;
+}
+
+void DataStructures::setSymbolsTable(stack<list<Symbol *> *> *symbolsTable) {
+    DataStructures::symbolsTable = symbolsTable;
+}
+
+
+
 Symbol::Symbol(const string &type, int offset, const string &name) : type(type), offset(offset), name(name) {}
+
+const string &Symbol::getType() const {
+    return type;
+}
+
+void Symbol::setType(const string &type) {
+    Symbol::type = type;
+}
+
+int Symbol::getOffset() const {
+    return offset;
+}
+
+void Symbol::setOffset(int offset) {
+    Symbol::offset = offset;
+}
+
+const string &Symbol::getName() const {
+    return name;
+}
+
+void Symbol::setName(const string &name) {
+    Symbol::name = name;
+}

@@ -37,8 +37,8 @@ public:
 
 class Type : public Node{
 public:
-    Type(TypesEnum typeName);
-    TypesEnum getTypeName() const;
+    Type(TypesEnum t){}
+    //TypesEnum getTypeName() ;
 };
 
 class Id : public Node {

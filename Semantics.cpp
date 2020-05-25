@@ -5,16 +5,62 @@
 #include "Semantics.h"
 #include "Tokens.h"
 #include "NonTerminals.h"
+extern int yylineno;
+
 
 //-------------------------------------------------helper functions---------------------------------------------------//
-
-void searchIfPreDefined(Node* id, DataStructures* tables){
-    //throw error
+/*
+ * throws an error if that symbol already exists
+ */
+void symbolExistsinList(list<Symbol*>* currList, string name){
+    list<Symbol*>::iterator it = currList->begin();
+    for(it; it != currList->end(); it++){
+        Symbol* temp = *it;
+        if(temp->getName() == name){
+            output::errorDef(yylineno, name);
+            exit(0);
+        }
+    }
 }
+
+/*
+ * throws an error if symbol already exists somewhere in the stack.
+ */
+void searchIfPreDefined(Node* id, DataStructures* tables) {
+    Id *i = dynamic_cast<Id *>(id);
+    string name = i->getIdName();
+
+    stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
+    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+    DataStructures *tempDS = new DataStructures();
+    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+    while (!symbolTables->empty()) {
+        list<Symbol *> *currList = symbolTables->top();
+        symbolExistsinList(currList, name);
+        tempSymbolTable->push(currList);
+        symbolTables->pop();
+    }
+    while (!tempSymbolTable->empty()) {
+        list<Symbol *> *currList = tempSymbolTable->top();
+        symbolTables->push(currList);
+        tempSymbolTable->pop();
+    }
+
+}
+
 
 list<string>* combineLists(list<string>* list1, list<string>* list2){
     //use new
-    //fill!
+    list<string>* new_list = new list<string>();
+    list<string>::iterator it = list1->begin();
+    for(it; it!=list1->end(); it++){
+        new_list->push_back(*it);
+    }
+   it = list2->begin();
+    for(it; it!=list2->end(); it++){
+        new_list->push_back(*it);
+    }
+    return new_list;
 }
 
 //-----------------------------------------------Semantics Functions--------------------------------------------------//
@@ -23,17 +69,21 @@ Node *semanticsTypeInt() {
     return new Type(INT_ENUM);
 }
 
-void semantics15(Node *type, Node *id, Node *sc, ScopesTable *scopesTable) {
-    //check if this id already exists in ths scopes table
+void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
+    //check if this id already exists in the symbol table
+    searchIfPreDefined(id, tables);
 
-    Scope* current_scope =scopesTable->getLastScope();
-    string id_name = dynamic_cast<Id*>(id)->getIdName();
-    if(current_scope->symbolExists(id_name)){
-        //return error;
-    }
-    TypesEnum types_enum = dynamic_cast<Type*>(type)->getTypeName();
-  //  Symbol* new_symbol = new Symbol(id_name, types_enum ,scopesTable->getRelativeLocation()+1, (int)current_scope->getMySymbols()->size()+1);
-   // scopesTable->addSymbol(new_symbol);
+
+    TypesEnum t = dynamic_cast<Type*>(type)->getType();
+    string typeString = type->getTypeAsString(t);
+    string name = dynamic_cast<Id*>(id)->getIdName();
+
+    int offset= tables->getOffsetsTable()->top();
+
+    tables->getOffsetsTable()->push(offset+1);
+
+    Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
+    tables->pushNewSymbol(new_symbol);
 
 }
 
@@ -50,7 +100,7 @@ void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* fun
     //add the scope name to the current scope and then open the new scope
     searchIfPreDefined(id, tables);
     string name = dynamic_cast<Id*>(id)->getIdName();
-    TypesEnum types_enum = dynamic_cast<Type*>(type)->getTypeName();
+    TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
     functionArgs->clear();
     Symbol* s = new Symbol(funcType, 0, name);
@@ -63,8 +113,8 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
-    list::iterator<string> it1 = names->begin();
-    list::iterator<string> it2 = types->begin();
+    list<string>::iterator it1 = names->begin();
+    list<string>::iterator it2 = types->begin();
 
     int offset = -1;
     int length = names->size();
@@ -95,6 +145,11 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     list<string>* types_temp = combineLists(parameter1->getTypes(), parameter2->getTypes());
     p->setTypes(types_temp);
     funcArgs->insert(funcArgs->begin(), type1);
+
+    delete parameter1->getNames();
+    delete parameter2->getNames();
+    delete parameter1->getTypes();
+    delete parameter2->getTypes();
 
     return p;
 }

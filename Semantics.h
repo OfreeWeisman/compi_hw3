@@ -16,6 +16,7 @@
 
 extern int yylineno;
 
+
 //extern Node* yylval;
 
 //marker1
@@ -49,7 +50,7 @@ Node* semantics10(Node* formalsDecl, Node* comma, Node* formalsList, DataStructu
 Node* semantics11(Node *type, Node *id, DataStructures *tables);
 
 //rule 15 : Statements -> TYPE ID SC
-void semantics15(Node* type, Node* id, Node* sc, ScopesTable* scopesTable);
+void semantics15(Node* type, Node* id, Node* sc, DataStructures* tables);
 
 //rule 31 : Type -> INT
 Node* semanticsTypeInt();

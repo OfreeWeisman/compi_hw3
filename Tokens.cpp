@@ -4,11 +4,8 @@
 
 #include "Tokens.h"
 
-Type::Type(TypesEnum typeName) : typeName(typeName) {}
 
-TypesEnum Type::getTypeName() const {
-    return typeName;
-}
+
 
 
 
