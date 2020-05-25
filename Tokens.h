@@ -41,7 +41,7 @@ private:
     int value;
     string strValue;
 public:
-    Num(string &strValue);
+    Num(char* strValue);
     int getValue() const;
     void setValue(int value);
     const string &getStrValue() const;

@@ -36,8 +36,8 @@ Parameters::Parameters(list<TypesEnum> *list) {
     parametersList = list;
 }
 
-Num::Num(string &strValue) : strValue(strValue) {
-    value = atoi((char*)strValue);
+Num::Num(char* strValue) : strValue(strValue) {
+    value = atoi(strValue);
 }
 
 int Num::getValue() const {
