@@ -18,11 +18,11 @@ public:
     virtual ~Node(){}
 };
 
-class TypeClass : public Node{
+class Type : public Node{
 private:
     TypesEnum typeName;
 public:
-    TypeClass(TypesEnum typeName);
+    Type(TypesEnum typeName);
     TypesEnum getTypeName() const;
 };
 

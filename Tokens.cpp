@@ -4,9 +4,9 @@
 
 #include "Tokens.h"
 
-TypeClass::TypeClass(TypesEnum typeName) : typeName(typeName) {}
+Type::Type(TypesEnum typeName) : typeName(typeName) {}
 
-TypesEnum TypeClass::getTypeName() const {
+TypesEnum Type::getTypeName() const {
     return typeName;
 }
 
