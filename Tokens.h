@@ -15,14 +15,22 @@ using namespace std;
 
 
 class Node{
+private:
+    TypesEnum type;
 public:
     Node(){};
     virtual ~Node(){}
+
+    TypesEnum getType() const {
+        return type;
+    }
+
+    void setType(TypesEnum type) {
+        Node::type = type;
+    }
 };
 
 class Type : public Node{
-private:
-    TypesEnum typeName;
 public:
     Type(TypesEnum typeName);
     TypesEnum getTypeName() const;

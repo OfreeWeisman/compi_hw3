@@ -8,7 +8,7 @@
 	int yylex();
 	void yyerror(const char*);
 
-	ScopesTable* globalScopesTable;
+	DataStructures* globalTables;
 
 
 %}
@@ -46,8 +46,9 @@
 
 %%
 
-Program 	: Funcs															{output::printProductionRule(1);}
+Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
+Marker1     : /*epsilon*/                                                   {setup(globalTables);}
 Funcs		: /*epsilon*/													{output::printProductionRule(2);}
 			| FuncDecl Funcs												{output::printProductionRule(3);}
 			;
@@ -116,7 +117,8 @@ Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
 %%
 
 int main(){
-    globalScopesTable = new ScopesTable();
+    //globalScopesTable = new ScopesTable();
+    DataStructures ds = new DataStructures();
 	return yyparse();
 }
 

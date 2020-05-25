@@ -16,6 +16,7 @@ private:
 
     string name;
     TypesEnum type;
+    //int offset;
     int relativeLocation;
     int relativeLocationInScope;
 public:

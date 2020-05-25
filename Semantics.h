@@ -10,7 +10,19 @@
 
 #include "Tokens.h"
 #include "ScopesTable.h"
+#include "hw3_output.hpp"
+#include "output.hpp"
+#include "DataStructures.h"
+
+extern int yylineno;
+
 //extern Node* yylval;
+
+//marker1
+void setup(DataStructures* globalTables);
+
+//rule 1 : Program -> Funcs
+void cleanup (DataStructures* globalTables);
 
 //rule 4 : FuncDecl -> 𝑅𝑒𝑡𝑇𝑦𝑝𝑒 𝐼𝐷 𝐿𝑃𝐴𝑅𝐸𝑁 𝐹𝑜𝑟𝑚𝑎𝑙𝑠 𝑅𝑃𝐴𝑅𝐸𝑁 𝐿𝐵𝑅𝐴𝐶𝐸 𝑆𝑡𝑎𝑡𝑒𝑚𝑒𝑛𝑡𝑠 𝑅𝐵𝑅𝐴𝐶
 void OpenScope(Node* type, Node* id, ScopesTable* scopesTable);

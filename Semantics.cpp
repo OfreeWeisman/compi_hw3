@@ -8,6 +8,7 @@
 
 
 
+
 Node *semanticsTypeInt() {
     return new Type(INT_ENUM);
 }
@@ -23,7 +24,6 @@ void semantics15(Node *type, Node *id, Node *sc, ScopesTable *scopesTable) {
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getTypeName();
     Symbol* new_symbol = new Symbol(id_name, types_enum ,scopesTable->getRelativeLocation()+1, (int)current_scope->getMySymbols()->size()+1);
     scopesTable->addSymbol(new_symbol);
-
 
 }
 
@@ -127,5 +127,66 @@ Node *semantics39(Node *num, Node *b) {
     //error instead
     return nullptr;
 }
+
+void setup(DataStructures *globalTables) {
+    globalTables->pushNewScope();
+}
+
+void cleanup(DataStructures *globalTables) {
+    globalTables->popScope();
+}
+
+
+
+//----------------------------------------------Type Checking Functions-----------------------------------------------//
+
+//rule 8:
+TypesEnum checkLegalRelop(Node* operand1, Node* operand2){
+    //check both operands are numerical
+    if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
+    (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
+        return BOOL_ENUM;
+    } else {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+}
+
+//rule 9:
+TypesEnum checkLogicalOp(Node* operand1, Node* operand2){
+    if(dynamic_cast<Bool*>(operand1) && dynamic_cast<Bool*>(operand2)){
+        return BOOL_ENUM;
+    } else {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+}
+
+//rule 10:
+TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
+    //check both operands are numerical
+    TypesEnum type1 = operand1->getType();
+    TypesEnum type2 = operand2->getType();
+
+    if (type1 == type2) {
+        return type1;
+    } else if ((type1 == INT_ENUM || type1 == BYTE_ENUM) && (type2 == INT_ENUM || type2 == BYTE_ENUM)) {
+        return INT_ENUM;
+    } else {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+}
+
+//rule 16:
+bool checkIfWhileTypes(Node* exp){
+    if(exp->getType() == BOOL_ENUM){
+        return true;
+    } else {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+}
+
 
 
