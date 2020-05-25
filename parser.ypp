@@ -53,7 +53,7 @@ Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
 Marker1     : /*epsilon*/                                                   {setup(globalTables);}
 Funcs		: /*epsilon*/													{}
-			| FuncDecl Funcs												{output::printProductionRule(3);}
+			| FuncDecl Funcs												//{output::printProductionRule(3);}
 			;
 FuncDecl	: RetType ID                                                    {openScope($1,$2,globalTables,funcArgs);}
                 LPAREN
@@ -74,48 +74,48 @@ FormalsList	: FormalDecl													{semantics9($1);}
 			;
 FormalDecl	: Type ID														{semantics11($1,$2,globalTables);}
 			;
-Statements	: Statement														{output::printProductionRule(12);}
-			| Statements Statement											{output::printProductionRule(13);}
+Statements	: Statement														//{output::printProductionRule(12);}
+			| Statements Statement											//{output::printProductionRule(13);}
 			;
-Statement : IF LPAREN Exp RPAREN Statement								    {output::printProductionRule(21);}
-      |  IF LPAREN Exp RPAREN Statement ELSE Statement					    {output::printProductionRule(22);}
-      |  WHILE LPAREN Exp RPAREN Statement								    {output::printProductionRule(23);}
-      |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				    {output::printProductionRule(24);}
-      | LBRACE Statements RBRACE										    {output::printProductionRule(14);}
+Statement : IF LPAREN Exp RPAREN Statement								   // {output::printProductionRule(21);}
+      |  IF LPAREN Exp RPAREN Statement ELSE Statement					   // {output::printProductionRule(22);}
+      |  WHILE LPAREN Exp RPAREN Statement								   // {output::printProductionRule(23);}
+      |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				    //{output::printProductionRule(24);}
+      | LBRACE Statements RBRACE										   // {output::printProductionRule(14);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
-			| Type ID ASSIGN Exp SC											{output::printProductionRule(16);}
-			| ID ASSIGN Exp SC												{output::printProductionRule(17);}
-			| Call SC														{output::printProductionRule(18);}
-			| RETURN SC														{output::printProductionRule(19);}
-			| RETURN Exp SC													{output::printProductionRule(20);}
-			| BREAK SC														{output::printProductionRule(25);}
-			| CONTINUE SC													{output::printProductionRule(26);}
+			| Type ID ASSIGN Exp SC											//{output::printProductionRule(16);}
+			| ID ASSIGN Exp SC												//{output::printProductionRule(17);}
+			| Call SC														//{output::printProductionRule(18);}
+			| RETURN SC														//{output::printProductionRule(19);}
+			| RETURN Exp SC													//{output::printProductionRule(20);}
+			| BREAK SC														//{output::printProductionRule(25);}
+			| CONTINUE SC													//{output::printProductionRule(26);}
 			;
-Call		: ID LPAREN ExpList RPAREN												{output::printProductionRule(27);}
-			| ID LPAREN RPAREN												{output::printProductionRule(28);}
+Call		: ID LPAREN ExpList RPAREN											//	{output::printProductionRule(27);}
+			| ID LPAREN RPAREN											//	{output::printProductionRule(28);}
 			;
-ExpList		: Exp															{output::printProductionRule(29);}
-			| Exp COMMA ExpList												{output::printProductionRule(30);}
+ExpList		: Exp															//{output::printProductionRule(29);}
+			| Exp COMMA ExpList												//{output::printProductionRule(30);}
 			;
 Type		: INT															{$$ = semanticsTypeInt();}
 			| BYTE															{$$ = semanticsTypeByte();}
 			| BOOL															{$$ = semanticsTypeBool();}
 			;
-Exp			: LPAREN Exp RPAREN												{output::printProductionRule(34);}
-			| Exp MUL_OP Exp												{output::printProductionRule(35);}
-			| Exp PLUS_OP Exp												{output::printProductionRule(35);}
-			| ID															{output::printProductionRule(36);}
-			| Call															{output::printProductionRule(37);}
+Exp			: LPAREN Exp RPAREN											//	{output::printProductionRule(34);}
+			| Exp MUL_OP Exp											//	{output::printProductionRule(35);}
+			| Exp PLUS_OP Exp											//	{output::printProductionRule(35);}
+			| ID														//	{output::printProductionRule(36);}
+			| Call														//	{output::printProductionRule(37);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
-			| STRING														{output::printProductionRule(40);}
+			| STRING													//	{output::printProductionRule(40);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
-			| NOT Exp														{output::printProductionRule(43);}
-			| Exp AND Exp													{output::printProductionRule(44);}
-			| Exp OR Exp													{output::printProductionRule(45);}
-			| Exp RELOP Exp													{output::printProductionRule(46);}
-			| Exp EQUALITY Exp												{output::printProductionRule(46);}
+			| NOT Exp													//	{output::printProductionRule(43);}
+			| Exp AND Exp												//	{output::printProductionRule(44);}
+			| Exp OR Exp												//	{output::printProductionRule(45);}
+			| Exp RELOP Exp												//	{output::printProductionRule(46);}
+			| Exp EQUALITY Exp											//	{output::printProductionRule(46);}
 			;
 %%
 
