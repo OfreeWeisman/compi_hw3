@@ -27,6 +27,7 @@ public:
 
 #endif //COMPI3_SYMBOLTABLE_H
 
+/*
 
 function 1 {
 
@@ -43,3 +44,4 @@ function 2{
 
     };
 };
+ */
