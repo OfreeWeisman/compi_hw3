@@ -4,7 +4,8 @@
 	#define YYSTYPE Node*
     #include "Tokens.h"
 	void errorHandler(int);
-	
+
+    extern YYSTYPE yylval;
 
 %}
 
