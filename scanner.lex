@@ -1,8 +1,8 @@
 %{
 	#include "output.hpp"
+	#define YYSTYPE Node*
     #include "parser.tab.hpp"
     #include "Tokens.h"
-    #define YYSTYPE Node*
 	void errorHandler(int);
 	
 
@@ -77,7 +77,7 @@ SPACES			([\t\n\r ])
 {MUL_OP}		{return MUL_OP;}
 {PLUS_OP}		{return PLUS_OP;}
 {ID}			{return ID;}
-{NUM}			{yylval = new Num(yytext); return NUM}
+{NUM}			{yylval = new Num(yytext); return NUM;}
 {STRING}		{return STRING;}
 {COMMENT}		;
 {SPACES}		;
