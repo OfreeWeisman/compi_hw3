@@ -8,6 +8,7 @@
 #include <string>
 #include <list>
 #include "Enums.h"
+//keep this !!!!!! VV
 #define YYSTYPE Node*
 
 using namespace std;
