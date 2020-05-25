@@ -69,10 +69,10 @@ Node* semantics38(Node* num);
 Node* semantics39(Node* num, Node* b);
 
 //rule 41 : Exp -> TRUE
-Node* semanticsTrue(){}
+Node* semanticsTrue();
 
 //rule 42 : Exp -> FALSE
-Node* semanticsFalse(){}
+Node* semanticsFalse();
 
 
 #endif //COMPI3_SEMANTICS_H

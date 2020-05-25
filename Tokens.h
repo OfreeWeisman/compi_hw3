@@ -18,7 +18,9 @@ class Node{
 private:
     TypesEnum type;
 public:
-    Node(){};
+    Node(){
+        type = NULL_ENUM;
+    };
     virtual ~Node(){}
     TypesEnum getType() const {
         return type;
@@ -37,7 +39,9 @@ public:
 
 class Type : public Node{
 public:
-    Type(TypesEnum t){}
+    Type(TypesEnum t){
+        this->setType(t);
+    }
     //TypesEnum getTypeName() ;
 };
 

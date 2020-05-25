@@ -182,6 +182,15 @@ Node *semantics39(Node *num, Node *b) {
     return nullptr;
 }
 
+Node* semanticsTrue(){
+    return new Bool(TRUE_ENUM);
+}
+
+Node* semanticsFalse(){
+    return new Bool(FALSE_ENUM);
+}
+
+
 void setup(DataStructures* globalTables) {
     globalTables->pushNewScope();
     Symbol* s1 = new Symbol("string -> void", 0, "print");
