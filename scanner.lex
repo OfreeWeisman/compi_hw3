@@ -46,8 +46,8 @@ SPACES			([\t\n\r ])
 
 %%
 
-{VOID}			{yylval = new Type(yytext); return VOID;}
-{INT}			{yylval = new Type(yytext); return INT;}
+{VOID}			{yylval = new VOID(yytext); return VOID;}
+{INT}			{yylval = new INT(yytext); return INT;}
 {BYTE}			{yylval = new Type(yytext); return BYTE;}
 {B}				{yylval = new Type(yytext); return B;}
 {BOOL}			{yylval = new Type(yytext); return BOOL;}

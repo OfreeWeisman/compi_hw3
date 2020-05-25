@@ -22,7 +22,7 @@ class Type : public Node{
 private:
     TypesEnum typeName;
 public:
-    Type(string typeName);
+    Type(TypesEnum typeName);
     TypesEnum getTypeName() const;
 };
 
