@@ -36,7 +36,7 @@ Node* semantics5(Node* type);
 Node* semantics6();
 
 //rule 7 : Formals -> epsilon
-Node* addEmptyParametersList() {}
+void addEmptyParametersList() {}
 
 //rule 8 : Formals -> FormalsList
 Node* addParametersList(Node* formalsList ,DataStructures* tables, vector<string>* funcArgs);

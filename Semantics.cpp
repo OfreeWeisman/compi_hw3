@@ -70,7 +70,7 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
 //----------------------------------------------Type Checking Functions-----------------------------------------------//
 //rule 2:
 
-BoolEnum checkexpBool(Node* operand1){
+BoolEnum checkExpBool(Node* operand1){
     Bool* check = (dynamic_cast<Bool*>(operand1));
     if(dynamic_cast<Bool*>(operand1)){
         return check->getBoolEnum();
