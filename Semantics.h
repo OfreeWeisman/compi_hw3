@@ -62,6 +62,9 @@ Node* semanticsTypeByte();
 //rule 33 : Type -> BOOL
 Node* semanticsTypeBool();
 
+//rule 35 : Exp -> Exp BINOP Exp
+Node* semantics35(Node* exp1, Node* BINOP, Node* exp2);
+
 //rule 38 : Exp -> NUM
 Node* semantics38(Node* num);
 
@@ -73,6 +76,19 @@ Node* semanticsTrue();
 
 //rule 42 : Exp -> FALSE
 Node* semanticsFalse();
+
+//rule 43 : Exp -> NOT Exp
+Node* semantics43(Node* expression);
+
+//rule 44 : Exp -> Exp AND Exp
+Node* semantics44(Node* exp1, Node* AND, Node* exp2);
+
+//rule 45 : Exp -> Exp OR Exp
+Node* semantics45(Node* exp1, Node* OR, Node* exp2);
+
+//rule 46 : Exp -> Exp RELOP Exp
+Node* semantics46(Node* exp1, Node* RELOP, Node* exp2);
+
 
 
 #endif //COMPI3_SEMANTICS_H

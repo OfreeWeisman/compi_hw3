@@ -15,7 +15,10 @@ const string &Id::getIdName() const {
     return idName;
 }
 
-Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {}
+Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {
+    setType(BOOL_ENUM);
+
+}
 
 BoolEnum Bool::getBoolEnum() const {
     return boolEnum;
@@ -28,6 +31,8 @@ void Bool::setBoolEnum(BoolEnum boolEnum) {
 
 Num::Num(char* strValue) : strValue(strValue) {
     value = atoi(strValue);
+    setType(INT_ENUM);
+
 }
 
 int Num::getValue() const {
@@ -46,6 +51,10 @@ void Num::setStrValue(const string &strValue) {
     Num::strValue = strValue;
 }
 
+Num::Num() {
+    setType(INT_ENUM);
+}
+
 int Byte::getValue() const {
     return value;
 }
@@ -56,6 +65,8 @@ void Byte::setValue(int value) {
 
 Byte::Byte(char *strValue) : strValue(strValue){
     value = atoi(strValue);
+    setType(BYTE_ENUM);
+
 
 }
 
@@ -67,11 +78,16 @@ bool Byte::isValidByte() {
 
 }
 
+Byte::Byte() {
+    setType(BYTE_ENUM);
+}
+
 const string &Parameter::getId() {
     return id;
 }
 
 Parameter::Parameter(const string &type, const string &id) : type(type), id(id) {
+    setType(NULL_ENUM);
     names = new list<string>();
     types = new list<string>();
 }
@@ -93,8 +109,65 @@ void Parameter::setTypes(list<string> *types) {
 }
 
 Parameter::Parameter() {
+    setType(NULL_ENUM);
     id = nullptr;
     type = nullptr;
     names = new list<string>();
     types = new list<string>();
+}
+
+Expression::Expression() {
+    setType(NULL_ENUM);
+
+}
+
+Expression::Expression(const string &id, const string &type) : id(id), type(type) {
+    setType(NULL_ENUM);
+
+}
+
+const string &Expression::getId() const {
+    return id;
+}
+
+void Expression::setId(const string &id) {
+    Expression::id = id;
+}
+
+const string &Expression::getType() const {
+    return type;
+}
+
+void Expression::setTypeStr(const string &type) {
+    Expression::type = type;
+}
+
+Relop::Relop() {
+    setType(NULL_ENUM);
+
+}
+
+Relop::Relop(const string &relop) : relop(relop) {
+    setType(NULL_ENUM);
+
+}
+
+const string &Relop::getRelop() const {
+    return relop;
+}
+
+void Relop::setRelop(const string &relop) {
+    Relop::relop = relop;
+}
+
+Binop::Binop(const string &binop) : binop(binop) {}
+
+Binop::Binop() {}
+
+const string &Binop::getBinop() const {
+    return binop;
+}
+
+void Binop::setBinop(const string &binop) {
+    Binop::binop = binop;
 }

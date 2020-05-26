@@ -81,11 +81,10 @@ BoolEnum checkExpBool(Node* operand1){
 }
 
 //rule 8:
-TypesEnum checkLegalRelop(Node* operand1, Node* operand2){
+void checkLegalRelop(Node* operand1, Node* operand2){
     //check both operands are numerical
     if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
        (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
-        return BOOL_ENUM;
     } else {
         output::errorMismatch(yylineno);
         exit(0);
@@ -163,7 +162,6 @@ Node *semanticsTypeBool() {
     return new Type(BOOL_ENUM);
 }
 
-
 void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
     //add the scope name to the current scope and then open the new scope
     searchIfPreDefined(id, tables);
@@ -176,12 +174,9 @@ void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* fun
     tables->pushNewScope();
 }
 
-
 void closeScope(DataStructures* globalTables){
     globalTables->popScope();
 }
-
-
 
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
@@ -264,7 +259,6 @@ Node* semanticsFalse(){
     return new Bool(FALSE_ENUM);
 }
 
-
 void setup(DataStructures* globalTables) {
     globalTables->pushNewScope();
     Symbol* s1 = new Symbol("string -> void", 0, "print");
@@ -276,6 +270,171 @@ void setup(DataStructures* globalTables) {
 void cleanup(DataStructures* globalTables) {
     globalTables->popScope();
 
+}
+
+Node *semantics43(Node *expression) {
+    BoolEnum b = checkExpBool(expression);
+    if(FALSE_ENUM == b){
+        dynamic_cast<Bool*>(expression)->setBoolEnum(TRUE_ENUM);
+        return expression;
+    } else {
+        dynamic_cast<Bool*>(expression)->setBoolEnum(FALSE_ENUM);
+        return expression;
+    }
+}
+
+Node *semantics44(Node *exp1, Node *AND, Node *exp2) {
+    BoolEnum b1 = checkExpBool(exp1);
+    BoolEnum b2 = checkExpBool(exp2);
+
+    if(b1 == b2){
+        delete(exp2);
+        return exp1;
+    } else if(b1 == FALSE_ENUM) {
+        delete(exp2);
+        return exp1;
+    } else {
+        delete(exp1);
+        return exp2;
+    }
+
+}
+
+Node *semantics45(Node *exp1, Node *OR, Node *exp2) {
+    BoolEnum b1 = checkExpBool(exp1);
+    BoolEnum b2 = checkExpBool(exp2);
+
+    if(b1 == TRUE_ENUM){
+        delete(exp2);
+        return exp1;
+    } else {
+        delete(exp1);
+        return exp2;
+    }
+}
+
+Node *semantics46(Node *exp1, Node *RELOP, Node *exp2) {
+
+    //check if the expressions are ok to relop
+    checkLegalRelop(exp1, exp2);
+    int v1;
+    int v2;
+
+    if(exp1->getType() == BYTE_ENUM){
+        v1 = dynamic_cast<Byte*>(exp1)->getValue();
+    } else {
+        v1 = dynamic_cast<Num*>(exp1)->getValue();
+    }
+
+    if(exp2->getType() == BYTE_ENUM){
+        v2 = dynamic_cast<Byte*>(exp2)->getValue();
+    } else {
+        v2 = dynamic_cast<Num*>(exp2)->getValue();
+    }
+
+    string r = dynamic_cast<Relop*>(RELOP)->getRelop();
+
+    delete(exp1);
+    delete(exp2);
+    delete(RELOP);
+
+    if(r == "<"){
+        if (v1 < v2){
+            return new Bool(TRUE_ENUM);
+        } else {
+            return new Bool(FALSE_ENUM);
+        }
+    } else if (r == ">"){
+        if (v1 < v2){
+            return new Bool(FALSE_ENUM);
+        } else {
+            return new Bool(TRUE_ENUM);
+        }
+    } else if (r == "<="){
+        if (v1 <= v2){
+            return new Bool(TRUE_ENUM);
+        } else {
+            return new Bool(FALSE_ENUM);
+        }
+    } else if (r == ">="){
+        if (v1 <= v2){
+            return new Bool(FALSE_ENUM);
+        } else {
+            return new Bool(TRUE_ENUM);
+        }
+    } else if (r == "=="){
+        if (v1 == v2){
+            return new Bool(TRUE_ENUM);
+        } else {
+            return new Bool(FALSE_ENUM);
+        }
+    } else if (r == "!="){
+        if (v1 != v2){
+            return new Bool(TRUE_ENUM);
+        } else {
+            return new Bool(FALSE_ENUM);
+        }
+    }
+
+}
+
+Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
+    TypesEnum type = checkLegalBinop(exp1, exp2);
+
+    int v1;
+    int v2;
+
+    if(exp1->getType() == BYTE_ENUM){
+        v1 = dynamic_cast<Byte*>(exp1)->getValue();
+    } else {
+        v1 = dynamic_cast<Num*>(exp1)->getValue();
+    }
+
+    if(exp2->getType() == BYTE_ENUM){
+        v2 = dynamic_cast<Byte*>(exp2)->getValue();
+    } else {
+        v2 = dynamic_cast<Num*>(exp2)->getValue();
+    }
+    string b = dynamic_cast<Relop*>(BINOP)->getRelop();
+
+    delete(exp1);
+    delete(exp2);
+    delete(BINOP);
+
+    if(b == "+"){
+        if (type == INT_ENUM){
+            Num* n = new Num();
+            n->setValue(v1+v2);
+            return n;
+
+        } else {
+            Byte* b = new Byte();
+            b->setValue(v1+v2);
+            return b;
+        }
+    } else if (b == "-"){
+        if (type == INT_ENUM){
+            Num* n = new Num();
+            n->setValue(v1-v2);
+            return n;
+
+        } else {
+            Byte* b = new Byte();
+            b->setValue(v1-v2);
+            return b;
+        }
+    } else if (b == "*"){
+        if (type == INT_ENUM){
+            Num* n = new Num();
+            n->setValue(v1+v2);
+            return n;
+
+        } else {
+            Byte* b = new Byte();
+            b->setValue(v1*v2);
+            return b;
+        }
+    }
 }
 
 

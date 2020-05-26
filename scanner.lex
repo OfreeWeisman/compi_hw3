@@ -70,10 +70,10 @@ SPACES			([\t\n\r ])
 {LBRACE}		{return LBRACE;}
 {RBRACE}		{return RBRACE;}
 {ASSIGN}		{return ASSIGN;}
-{RELOP}			{return RELOP;}
-{EQUALITY}		{return EQUALITY;}
-{MUL_OP}		{return MUL_OP;}
-{PLUS_OP}		{return PLUS_OP;}
+{RELOP}			{yylval = new Relop(yytext); return RELOP;}
+{EQUALITY}		{yylval = new Relop(yytext); return EQUALITY;}
+{MUL_OP}		{yylval = new Binop(yytext); return MUL_OP;}
+{PLUS_OP}		{yylval = new Binop(yytext); return PLUS_OP;}
 {ID}			{return ID;}
 {NUM}			{yylval = new Num(yytext); return NUM;}
 {STRING}		{return STRING;}
