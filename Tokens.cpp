@@ -91,3 +91,10 @@ list<string> *Parameter::getTypes()  {
 void Parameter::setTypes(list<string> *types) {
     Parameter::types = types;
 }
+
+Parameter::Parameter() {
+    id = nullptr;
+    type = nullptr;
+    names = new list<string>();
+    types = new list<string>();
+}

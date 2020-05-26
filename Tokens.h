@@ -99,7 +99,7 @@ private:
     list<string>* types;
 
 public:
-    Parameter() {}
+    Parameter();
 
     Parameter(const string &type, const string &id);
 
