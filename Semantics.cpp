@@ -48,29 +48,67 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 
 }
 
+Symbol* getSymbolinList(list<Symbol *> *currList, string name){
+    list<Symbol*>::iterator it = currList->begin();
+    Symbol* temp;
+    for(it; it != currList->end(); it++){
+        temp = *it;
+        if(temp->getName() == name){
+            return temp;
+        }
+    }
+    return nullptr;
+}
+
+/*
+ * only returns the func's arguments.
+ */
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
-//    Id *i = dynamic_cast<Id *>(id);
-//    string name = i->getIdName();
-//
-//    stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
-//    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
-//    DataStructures *tempDS = new DataStructures();
-//    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
-//    while (!symbolTables->empty()) {
-//        list<Symbol *> *currList = symbolTables->top();
-//        symbolExistsinList(currList, name);
-//        tempSymbolTable->push(currList);
-//        symbolTables->pop();
-//    }
-//    while (!tempSymbolTable->empty()) {
-//        list<Symbol *> *currList = tempSymbolTable->top();
-//        symbolTables->push(currList);
-//        tempSymbolTable->pop();
-//    }
+
+    Id* i = dynamic_cast<Id*>(id);
+    string func_name = i->getIdName();
+    stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
+
+    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+    DataStructures *tempDS = new DataStructures();
+    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+    list<Symbol *> *currList;
+    Symbol* func = nullptr;
+    list<Symbol*>* funcs_args = nullptr;
+    while (!symbolTable->empty()) {
+       currList = symbolTable->top();
+        if(func != nullptr){
+            funcs_args = currList;
+        }
+       func = getSymbolinList(currList, func_name);
+       tempSymbolTable->push(currList);
+       symbolTable->pop();
+    }
+    while (!tempSymbolTable->empty()) {
+        list<Symbol *> *currList = tempSymbolTable->top();
+        symbolTable->push(currList);
+        tempSymbolTable->pop();
+    }
+
+    if(func == nullptr){
+        output::errorUndefFunc(yylineno, func_name);
+        exit(0);
+    }
+
+    //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
+    list<Symbol*>* l = new list<Symbol*>();
+    list<Symbol*>::iterator it = funcs_args->begin();
+    for(it; it != funcs_args->end(); it++){
+        func = *it;
+        if(func->getOffset() < 0){
+            l->push_back(func);
+        }
+    }
+    return l;
+
 }
 
 list<string>* combineLists(list<string>* list1, list<string>* list2){
-    //use new
     list<string>* new_list = new list<string>();
     list<string>::iterator it = list1->begin();
     for(it; it!=list1->end(); it++){
@@ -84,11 +122,12 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
 }
 
 
-Node* getFunctionRetType(Node* node){
+Node* getFunctionRetType(Node* node, DataStructures* tables){
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
     //type_name is the string of the type
+
 
 //    if(type_name == "bool"){
 //        return new Bool();
@@ -525,7 +564,7 @@ Node* semantics28(Node *id, DataStructures* tables) {
     if(!s->empty()){
         output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
     }
-    return getFunctionRetType(id);
+    return getFunctionRetType(id, tables);
 
 
 }
