@@ -121,7 +121,7 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
     return new_list;
 }
 
-
+//TODO:to finish this up
 Node* getFunctionRetType(Node* node, DataStructures* tables){
     //find the function in the symbol table
     //get the retType of the function
@@ -153,8 +153,25 @@ BoolEnum checkExpBool(Node* operand1){
 }
 
 //rule 6+7:
-void checkLegalAssignment(Node* operand1, Node* operand2){
+//TODO: what else should we be checking here?
+void checkLegalAssignment(Node* id, Node* exp){
     //it is legal to assign byte to int
+    Id* i = dynamic_cast<Id*>(id);
+    string id_type = i->getTypeAsString(i->getType());
+    Num* num = dynamic_cast<Num*>(exp);
+    Byte* byte = dynamic_cast<Byte*>(exp);
+    Bool* b =  dynamic_cast<Bool*>(exp);
+    if(id_type == "int" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
+        output::errorMismatch(yylineno);
+        exit(0);
+    }else if(id_type == "bool" && !b){ //we've received a bool, but the expression isn't a bool.
+        output::errorMismatch(yylineno);
+        exit(0);
+    }else if(id_type == "byte" && !byte){ //we've received a bool, but the expression isn't a bool.
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+
 }
 
 //rule 8:
@@ -593,7 +610,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
-    return getFunctionRetType(id);
+    return getFunctionRetType(id,tables);
 
 }
 
