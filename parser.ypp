@@ -84,11 +84,11 @@ Statement : IF LPAREN Exp RPAREN Statement								   // {output::printProduction
       |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				    //{output::printProductionRule(24);}
       | LBRACE Statements RBRACE										   // {output::printProductionRule(14);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
-			| Type ID ASSIGN Exp SC											//{output::printProductionRule(16);}
-			| ID ASSIGN Exp SC												//{output::printProductionRule(17);}
-			| Call SC														//{output::printProductionRule(18);}
-			| RETURN SC														//{output::printProductionRule(19);}
-			| RETURN Exp SC													//{output::printProductionRule(20);}
+			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
+			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4);}
+			| Call SC														{semantics18($1,$2);}
+			| RETURN SC														{semantics19($1,$2,globalTables);}
+			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}
 			| BREAK SC														{semantics25($1,$2,inWhile);}
 			| CONTINUE SC													{semantics26($1,$2,inWhile);}
 			;

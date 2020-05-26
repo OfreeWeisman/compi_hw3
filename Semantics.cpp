@@ -170,6 +170,18 @@ bool checkIfWhileTypes(Node* exp){
     }
 }
 
+string getFunctionRetTypeFromTable(DataStructures* tables){
+    list<Symbol*>* top_scope = tables->getSymbolsTable()->top();
+    tables->getSymbolsTable()->pop();
+    list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
+    Symbol* function = inner_scope->back();
+    string type = function->getType();
+    tables->getSymbolsTable()->push(top_scope);
+
+    return type;
+
+}
+
 
 
 
@@ -554,6 +566,46 @@ void semantics18(Node *call, Node *sc) {
 void semantics17(Node *id, Node *assign, Node *exp, Node *sc) {
     checkLegalAssignment(id,exp);
     delete(id);
+    delete(exp);
+}
+
+void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataStructures* tables) {
+    searchIfPreDefined(id, tables);
+
+    TypesEnum t = dynamic_cast<Type*>(type)->getType();
+    string typeString = type->getTypeAsString(t);
+    string name = dynamic_cast<Id*>(id)->getIdName();
+
+    int offset = tables->getOffsetsTable()->top();
+
+    tables->getOffsetsTable()->push(offset+1);
+
+    Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
+    tables->pushNewSymbol(new_symbol);
+
+    checkLegalAssignment(id,exp);
+    delete(id);
+    delete(exp);
+    delete(type);
+
+}
+
+void semantics19(Node *ret, Node *sc, DataStructures *tables) {
+    string returnType = getFunctionRetTypeFromTable(tables);
+    if (returnType != "void") {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+    delete(ret);
+}
+
+void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
+    string returnType = getFunctionRetTypeFromTable(tables);
+    if (returnType == "void") {
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+    delete(ret);
     delete(exp);
 }
 

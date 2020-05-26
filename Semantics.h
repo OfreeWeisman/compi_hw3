@@ -53,11 +53,20 @@ Node* semantics11(Node *type, Node *id, DataStructures *tables);
 //rule 15 : Statements -> TYPE ID SC
 void semantics15(Node* type, Node* id, Node* sc, DataStructures* tables);
 
+//rule 16 : Statement -> TYPE ID ASSIGN Exp SC
+void semantics16(Node* type, Node* id, Node* assign, Node* exp, Node* sc, DataStructures* tables);
+
 //rule 17 : Statement -> ID ASSIGN Exp SC
 void semantics17(Node* id, Node* assign, Node* exp, Node* sc);
 
 //rule 18 : Statement -> Call SC
 void semantics18(Node* call, Node* sc);
+
+//rule 19 : Statement -> RETURN SC
+void semantics19(Node* ret, Node* sc, DataStructures* tables);
+
+//rule 20 : Statement -> RETURN Exp SC
+void semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
 
 //rule 25 : Statement -> BREAK SC
 void semantics25(Node* BREAK, Node* sc, int inWhile);
