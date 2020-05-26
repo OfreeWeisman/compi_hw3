@@ -32,6 +32,7 @@ void Bool::setBoolEnum(BoolEnum boolEnum) {
 Num::Num(char* strValue) : strValue(strValue) {
     value = atoi(strValue);
     setType(INT_ENUM);
+    setTypes("int");
 
 }
 
@@ -118,11 +119,14 @@ Parameter::Parameter() {
 
 Expression::Expression() {
     setType(NULL_ENUM);
+    types = new list<string>();
+
 
 }
 
 Expression::Expression(const string &id, const string &type) : id(id), type(type) {
     setType(NULL_ENUM);
+    types = new list<string>();
 
 }
 
@@ -141,6 +145,12 @@ const string &Expression::getType() const {
 void Expression::setTypeStr(const string &type) {
     Expression::type = type;
 }
+
+list<string> *Expression::getTypes()  {
+    return types;
+}
+
+Expression::Expression(const string &id, const string &type, list<string> *types) : id(id), type(type), types(types) {}
 
 Relop::Relop() {
     setType(NULL_ENUM);
@@ -170,4 +180,20 @@ const string &Binop::getBinop() const {
 
 void Binop::setBinop(const string &binop) {
     Binop::binop = binop;
+}
+
+String::String() {
+    setType(STRING_ENUM);
+}
+
+String::String(const string &str) : str(str) {
+    setType(STRING_ENUM);
+}
+
+const string &String::getStr() const {
+    return str;
+}
+
+void String::setStr(const string &str) {
+    String::str = str;
 }

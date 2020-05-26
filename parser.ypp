@@ -102,20 +102,20 @@ Type		: INT															{$$ = semanticsTypeInt();}
 			| BOOL															{$$ = semanticsTypeBool();}
 			;
 Exp			: LPAREN Exp RPAREN											//	{output::printProductionRule(34);}
-			| Exp MUL_OP Exp											//	{output::printProductionRule(35);}
-			| Exp PLUS_OP Exp											//	{output::printProductionRule(35);}
-			| ID														//	{output::printProductionRule(36);}
+			| Exp MUL_OP Exp												{$$ = semantics35($1,$2,$3);}
+			| Exp PLUS_OP Exp												{$$ = semantics35($1,$2,$3);}
+			| ID															{$$ = semantics36($1);}
 			| Call														//	{output::printProductionRule(37);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
 			| STRING													//	{output::printProductionRule(40);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
-			| NOT Exp													//	{output::printProductionRule(43);}
-			| Exp AND Exp												//	{output::printProductionRule(44);}
-			| Exp OR Exp												//	{output::printProductionRule(45);}
-			| Exp RELOP Exp												//	{output::printProductionRule(46);}
-			| Exp EQUALITY Exp											//	{output::printProductionRule(46);}
+			| NOT Exp														{$$ = semantics43($1,$2);}
+			| Exp AND Exp													{$$ = semantics44($1,$2,$3);}
+			| Exp OR Exp													{$$ = semantics45($1,$2,$3);}
+			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3);}
+			| Exp EQUALITY Exp												{$$ = semantics46($1,$2,$3);}
 			;
 %%
 

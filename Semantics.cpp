@@ -48,6 +48,26 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 
 }
 
+list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
+    Id *i = dynamic_cast<Id *>(id);
+    string name = i->getIdName();
+
+    stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
+    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+    DataStructures *tempDS = new DataStructures();
+    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+    while (!symbolTables->empty()) {
+        list<Symbol *> *currList = symbolTables->top();
+        symbolExistsinList(currList, name);
+        tempSymbolTable->push(currList);
+        symbolTables->pop();
+    }
+    while (!tempSymbolTable->empty()) {
+        list<Symbol *> *currList = tempSymbolTable->top();
+        symbolTables->push(currList);
+        tempSymbolTable->pop();
+    }
+}
 
 list<string>* combineLists(list<string>* list1, list<string>* list2){
     //use new
@@ -115,6 +135,11 @@ TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
         output::errorMismatch(yylineno);
         exit(0);
     }
+}
+
+//rule 14:
+void checkValidArgs(list<string>* types, list<Symbol*>* args){
+    //compare the lists
 }
 
 //rule 16:
@@ -236,19 +261,16 @@ Node *semantics6() {
 }
 
 Node *semantics38(Node* num) {
-    int value = dynamic_cast<Num*>(num)->getValue();
-    return new NonTerminalNum(value);
+    return num;
 }
 
 Node *semantics39(Node *num, Node *b) {
     Byte* byte = dynamic_cast<Byte*>(num);
     if(byte->isValidByte()){
-        return new NonTerminalByte(byte->getValue());
+        return num;
     } else {
         //error
     }
-    //error instead
-    return nullptr;
 }
 
 Node* semanticsTrue(){
@@ -435,6 +457,55 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
             return b;
         }
     }
+}
+
+Node *semantics40(Node *exp, Node *str) {
+    return str;
+}
+
+Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
+    return exp;
+}
+
+Node *semantics36(Node *id) {
+    return id;
+}
+
+Node *semantics37(Node *call) {
+    return nullptr;
+}
+
+void semantics28(Node *id, DataStructures* tables) {
+    Id* i = dynamic_cast<Id*>(id);
+    vector<string>* args = new vector<string>();
+    list<Symbol*>* s = getFunctionsArgs(id, tables); // search if id exists
+    if(!s->empty()){
+        output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
+    }
+
+}
+
+Node *semantics29(Node *exp) {
+    return exp;
+}
+
+Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
+    Expression* e1 = dynamic_cast<Expression*>(exp);
+    Expression* e2 = dynamic_cast<Expression*>(explist);
+
+    list<string>* temp = combineLists(e1->getTypes(), e2->getTypes());
+    Expression* expression = new Expression(e1->getId(), e1->getType(), temp);
+    delete(exp);
+    delete(explist);
+    delete(COMMA);
+    return expression;
+}
+
+void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
+    Expression* e = dynamic_cast<Expression*>(explist);
+    list<string>* types = e->getTypes();
+    list<Symbol*>* s = getFunctionsArgs(id, tables);
+    checkValidArgs(types, s); //throw error if mismatch
 }
 
 

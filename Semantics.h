@@ -53,6 +53,18 @@ Node* semantics11(Node *type, Node *id, DataStructures *tables);
 //rule 15 : Statements -> TYPE ID SC
 void semantics15(Node* type, Node* id, Node* sc, DataStructures* tables);
 
+//rule 27 : Call -> ID LPAREN Explist RPAREN
+void semantics27(Node* id, Node* lparen, Node* explist, Node* rparen, DataStructures* tables);
+
+//rule 28 : Call -> ID LPAREN RPAREN
+void semantics28(Node* id, DataStructures* tables);
+
+//rule 29 : Explist -> Exp
+Node* semantics29(Node* exp);
+
+//rule 30 : Explist -> Exp COMMA Explist
+Node* semantics30(Node* exp, Node* COMMA, Node* explist);
+
 //rule 31 : Type -> INT
 Node* semanticsTypeInt();
 
@@ -62,14 +74,26 @@ Node* semanticsTypeByte();
 //rule 33 : Type -> BOOL
 Node* semanticsTypeBool();
 
+//rule 34 : Exp -> LPAREN Exp RPAREN
+Node* semantics34(Node* lparen, Node* exp, Node* rparen);
+
 //rule 35 : Exp -> Exp BINOP Exp
 Node* semantics35(Node* exp1, Node* BINOP, Node* exp2);
+
+//rule 36 : Exp -> ID
+Node* semantics36(Node* id);
+
+//rule 37 : Exp -> Call
+Node* semantics37(Node* call);
 
 //rule 38 : Exp -> NUM
 Node* semantics38(Node* num);
 
 //rule 39 : Exp -> NUM B
 Node* semantics39(Node* num, Node* b);
+
+//rule 40 : Exp -> STRING
+Node* semantics40(Node* exp, Node* str);
 
 //rule 41 : Exp -> TRUE
 Node* semanticsTrue();

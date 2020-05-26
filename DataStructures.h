@@ -14,17 +14,11 @@ using namespace std;
 class Symbol {
 public:
     Symbol(const string &type, int offset, const string &name);
-
     const string &getType() const;
-
     void setType(const string &type);
-
     int getOffset() const;
-
     void setOffset(int offset);
-
     const string &getName() const;
-
     void setName(const string &name);
 
 private:
@@ -42,13 +36,9 @@ public:
     void popScope();
     void pushNewScope();
     void pushNewSymbol(Symbol* s);
-
     stack<int> *getOffsetsTable() const;
-
     void setOffsetsTable(stack<int> *offsetsTable);
-
     stack<list<Symbol *> *> *getSymbolsTable() const;
-
     void setSymbolsTable(stack<list<Symbol *> *> *symbolsTable);
 };
 

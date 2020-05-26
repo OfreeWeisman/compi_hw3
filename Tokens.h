@@ -18,6 +18,14 @@ class Node{
 private:
     TypesEnum type;
 public:
+    list<string> *getTypes() {
+        return types;
+    }
+
+private:
+    list<string>* types;
+
+public:
     Node(){
         type = NULL_ENUM;
     };
@@ -34,6 +42,9 @@ public:
             case BOOL_ENUM : return "bool";
             case BYTE_ENUM : return "byte";
         }
+    }
+    void setTypes(string t){
+        types->push_back(t);
     }
 };
 
@@ -116,14 +127,20 @@ class Expression : public Node {
 public:
     Expression(const string &id, const string &type);
     Expression();
+
+    Expression(const string &id, const string &type, list<string> *types);
+
     const string &getId() const;
     void setId(const string &id);
     const string &getType() const;
     void setTypeStr(const string &type);
 
+    list<string> *getTypes();
+
 private:
     string id;
     string type;
+   // list<string>* types;
 };
 
 class Relop : public Node{
@@ -150,6 +167,17 @@ public:
 private:
     string binop;
 
+};
+
+class String : public Node {
+public:
+    String();
+    String(const string &str);
+    const string &getStr() const;
+    void setStr(const string &str);
+
+private:
+    string str;
 };
 #define YYSTYPE Node*
 
