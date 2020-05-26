@@ -50,20 +50,21 @@
 
 %%
 
+Marker1         : /*epsilon*/                                               {setup(globalTables);}
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
+Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
+
 Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
-Marker1     : /*epsilon*/                                                   {setup(globalTables);}
 Funcs		: /*epsilon*/													{}
 			| FuncDecl Funcs												//{output::printProductionRule(3);}
 			;
-FuncDecl	: RetType ID                                                    {openScope($1,$2,globalTables,funcArgs);}
-                LPAREN
-                    Formals
-                RPAREN
-                LBRACE
-                    Statements
-                RBRACE		                                                {closeScope(globalTables);}
-			;
+FuncDecl	: FuncDeclOpen FuncDeclInsert                                   {}
+            ;
+FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              {openFuncScope($1,$2,globalTables,funcArgs);}
+            ;
+FuncDeclInsert :LBRACE Statements Marker_close RBRACE                       {}
+            ;
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
 			;
@@ -82,7 +83,7 @@ Statement : IF LPAREN Exp RPAREN Statement								   // {output::printProduction
       |  IF LPAREN Exp RPAREN Statement ELSE Statement					   // {output::printProductionRule(22);}
       |  WHILE LPAREN Exp RPAREN Statement								   // {output::printProductionRule(23);}
       |  WHILE LPAREN Exp RPAREN Statement ELSE Statement				    //{output::printProductionRule(24);}
-      | LBRACE Statements RBRACE										   // {output::printProductionRule(14);}
+      | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
 			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
 			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4);}

@@ -217,7 +217,11 @@ Node *semanticsTypeBool() {
     return new Type(BOOL_ENUM);
 }
 
-void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
+void openScope(DataStructures* tables){
+    tables->pushNewScope();
+}
+
+void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
     //add the scope name to the current scope and then open the new scope
     searchIfPreDefined(id, tables);
     string name = dynamic_cast<Id*>(id)->getIdName();
@@ -230,6 +234,15 @@ void openScope(Node *type, Node *id, DataStructures* tables, vector<string>* fun
 }
 
 void closeScope(DataStructures* globalTables){
+    //print the top scope
+    output::endScope();
+    list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
+    Symbol* s;
+    list<Symbol*>::iterator it = scope->begin();
+    for(it ; it != scope->end(); it++){
+        s = *it;
+        output::printID(s->getName(),s->getOffset(), s->getType());
+    }
     globalTables->popScope();
 }
 
@@ -607,6 +620,10 @@ void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     }
     delete(ret);
     delete(exp);
+}
+
+void semantics14(Node* statement){
+    delete(statement);
 }
 
 
