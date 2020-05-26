@@ -99,6 +99,9 @@ public:
 class Bool : public Node {
 public:
     Bool(BoolEnum boolEnum);
+
+    Bool();
+
     BoolEnum getBoolEnum() const;
     void setBoolEnum(BoolEnum boolEnum);
 private:

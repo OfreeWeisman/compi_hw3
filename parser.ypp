@@ -12,6 +12,7 @@
 
 	DataStructures* globalTables;
 	vector<string>* funcArgs;
+	int inWhile;
 
 
 %}
@@ -88,27 +89,27 @@ Statement : IF LPAREN Exp RPAREN Statement								   // {output::printProduction
 			| Call SC														//{output::printProductionRule(18);}
 			| RETURN SC														//{output::printProductionRule(19);}
 			| RETURN Exp SC													//{output::printProductionRule(20);}
-			| BREAK SC														//{output::printProductionRule(25);}
-			| CONTINUE SC													//{output::printProductionRule(26);}
+			| BREAK SC														{semantics25($1,$2,inWhile);}
+			| CONTINUE SC													{semantics26($1,$2,inWhile);}
 			;
-Call		: ID LPAREN ExpList RPAREN											//	{output::printProductionRule(27);}
-			| ID LPAREN RPAREN											//	{output::printProductionRule(28);}
+Call		: ID LPAREN ExpList RPAREN										{semantics27($1,$2,$3,$4,globalTables;}
+			| ID LPAREN RPAREN												{semantics28($1,$2,$3);}
 			;
-ExpList		: Exp															//{output::printProductionRule(29);}
-			| Exp COMMA ExpList												//{output::printProductionRule(30);}
+ExpList		: Exp															{$$ = semantics29($1);}
+			| Exp COMMA ExpList												{$$ = semantics30($1,$2,$3);}
 			;
 Type		: INT															{$$ = semanticsTypeInt();}
 			| BYTE															{$$ = semanticsTypeByte();}
 			| BOOL															{$$ = semanticsTypeBool();}
 			;
-Exp			: LPAREN Exp RPAREN											//	{output::printProductionRule(34);}
+Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| Exp MUL_OP Exp												{$$ = semantics35($1,$2,$3);}
 			| Exp PLUS_OP Exp												{$$ = semantics35($1,$2,$3);}
 			| ID															{$$ = semantics36($1);}
-			| Call														//	{output::printProductionRule(37);}
+			| Call															{$$ = semantics37($1);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
-			| STRING													//	{output::printProductionRule(40);}
+			| STRING														{$$ = semantics40($1);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
 			| NOT Exp														{$$ = semantics43($1,$2);}
@@ -124,6 +125,7 @@ int main(){
 
     funcArgs = new  vector<string>();
     globalTables = new DataStructures();
+    inWhile = 0;
 	return yyparse();
 }
 

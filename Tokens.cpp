@@ -17,6 +17,7 @@ const string &Id::getIdName() const {
 
 Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {
     setType(BOOL_ENUM);
+    setTypes("bool");
 
 }
 
@@ -26,6 +27,11 @@ BoolEnum Bool::getBoolEnum() const {
 
 void Bool::setBoolEnum(BoolEnum boolEnum) {
     Bool::boolEnum = boolEnum;
+}
+
+Bool::Bool() {
+    setType(BOOL_ENUM);
+    setTypes("bool");
 }
 
 
@@ -54,6 +60,7 @@ void Num::setStrValue(const string &strValue) {
 
 Num::Num() {
     setType(INT_ENUM);
+    setTypes("int");
 }
 
 int Byte::getValue() const {
@@ -67,6 +74,7 @@ void Byte::setValue(int value) {
 Byte::Byte(char *strValue) : strValue(strValue){
     value = atoi(strValue);
     setType(BYTE_ENUM);
+    setTypes("byte");
 
 
 }
@@ -81,6 +89,8 @@ bool Byte::isValidByte() {
 
 Byte::Byte() {
     setType(BYTE_ENUM);
+    setTypes("byte");
+
 }
 
 const string &Parameter::getId() {
@@ -184,10 +194,13 @@ void Binop::setBinop(const string &binop) {
 
 String::String() {
     setType(STRING_ENUM);
+    setTypes("string");
 }
 
 String::String(const string &str) : str(str) {
     setType(STRING_ENUM);
+    setTypes("string");
+
 }
 
 const string &String::getStr() const {

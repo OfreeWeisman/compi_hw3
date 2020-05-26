@@ -49,24 +49,24 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 }
 
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
-    Id *i = dynamic_cast<Id *>(id);
-    string name = i->getIdName();
-
-    stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
-    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
-    DataStructures *tempDS = new DataStructures();
-    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
-    while (!symbolTables->empty()) {
-        list<Symbol *> *currList = symbolTables->top();
-        symbolExistsinList(currList, name);
-        tempSymbolTable->push(currList);
-        symbolTables->pop();
-    }
-    while (!tempSymbolTable->empty()) {
-        list<Symbol *> *currList = tempSymbolTable->top();
-        symbolTables->push(currList);
-        tempSymbolTable->pop();
-    }
+//    Id *i = dynamic_cast<Id *>(id);
+//    string name = i->getIdName();
+//
+//    stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
+//    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+//    DataStructures *tempDS = new DataStructures();
+//    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+//    while (!symbolTables->empty()) {
+//        list<Symbol *> *currList = symbolTables->top();
+//        symbolExistsinList(currList, name);
+//        tempSymbolTable->push(currList);
+//        symbolTables->pop();
+//    }
+//    while (!tempSymbolTable->empty()) {
+//        list<Symbol *> *currList = tempSymbolTable->top();
+//        symbolTables->push(currList);
+//        tempSymbolTable->pop();
+//    }
 }
 
 list<string>* combineLists(list<string>* list1, list<string>* list2){
@@ -84,7 +84,20 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
 }
 
 
+Node* getFunctionRetType(Node* node){
+    //find the function in the symbol table
+    //get the retType of the function
+    //return New of this type
+    //type_name is the string of the type
 
+//    if(type_name == "bool"){
+//        return new Bool();
+//    } else if(type_name == "int"){
+//        return new Num();
+//    } else {
+//        return new Byte();
+//    }
+}
 
 
 //----------------------------------------------Type Checking Functions-----------------------------------------------//
@@ -98,6 +111,11 @@ BoolEnum checkExpBool(Node* operand1){
         output::errorMismatch(yylineno);
         exit(0);
     }
+}
+
+//rule 6+7:
+void checkLegalAssignment(Node* operand1, Node* operand2){
+    //it is legal to assign byte to int
 }
 
 //rule 8:
@@ -459,7 +477,7 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
     }
 }
 
-Node *semantics40(Node *exp, Node *str) {
+Node *semantics40(Node *str) {
     return str;
 }
 
@@ -472,16 +490,18 @@ Node *semantics36(Node *id) {
 }
 
 Node *semantics37(Node *call) {
-    return nullptr;
+    return call;
 }
 
-void semantics28(Node *id, DataStructures* tables) {
+Node* semantics28(Node *id, DataStructures* tables) {
     Id* i = dynamic_cast<Id*>(id);
     vector<string>* args = new vector<string>();
     list<Symbol*>* s = getFunctionsArgs(id, tables); // search if id exists
     if(!s->empty()){
         output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
     }
+    return getFunctionRetType(id);
+
 
 }
 
@@ -501,11 +521,40 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
     return expression;
 }
 
-void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
+Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
     Expression* e = dynamic_cast<Expression*>(explist);
     list<string>* types = e->getTypes();
     list<Symbol*>* s = getFunctionsArgs(id, tables);
     checkValidArgs(types, s); //throw error if mismatch
+    //find the function in the symbol table
+    //get the retType of the function
+    //return New of this type
+    return getFunctionRetType(id);
+
+}
+
+void semantics26(Node *cont, Node *sc, int inWhile) {
+    if(!inWhile){
+        output::errorUnexpectedContinue(yylineno);
+        exit(0);
+    }
+}
+
+void semantics25(Node *BREAK, Node *sc, int inWhile) {
+    if(!inWhile){
+        output::errorUnexpectedBreak(yylineno);
+        exit(0);
+    }
+}
+
+void semantics18(Node *call, Node *sc) {
+    delete(call);
+}
+
+void semantics17(Node *id, Node *assign, Node *exp, Node *sc) {
+    checkLegalAssignment(id,exp);
+    delete(id);
+    delete(exp);
 }
 
 
