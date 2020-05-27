@@ -51,6 +51,7 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
         symbolTables->push(currList);
         tempSymbolTable->pop();
     }
+    cout<<"searchIfPreDefinedFINISHED"<<endl;
 
 }
 
