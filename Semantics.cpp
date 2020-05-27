@@ -827,6 +827,9 @@ void semantics14(Node* statement){
 
 void checkExpBoolFromExpression(Node* operand1){
     Expression* check = (dynamic_cast<Expression*>(operand1));
+    if(!check){
+        cout<<"check is not an expression"<<endl;
+    }
     if(check->getType() != BOOL_ENUM){
         output::errorMismatch(yylineno);
         exit(0);
