@@ -324,7 +324,10 @@ Node *semanticsTypeBool() {
 }
 
 void openScope(DataStructures* tables){
+    cout<<"marker open start"<<endl;
     tables->pushNewScope();
+    cout<<"marker open finish"<<endl;
+
 }
 
 void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
