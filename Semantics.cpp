@@ -390,7 +390,7 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
    // cout<<"makefunctiontype finished"<<endl;
 
-    functionArgs->clear();
+    //functionArgs->clear();
 
     //fill here the functionArgs vector with the functType
 
