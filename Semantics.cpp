@@ -207,6 +207,7 @@ BoolEnum checkExpBool(Node* operand1){
     if(dynamic_cast<Bool*>(operand1)){
         return check->getBoolEnum();
     }else{
+        cout<< "problem? "<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
