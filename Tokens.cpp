@@ -202,6 +202,8 @@ String::String() {
 String::String(string str) : str(str) {
     cout<<"string constructor"<<endl;
     setType(STRING_ENUM);
+    cout<<"setType"<<endl;
+
     setTypes("STRING");
     cout<<"string constructor end"<<endl;
 
