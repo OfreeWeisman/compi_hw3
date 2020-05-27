@@ -337,6 +337,7 @@ void checkLegalRelop(Node* operand1, Node* operand2){
     if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
        (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
     } else {
+        cout<<"checkLegalRelop"<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -719,7 +720,7 @@ Node *semantics45(Node *exp1, Node *OR, Node *exp2) {
 }
 
 Node *semantics46(Node *exp1, Node *RELOP, Node *exp2) {
-
+    cout<<"Semantics46"<<endl;
     //check if the expressions are ok to relop
     checkLegalRelop(exp1, exp2);
     int v1;
