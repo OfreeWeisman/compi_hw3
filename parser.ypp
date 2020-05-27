@@ -92,7 +92,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| CONTINUE SC													{semantics26($1,$2,inWhile);}
 			;
 Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
-			| ID LPAREN RPAREN												{semantics28($1,globalTables);}
+			| ID LPAREN RPAREN												{cout<< "empty call?<<endl; semantics28($1,globalTables);}
 			;
 ExpList		: Exp															{$$ = semantics29($1);}
 			| Exp COMMA ExpList												{$$ = semantics30($1,$2,$3);}
