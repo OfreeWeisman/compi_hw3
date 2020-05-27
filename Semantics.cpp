@@ -414,22 +414,29 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 //    }
 
 
-
-    Symbol* s = new Symbol(funcType, 0, name);
+//edit:
+    //Symbol* s = new Symbol(funcType, 0, name);
+    Symbol* s = new Symbol(type->getTypeAsString(types_enum), 0, name); // so only its return type.
     tables->pushNewSymbol(s);
-   // cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
 
 
 
-    //insert here the parameters in the new scope
+    //insert here the functions' parameters in the new scope
     auto it1 = p->getTypes()->begin();
     auto it2 = p->getNames()->begin();
     int offset = 0;
+    string curr_name ;
+    string curr_type;
 
     for(int i = 0; i < functionArgs->size(); i++){
-        cout<<*it1<<" "<<*it2<<endl;
-        Symbol* s = new Symbol(*it2++, offset--, *it1++);
+        curr_name = *it2;
+        curr_type = *it1;
+        Symbol* s = new Symbol(curr_name, offset--, curr_type);
+        cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<endl;
+
+        it2++;
+        it1++;
         tables->pushNewSymbol(s);
     }
 
