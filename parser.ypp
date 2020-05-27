@@ -65,7 +65,7 @@ FuncDeclInsert :LBRACE Statements Marker_close RBRACE                       {}
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
 			;
-Formals		: /*epsilon*/													{addEmptyParametersList();}
+Formals		: /*epsilon*/													{}
 			| FormalsList													{$$ = addParametersList($1,globalTables,funcArgs);}
 			;
 FormalsList	: FormalDecl													{semantics9($1);}
