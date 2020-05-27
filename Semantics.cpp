@@ -62,7 +62,7 @@ Symbol* getSymbolinList(list<Symbol *> *currList, string name){
     Symbol* temp;
     for(it; it != currList->end(); it++){
         temp = *it;
-        cout<<"in loop in symbol list"<<endl;
+        cout<<"in loop in symbol list and temps name is "<<temp->getName()<<endl;
         if(temp->getName() == name){
             cout<<"returning from symbol in list with a symbol!"<<endl;
             return temp;
