@@ -10,6 +10,7 @@
 
 	void yyerror(const char*);
 
+    using namespace std;
 	DataStructures* globalTables;
 	vector<string>* funcArgs;
 	int inWhile;
@@ -126,7 +127,7 @@ Marker_close    : /*epsilon*/                                               {clo
 
 int main(){
     cout<<"in main"<<endl;
-   funcArgs = new  vector<string>();
+    funcArgs = new  vector<string>();
     globalTables = new DataStructures();
     inWhile = 0;
 	return yyparse();
