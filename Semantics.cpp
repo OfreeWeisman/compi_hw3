@@ -332,8 +332,15 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
 }
 
 //rule 8:
-void checkLegalRelop(Node* operand1, Node* operand2){
+void checkLegalRelop(Node* operand1, Node* operand2,  DataStructures* tables){
     //check both operands are numerical
+    Id* i1= dynamic_cast<Id*>(operand1);
+
+    string s1= getIdType(operand1, tables);
+    string s2 = getIdType(operand2,tables);
+
+    cout<<"s1 is "<<s1<<" s2 is "<<s2<<endl;
+
     if(!dynamic_cast<Num*>(operand1)){
         cout<<"operand1"<<endl;
     }
@@ -726,10 +733,11 @@ Node *semantics45(Node *exp1, Node *OR, Node *exp2) {
     }
 }
 
-Node *semantics46(Node *exp1, Node *RELOP, Node *exp2) {
+Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     cout<<"Semantics46"<<endl;
     //check if the expressions are ok to relop
-    checkLegalRelop(exp1, exp2);
+
+    checkLegalRelop(exp1, exp2, tables);
     int v1;
     int v2;
 

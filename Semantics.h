@@ -150,7 +150,7 @@ Node* semantics44(Node* exp1, Node* AND, Node* exp2);
 Node* semantics45(Node* exp1, Node* OR, Node* exp2);
 
 //rule 46 : Exp -> Exp RELOP Exp
-Node* semantics46(Node* exp1, Node* RELOP, Node* exp2);
+Node* semantics46(Node* exp1, Node* RELOP, Node* exp2, DataStructures* tables);
 
 
 
