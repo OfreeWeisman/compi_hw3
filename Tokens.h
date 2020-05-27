@@ -32,11 +32,11 @@ public:
     }
     string getTypeAsString(TypesEnum t){
         switch (t) {
-            case INT_ENUM : return "int";
-            case BOOL_ENUM : return "bool";
-            case BYTE_ENUM : return "byte";
-            case VOID_ENUM : return "void";
-            case STRING_ENUM: return "string";
+            case INT_ENUM : return "INT";
+            case BOOL_ENUM : return "BOOL";
+            case BYTE_ENUM : return "BYTE";
+            case VOID_ENUM : return "VOID";
+            case STRING_ENUM: return "STRING";
         }
     }
     void setTypes(string t){
