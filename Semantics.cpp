@@ -226,7 +226,7 @@ Node* getIdType(Node* id, DataStructures* tables) {
     }
 
     string ret_type = func->getType();
-
+    cout<<"ret type is "<<ret_type<<endl;
 
     if(ret_type == "BOOL"){
         return new Bool();
