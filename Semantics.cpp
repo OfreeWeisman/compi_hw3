@@ -490,8 +490,9 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
     string id_name = dynamic_cast<Id*>(id)->getIdName();
-    //string typestring = *(dynamic_cast<Id*>(id)->getTypes()->begin());
-    cout<<"semantics 11- name "<<id_name <<"type crashing"<<endl;
+    Id* temp = dynamic_cast<Id*>(id);
+    string typestring =id->getTypeAsString(temp->getType());
+    cout<<"semantics 11- name "<<id_name <<"type"<< typestring<<endl;
     cout<<"get type as string does this return bool? "<<type->getTypeAsString(type->getType())<<endl;
     return new Parameter(type->getTypeAsString(type->getType()), id_name);
 
