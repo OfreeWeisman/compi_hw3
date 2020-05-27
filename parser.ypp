@@ -74,7 +74,7 @@ FormalsList	: FormalDecl													{$$ = semantics9($1);}
 			;
 FormalDecl	: Type ID														{ $$ = semantics11($1,$2,globalTables);}
 			;
-Statements	: Statement														{}
+Statements	: Statement														{cout<<"the end of statement"<<endl;}
 			| Statements Statement											{}
 			;
 
