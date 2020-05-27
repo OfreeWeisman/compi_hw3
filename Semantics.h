@@ -21,6 +21,9 @@ extern int yylineno;
 //marker1
 void setup(DataStructures* globalTables);
 
+//Marker_open
+void openScope(DataStructures* tables);
+
 //rule 1 : Program -> Funcs
 void cleanup (DataStructures* globalTables);
 
