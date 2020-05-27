@@ -210,3 +210,5 @@ const string &String::getStr() const {
 void String::setStr(const string &str) {
     String::str = str;
 }
+
+Str::Str(char* str) : str((string)str) {}

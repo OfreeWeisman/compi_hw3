@@ -76,7 +76,7 @@ SPACES			([\t\n\r ])
 {PLUS_OP}		{yylval = new Binop(yytext); return PLUS_OP;}
 {ID}			{yylval = new Id(yytext); return ID;}
 {NUM}			{yylval = new Num(yytext); return NUM;}
-{STRING}		{string str(yytext) ;yylval = new String(str); return STRING;}
+{STRING}		{yylval = new Str(yytext); return STRING;}
 {COMMENT}		;
 {SPACES}		;
 .				{errorHandler(yylineno);}

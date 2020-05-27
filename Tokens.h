@@ -171,6 +171,16 @@ private:
 
 };
 
+
+class Str : public Node{
+public:
+    Str(char* str);
+
+private:
+    string str;
+public:
+};
+
 class String : public Node {
 public:
     //String();
