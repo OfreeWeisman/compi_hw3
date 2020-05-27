@@ -203,6 +203,7 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 //rule 2:
 
 BoolEnum checkExpBool(Node* operand1){
+    cout<<operand1->getTypeAsString(operand1->getType())<<endl;
     Bool* check = (dynamic_cast<Bool*>(operand1));
     if(dynamic_cast<Bool*>(operand1)){
         return check->getBoolEnum();
