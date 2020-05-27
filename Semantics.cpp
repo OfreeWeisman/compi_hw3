@@ -228,9 +228,9 @@ Node* getIdType(Node* id, DataStructures* tables) {
     string ret_type = func->getType();
 
 
-    if(ret_type == "bool"){
+    if(ret_type == "BOOL"){
         return new Bool();
-    } else if(ret_type == "int"){
+    } else if(ret_type == "INT"){
         return new Num();
     } else {
         return new Byte();
@@ -871,7 +871,7 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
     }
 
     Node* n = getIdType(operand1, tables);
-    cout<<"here? "<<endl;
+   // cout<<n->getType()<<endl;
     Bool* b = dynamic_cast<Bool*>(n);
     if(b == nullptr){
         output::errorMismatch(yylineno);
