@@ -363,6 +363,7 @@ void closeScope(DataStructures* globalTables){
     list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
     cout<<"yes"<<endl;
     Symbol* s;
+    cout<<"the size is "<<scope->size()<<endl;
     list<Symbol*>::iterator it = scope->begin();
     for(it ; it != scope->end(); it++){
         s = *it;
