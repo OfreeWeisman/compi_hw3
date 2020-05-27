@@ -69,10 +69,10 @@ RetType		: Type															{$$ = semantics5($1);}
 Formals		: /*epsilon*/													{cout<< " end of empty formals"<<endl;}
 			| FormalsList													{cout<< "one formal"<<endl; $$ = addParametersList($1,globalTables,funcArgs);}
 			;
-FormalsList	: FormalDecl													{semantics9($1);}
-			| FormalDecl COMMA FormalsList									{semantics10($1,$2,$3,globalTables, funcArgs);}
+FormalsList	: FormalDecl													{$$ = semantics9($1);}
+			| FormalDecl COMMA FormalsList									{$$ = semantics10($1,$2,$3,globalTables, funcArgs);}
 			;
-FormalDecl	: Type ID														{cout<<"type id"<<endl; semantics11($1,$2,globalTables);}
+FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2,globalTables);}
 			;
 Statements	: Statement														{}
 			| Statements Statement											{}
