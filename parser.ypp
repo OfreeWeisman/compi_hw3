@@ -77,7 +77,6 @@ FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2
 Statements	: Statement														{cout<<"statement"<<endl;}
 			| Statements Statement											{cout<<"statements statement"<<endl;}
 			;
-Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
 
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
@@ -109,7 +108,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| Exp MUL_OP Exp												{$$ = semantics35($1,$2,$3);}
 			| Exp PLUS_OP Exp												{$$ = semantics35($1,$2,$3);}
 			| ID															{cout<<"36"<<endl; $$ = semantics36($1);}
-			| Call															{$$ = semantics37($1);}
+			| Call															{cout<<"37"<<endl;$$ = semantics37($1);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
 			| STRING														{$$ = semantics40($1);}
@@ -124,6 +123,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 
 
 Marker1         : /*epsilon*/                                               {cout << "marker1" << endl;setup(globalTables);}
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
 Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
 
 %%
