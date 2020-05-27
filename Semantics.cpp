@@ -396,7 +396,7 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
 
     int end = funcType.find("->");
     string args = funcType.substr(0,end);
-    cout<<"args: "<<args<<endl;
+    cout<<end<<" args: "<<args<<endl;
 
     Symbol* s = new Symbol(funcType, 0, name);
     tables->pushNewSymbol(s);
