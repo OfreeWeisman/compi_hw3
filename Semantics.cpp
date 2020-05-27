@@ -830,7 +830,7 @@ void checkExpBoolFromExpression(Node* operand1){
     if(!check){
         cout<<"check is not an id"<<endl;
     }
-    if(check->getType() != BOOL_ENUM){
+    if(check->getIdName() != "bool"){
         output::errorMismatch(yylineno);
         exit(0);
     }
