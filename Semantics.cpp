@@ -405,23 +405,18 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
 
     Id* i =  dynamic_cast<Id*>(id);
-    if(i == nullptr){
-        cout<<"i isnt id"<<endl;
-    }
+
     string name = dynamic_cast<Id*>(id)->getIdName();
-    cout<<"first of alfffl"<<endl;
 
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
-    cout<<"first of all"<<endl;
     cout<<type->getTypeAsString(types_enum)<<endl;
-    cout<<"second of all"<<endl;
 
    // cout<<"dynamic casts finished"<<endl;
 
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
     cout<<"makefunctiontype in open funcscope returns "<< funcType<<endl;
 
-    //functionArgs->clear();
+    functionArgs->clear();
 
     //fill here the functionArgs vector with the functType
 
