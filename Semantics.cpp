@@ -62,6 +62,7 @@ Symbol* getSymbolinList(list<Symbol *> *currList, string name){
     Symbol* temp;
     for(it; it != currList->end(); it++){
         temp = *it;
+        cout<<"in loop in symbol list"<<endl;
         if(temp->getName() == name){
             cout<<"returning from symbol in list with a symbol!"<<endl;
             return temp;
@@ -228,14 +229,15 @@ string getIdType(Node* id, DataStructures* tables) {
         symbolTable->push(currListBack);
         tempSymbolTable->pop();
     }
-    cout<<"the id i got is of type "<<func->getType()<<" and name is "<< func->getName()<<endl;
-    cout<<"and now the size should be 1 "<<tables->getSymbolsTable()->top()->size()<<endl;
+
     if(func == nullptr){
         cout<<"error getIdType"<<endl;
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
 
+    cout<<"the id i got is of type "<<func->getType()<<" and name is "<< func->getName()<<endl;
+    cout<<"and now the size should be 1 "<<tables->getSymbolsTable()->top()->size()<<endl;
     return func->getType();
 //    cout<<"ret type is "<<ret_type<<endl;
 //
