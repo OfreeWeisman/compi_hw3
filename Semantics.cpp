@@ -434,7 +434,9 @@ Node *semantics9(Node *formalsDecl) {
     names_temp->push_back(id1);
 
     cout<<"before type 1 is "<<endl;
-    cout<<parameter1->getType()<<endl;
+    if(parameter1->getType() == BOOL_ENUM){
+        cout<<"boolenum"<<endl;
+    }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     cout<<"type 1 is "<<type1<<endl;
 
