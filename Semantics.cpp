@@ -396,10 +396,13 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     searchIfPreDefined(id, tables);
 
     Parameter* p  = dynamic_cast<Parameter*>(formals);
-    if(p->getNames()){
-        cout<<"in open func names size is "<<p->getNames()->size()<<endl;
-        cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
+    if(p){
+        if(p->getNames()){
+            cout<<"in open func names size is "<<p->getNames()->size()<<endl;
+            cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
+        }
     }
+
 
     Id* i =  dynamic_cast<Id*>(id);
     if(i == nullptr){
