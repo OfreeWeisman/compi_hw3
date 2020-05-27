@@ -870,14 +870,14 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
         cout<<"check is not an id"<<endl;
     }
 
-    Node* n = getIdType(operand1, tables);
+    string type = getIdType(operand1, tables);
    // cout<<n->getType()<<endl;
-    Bool* b = dynamic_cast<Bool*>(n);
-    if(b == nullptr){
+    //Bool* b = dynamic_cast<Bool*>(n);
+    if(type != "BOOL"){
         output::errorMismatch(yylineno);
         exit(0);
     }
-    cout<<"id name is "<<check->getIdName()<<endl;
+    cout<<"id name is "<<type<<endl;
     //if(check->getIdName() != "BOOL"){
     //    output::errorMismatch(yylineno);
      //   exit(0);
