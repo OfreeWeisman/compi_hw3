@@ -582,13 +582,15 @@ Node *semantics38(Node* num) {
 
 Node *semantics39(Node *num, Node *b) {
     Byte* byte = dynamic_cast<Byte*>(num);
+
     if(!byte){
         cout<<"not a byte"<<endl;
     }
+    Num* number = dynamic_cast<Num*>(num);
     if(byte->isValidByte()){
         return num;
     } else {
-        //error
+        output::errorByteTooLarge(yylineno,number->getStrValue());
     }
 }
 
