@@ -3,6 +3,8 @@
 //
 
 #include "Tokens.h"
+#include <iostream>
+using namespace std;
 
 
 
@@ -198,6 +200,7 @@ String::String() {
 }
 
 String::String(string str) : str(str) {
+    cout<<"string constructor"<<endl;
     setType(STRING_ENUM);
     setTypes("STRING");
 
