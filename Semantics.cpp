@@ -275,9 +275,14 @@ void checkLegalAssignment(Node* id, Node* exp){
     //it is legal to assign byte to int
     Id* i = dynamic_cast<Id*>(id);
     string id_type = i->getTypeAsString(i->getType());
+    cout<<"id type "<<id_type << endl;
+
+
     Num* num = dynamic_cast<Num*>(exp);
     Byte* byte = dynamic_cast<Byte*>(exp);
     Bool* b =  dynamic_cast<Bool*>(exp);
+
+
     if(id_type == "int" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
         output::errorMismatch(yylineno);
         exit(0);
@@ -292,6 +297,8 @@ void checkLegalAssignment(Node* id, Node* exp){
     cout<<"endcheckLegalAssignment"<<endl;
 
 }
+
+
 
 //rule 8:
 void checkLegalRelop(Node* operand1, Node* operand2){
@@ -927,7 +934,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     tables->pushNewSymbol(new_symbol);
     cout<<"Semantics 16 6"<<endl;
 
-    checkLegalAssignment(type,exp);
+    checkLegalAssignment(id,exp);
     cout<<"Semantics 16 finish"<<endl;
 
     //  delete(id);
