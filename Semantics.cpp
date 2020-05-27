@@ -449,14 +449,18 @@ Node* semanticsFalse(){
 void setup(DataStructures* globalTables) {
     globalTables->pushNewScope();
     cout<<"1"<<std::endl;
-    Symbol* s1 = new Symbol("string -> void", 0, "print");
+    vector<string>* temp = new vector<string>();
+    temp->push_back("STRING");
+    Symbol* s1 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "print");
+    temp->clear();
     cout<<"2"<<std::endl;
 
     globalTables->pushNewSymbol(s1);
     cout<<"3"<<std::endl;
-
-    Symbol* s2 = new Symbol("int -> void", 0, "printi");
+    temp->push_back("INT");
+    Symbol* s2 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "printi");
     cout<<"1"<<std::endl;
+    temp->clear();
 
     globalTables->pushNewSymbol(s2);
 
