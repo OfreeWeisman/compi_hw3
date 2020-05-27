@@ -386,7 +386,7 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
     Parameter* p  = dynamic_cast<Parameter*>(formals);
     cout<<"in open func names size is "<<p->getNames()->size()<<endl;
-    cout<<"in open func types size is"<<p->getTypes()->size()<<endl;
+    cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
 
 
     string name = dynamic_cast<Id*>(id)->getIdName();
@@ -396,7 +396,7 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
    // cout<<"dynamic casts finished"<<endl;
 
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
-   // cout<<"makefunctiontype finished"<<endl;
+    cout<<"makefunctiontype in open funcscope returns "<< funcType<<endl;
 
     //functionArgs->clear();
 
@@ -462,9 +462,6 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     if(p==nullptr){
       //  cout <<"p is null"<< endl;
     }
-
-
-
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
     list<string>::iterator it1 = names->begin();
@@ -492,8 +489,7 @@ Node* semantics11(Node *type, Node *id, DataStructures *tables) {
     string id_name = dynamic_cast<Id*>(id)->getIdName();
     Type* temp = dynamic_cast<Type*>(type);
     string typestring =temp->getTypeAsString(temp->getType());
-    cout<<"semantics 11- name "<<id_name <<"type"<< typestring<<endl;
-    cout<<"get type as string does this return bool? "<<type->getTypeAsString(type->getType())<<endl;
+
     return new Parameter(type->getTypeAsString(type->getType()), id_name);
 
 }
@@ -528,7 +524,7 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
 
     int s = parameter1->getTypes()->size();
     int s2 = parameter1->getNames()->size();
-    cout<<"jjjj "<<s<<" "<<s2<<endl;
+    cout<<"size of the names and types lists "<<s<<" "<<s2<<endl;
 
     string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
@@ -545,7 +541,6 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     //list<string>* types_temp = new list<string>();
 
    // types_temp->push_back(type1);
-    cout<<"fail"<<endl;
 
 //    parameter1->setNames(names_temp);
 //    parameter1->setTypes(types_temp);
