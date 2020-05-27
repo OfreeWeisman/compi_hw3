@@ -430,15 +430,15 @@ Node *semantics9(Node *formalsDecl) {
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
     string id1 = parameter1->getId();
-
-    string type1 = parameter1->getTypeAsString(parameter1->getType());
-
     list<string>* names_temp = new list<string>();
-
     names_temp->push_back(id1);
 
-    list<string>* types_temp = new list<string>();
+    cout<<"before type 1 is "<<endl;
+
+    string type1 = parameter1->getTypeAsString(parameter1->getType());
     cout<<"type 1 is "<<type1<<endl;
+
+    list<string>* types_temp = new list<string>();
 
     types_temp->push_back(type1);
     cout<<"fail"<<endl;
