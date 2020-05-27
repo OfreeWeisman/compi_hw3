@@ -871,6 +871,7 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
     }
 
     Node* n = getIdType(operand1, tables);
+    cout<<"here? "<<endl;
     Bool* b = dynamic_cast<Bool*>(n);
     if(b == nullptr){
         output::errorMismatch(yylineno);
