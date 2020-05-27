@@ -460,8 +460,6 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     }
 
 
-
-
 }
 
 void closeScope(DataStructures* globalTables){
@@ -893,21 +891,38 @@ void semantics17(Node *id, Node *assign, Node *exp, Node *sc) {
 }
 
 void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataStructures* tables) {
+    cout<<"Semantics 16"<<endl;
     searchIfPreDefined(id, tables);
 
     TypesEnum t = dynamic_cast<Type*>(type)->getType();
-    string typeString = type->getTypeAsString(t);
-    string name = dynamic_cast<Id*>(id)->getIdName();
+    cout<<"Semantics 16 1"<<endl;
 
-    int offset = tables->getOffsetsTable()->top();
+    string typeString = type->getTypeAsString(t);
+    cout<<"Semantics 16 2 "<<endl;
+
+    string name = dynamic_cast<Id*>(id)->getIdName();
+    cout<<"Semantics 16 3 "<<endl;
+
+
+    int offset;
+    if(!tables->getOffsetsTable()->empty()){
+       offset = tables->getOffsetsTable()->top();
+    }else{
+        offset = 0;
+    }
+    cout<<"Semantics 16 4 "<<endl;
 
     tables->getOffsetsTable()->push(offset+1);
+    cout<<"Semantics 16 5"<<endl;
 
     Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
     tables->pushNewSymbol(new_symbol);
+    cout<<"Semantics 16 6"<<endl;
 
     checkLegalAssignment(id,exp);
-  //  delete(id);
+    cout<<"Semantics 16 finish"<<endl;
+
+    //  delete(id);
   //  delete(exp);
   //  delete(type);
 
