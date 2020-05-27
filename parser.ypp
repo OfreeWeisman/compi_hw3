@@ -59,7 +59,7 @@ Funcs		: /*epsilon*/													{}
 			;
 FuncDecl	: FuncDeclOpen FuncDeclInsert                                   {}
             ;
-FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              {openFuncScope($1,$2,globalTables,funcArgs);}
+FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              {openFuncScope($1,$2,$4,globalTables,funcArgs);}
             ;
 FuncDeclInsert :LBRACE Statements RBRACE Marker_close                       {}
             ;

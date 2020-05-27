@@ -377,9 +377,14 @@ void openScope(DataStructures* tables){
 
 }
 
-void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
+void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, vector<string>* functionArgs) {
     //add the scope name to the current scope and then open the new scope
     searchIfPreDefined(id, tables);
+
+    Parameter* p  = dynamic_cast<Parameter*>(formals);
+    cout<<"in open func "<<p->getNames()->size()<<endl;
+    cout<<"in open func "<<p->getTypes()->size()<<endl;
+
 
     string name = dynamic_cast<Id*>(id)->getIdName();
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
@@ -463,12 +468,12 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
         string k  = *it3;
         cout<<"print out "<< k <<endl;
     }
-    for(int i = 0; i < length; i++){
-        cout<<*it1<<" "<<*it2<<endl;
-        Symbol* s = new Symbol(*it2++, offset--, *it1++);
-        tables->pushNewSymbol(s);
-    }
-    return formalsList;
+//    for(int i = 0; i < length; i++){
+//        cout<<*it1<<" "<<*it2<<endl;
+//        Symbol* s = new Symbol(*it2++, offset--, *it1++);
+//        tables->pushNewSymbol(s);
+//    }
+    return p;
 }
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
@@ -534,7 +539,7 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     funcArgs->push_back(type1);
 
 
-    return formalsDecl;
+    return parameter1;
 }
 
 Node *semantics5(Node *type) {
