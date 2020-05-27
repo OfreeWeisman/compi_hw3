@@ -102,8 +102,6 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
  */
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
 
-
-
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
 
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
@@ -133,21 +131,45 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
     return new_list;
 }
 
+
+
 //TODO:to finish this up
 Node* getFunctionRetType(Node* id, DataStructures* tables){
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
     //type_name is the string of the type
+    Id* i = dynamic_cast<Id*>(id);
+    string func_name = i->getIdName();
+    stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
+    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+    DataStructures *tempDS = new DataStructures();
+    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+    list<Symbol *> *currList;
+    Symbol* func = nullptr;
+    while (!symbolTable->empty()) {
+        currList = symbolTable->top();
+        func = getSymbolinList(currList, func_name);
+        tempSymbolTable->push(currList);
+        symbolTable->pop();
+    }
+    list<Symbol *> *currListBack;
+    while (!tempSymbolTable->empty()) {
+        currListBack = tempSymbolTable->top();
+        symbolTable->push(currListBack);
+        tempSymbolTable->pop();
+    }
 
-/*
-    list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
-?????????????????????????????????????????????
+    if(func == nullptr){
+        output::errorUndefFunc(yylineno, func_name);
+        exit(0);
+    }
 
- the return type is the type of the symbol after the "->"
-*/
+    string funcs_type = func->getType();
+    std::size_t pos = funcs_type.find("->");      // position of "live" in str
 
-    string ret_type;
+    string ret_type = funcs_type.substr (pos);     // get from "live" to the end
+
 
     if(ret_type == "bool"){
         return new Bool();
