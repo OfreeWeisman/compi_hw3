@@ -491,7 +491,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     return p;
 }
 
-Node *semantics9(Node *formalsDecl) {
+Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     cout<<"9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
@@ -514,6 +514,10 @@ Node *semantics9(Node *formalsDecl) {
     parameter1->setNames(names_temp);
     parameter1->setTypes(types_temp);
     cout<<"end of 9 "<<endl;
+
+    funcArgs->push_back("bool");
+
+
     return formalsDecl;
 }
 

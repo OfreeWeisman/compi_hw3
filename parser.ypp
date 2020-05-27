@@ -69,7 +69,7 @@ RetType		: Type															{$$ = semantics5($1);}
 Formals		: /*epsilon*/													{}
 			| FormalsList													{$$ = addParametersList($1,globalTables,funcArgs);}
 			;
-FormalsList	: FormalDecl													{$$ = semantics9($1);}
+FormalsList	: FormalDecl													{$$ = semantics9($1,funcArgs);}
 			| FormalDecl COMMA FormalsList									{$$ = semantics10($1,$2,$3,globalTables, funcArgs);}
 			;
 FormalDecl	: Type ID														{ $$ = semantics11($1,$2,globalTables);}

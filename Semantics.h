@@ -45,7 +45,7 @@ Node* semantics6();
 Node* addParametersList(Node* formalsList ,DataStructures* tables, vector<string>* funcArgs);
 
 //rule 9 : FormalsList -> FormalsDecl
-Node* semantics9(Node* formalsDecl);
+Node* semantics9(Node* formalsDecl,vector<string>* funcArgs);
 
 //rule 10 : FormalList -> FormalDecl COMMA FormalsList
 Node* semantics10(Node* formalsDecl, Node* comma, Node* formalsList, DataStructures* tables, vector<string>* funcArgs);
