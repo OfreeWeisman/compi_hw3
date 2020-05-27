@@ -82,14 +82,14 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3);}
       | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
-			| Type ID SC													{cout<<"15<<endl;semantics15($1,$2,$3, globalTables);}
-			| Type ID ASSIGN Exp SC											{cout<<"16<<endl;semantics16($1,$2,$3,$4,$5, globalTables);}
-			| ID ASSIGN Exp SC												{cout<<"17<<endl;semantics17($1,$2,$3,$4);}
-			| Call SC														{cout<<"18<<endl;semantics18($1,$2);}
-			| RETURN SC														{cout<<"19<<endl;semantics19($1,$2,globalTables);}
-			| RETURN Exp SC													{cout<<"20<<endl;semantics20($1,$2,$3,globalTables);}
-			| BREAK SC														{cout<<"25<<endl;semantics25($1,$2,inWhile);}
-			| CONTINUE SC													{cout<<"26<<endl;semantics26($1,$2,inWhile);}
+			| Type ID SC													{cout<<"15"<<endl;semantics15($1,$2,$3, globalTables);}
+			| Type ID ASSIGN Exp SC											{cout<<"16"<<endl;semantics16($1,$2,$3,$4,$5, globalTables);}
+			| ID ASSIGN Exp SC												{cout<<"17"<<endl;semantics17($1,$2,$3,$4);}
+			| Call SC														{cout<<"18"<<endl;semantics18($1,$2);}
+			| RETURN SC														{cout<<"19"<<endl;semantics19($1,$2,globalTables);}
+			| RETURN Exp SC													{cout<<"20"<<endl;semantics20($1,$2,$3,globalTables);}
+			| BREAK SC														{cout<<"25"<<endl;semantics25($1,$2,inWhile);}
+			| CONTINUE SC													{cout<<"26"<<endl;semantics26($1,$2,inWhile);}
 			;
 Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
 			| ID LPAREN RPAREN												{cout<< "empty call?"<<endl; semantics28($1,globalTables);}
