@@ -428,12 +428,25 @@ Node *semantics9(Node *formalsDecl) {
     cout<<"9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
     cout<<"fail"<<endl;
+
     string id1 = parameter1->getId();
+    cout<<"fail"<<endl;
+
     string type1 = parameter1->getTypeAsString(parameter1->getType());
+    cout<<"fail"<<endl;
+
     list<string>* names_temp = new list<string>();
+    cout<<"fail"<<endl;
+
     names_temp->push_back(id1);
+    cout<<"fail"<<endl;
+
     list<string>* types_temp = new list<string>();
+    cout<<"fail"<<endl;
+
     types_temp->push_back(type1);
+    cout<<"fail"<<endl;
+
     parameter1->setNames(names_temp);
     parameter1->setTypes(types_temp);
     cout<<"end of 9 "<<endl;
