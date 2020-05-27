@@ -30,7 +30,7 @@ void DataStructures::pushNewScope() {
 void DataStructures::popScope() {
     list<Symbol*> temp = *symbolsTable->top();
     for(Symbol* s : temp){
-        delete(s);
+        //delete(s);
     }
     symbolsTable->pop();
     offsetsTable->pop();
