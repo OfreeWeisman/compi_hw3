@@ -361,12 +361,15 @@ void closeScope(DataStructures* globalTables){
     //print the top scope
     output::endScope();
     list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
+    cout<<"yes"<<endl;
     Symbol* s;
     list<Symbol*>::iterator it = scope->begin();
     for(it ; it != scope->end(); it++){
         s = *it;
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
+    cout<<"yes"<<endl;
+
     globalTables->popScope();
 }
 
