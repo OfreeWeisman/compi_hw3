@@ -830,6 +830,7 @@ void checkExpBoolFromExpression(Node* operand1){
     if(!check){
         cout<<"check is not an id"<<endl;
     }
+    cout<<"id name is "<<check->getIdName()<<endl;
     if(check->getIdName() != "bool"){
         output::errorMismatch(yylineno);
         exit(0);
