@@ -91,6 +91,9 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| BREAK SC														{cout<<"25"<<endl;semantics25($1,$2,inWhile);}
 			| CONTINUE SC													{cout<<"26"<<endl;semantics26($1,$2,inWhile);}
 			;
+
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
+
 Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
 			| ID LPAREN RPAREN												{cout<< "empty call?"<<endl; semantics28($1,globalTables);}
 			;
@@ -120,7 +123,6 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 
 
 Marker1         : /*epsilon*/                                               {cout << "marker1" << endl;setup(globalTables);}
-Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
 Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
 
 %%
