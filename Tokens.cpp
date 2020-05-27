@@ -211,4 +211,5 @@ void String::setStr(const string &str) {
     String::str = str;
 }
 
-Str::Str(char* str) : str((string)str) {}
+
+Str::Str(const string &str) : str(str) {}

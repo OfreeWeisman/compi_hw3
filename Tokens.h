@@ -174,7 +174,9 @@ private:
 
 class Str : public Node{
 public:
-    Str(char* str);
+    Str(const string &str);
+
+public:
 
 private:
     string str;
