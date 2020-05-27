@@ -396,8 +396,10 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     searchIfPreDefined(id, tables);
 
     Parameter* p  = dynamic_cast<Parameter*>(formals);
-    cout<<"in open func names size is "<<p->getNames()->size()<<endl;
-    cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
+    if(p->getNames()){
+        cout<<"in open func names size is "<<p->getNames()->size()<<endl;
+        cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
+    }
 
 
     string name = dynamic_cast<Id*>(id)->getIdName();
@@ -434,19 +436,22 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
 
     //insert here the functions' parameters in the new scope
-    auto it1 = p->getTypes()->begin();
-    auto it2 = p->getNames()->begin();
-    int offset = -1;
-    string curr_name ;
-    string curr_type;
+    if(p->getTypes()){
+        auto it1 = p->getTypes()->begin();
+        auto it2 = p->getNames()->begin();
+        int offset = -1;
+        string curr_name ;
+        string curr_type;
 
-    for(it1; it1 != p->getTypes()->end(); it1++,it2++){
-        curr_name = *it2;
-        curr_type = *it1;
-        cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<" offset "<< offset<<endl;
-        Symbol* s = new Symbol(curr_type, offset--, curr_name);
-        tables->pushNewSymbol(s);
+        for(it1; it1 != p->getTypes()->end(); it1++,it2++){
+            curr_name = *it2;
+            curr_type = *it1;
+            cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<" offset "<< offset<<endl;
+            Symbol* s = new Symbol(curr_type, offset--, curr_name);
+            tables->pushNewSymbol(s);
+        }
     }
+
 
 
 }
