@@ -228,7 +228,7 @@ string getIdType(Node* id, DataStructures* tables) {
         symbolTable->push(currListBack);
         tempSymbolTable->pop();
     }
-
+    cout<<"the id i got is of type "<<func->getType()<<" and name is "<< func->getName()<<endl;
     cout<<"and now the size should be 1 "<<tables->getSymbolsTable()->top()->size()<<endl;
     if(func == nullptr){
         cout<<"error getIdType"<<endl;
