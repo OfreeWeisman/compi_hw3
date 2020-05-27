@@ -825,21 +825,28 @@ void semantics14(Node* statement){
  //   delete(statement);
 }
 
-void checkExpBoolFromExpression(Node* operand1){
+void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
     Id* check = (dynamic_cast<Id*>(operand1));
     if(!check){
         cout<<"check is not an id"<<endl;
     }
-    cout<<"id name is "<<check->getIdName()<<endl;
-    if(check->getIdName() != "bool"){
+
+    Node* n = getFunctionRetType(operand1, tables);
+    Bool* b = dynamic_cast<Bool*>(n);
+    if(b == nullptr){
         output::errorMismatch(yylineno);
         exit(0);
     }
+    cout<<"id name is "<<check->getIdName()<<endl;
+    //if(check->getIdName() != "BOOL"){
+    //    output::errorMismatch(yylineno);
+     //   exit(0);
+    //}
 }
 
 
-void semantics21(Node *exp) {
-    checkExpBoolFromExpression(exp);
+void semantics21(Node *exp, DataStructures* tables) {
+    checkExpBoolFromExpression(exp, tables);
    // delete(exp);
 }
 
