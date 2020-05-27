@@ -653,6 +653,7 @@ Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
 }
 
 Node *semantics36(Node *id) {
+    cout<<"exp->id"<<endl;
     return id;
 }
 
