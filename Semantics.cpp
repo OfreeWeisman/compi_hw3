@@ -332,11 +332,18 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
     searchIfPreDefined(id, tables);
     string name = dynamic_cast<Id*>(id)->getIdName();
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
+    cout<<"dynamic casts finished"<<endl;
+
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
+    cout<<"makefunctiontype finished"<<endl;
+
     functionArgs->clear();
     Symbol* s = new Symbol(funcType, 0, name);
     tables->pushNewSymbol(s);
+    cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
+    cout<<"push new scope finished"<<endl;
+
 }
 
 void closeScope(DataStructures* globalTables){
