@@ -219,7 +219,9 @@ string getIdType(Node* id, DataStructures* tables) {
     Symbol* func = nullptr;
     while (!symbolTable->empty()) {
         currList = symbolTable->top();
-        func = getSymbolinList(currList, func_name);
+        if(func == nullptr){
+            func = getSymbolinList(currList, func_name);
+        }
         tempSymbolTable->push(currList);
         symbolTable->pop();
     }
