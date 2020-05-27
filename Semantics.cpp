@@ -449,6 +449,9 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     if(p==nullptr){
       //  cout <<"p is null"<< endl;
     }
+
+
+
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
     list<string>::iterator it1 = names->begin();
@@ -458,7 +461,7 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     int offset = -1;
     int length = names->size();
     cout<<"enter- names size "<<length<<endl;
-
+    cout<<"addParameters.."<<funcArgs->size()<<endl;
     vector<string>::iterator it3 = funcArgs->begin();
     for(it3; it3 != funcArgs->end(); it3++){
         string k  = *it3;
@@ -514,17 +517,18 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     cout<<"before type 1 is "<<endl;
     if(parameter1->getType() == NULL_ENUM){
         cout<<"null"<<endl;
+        cout<<"null"<<endl;
     }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     cout<<"type 1 is "<<type1<<endl;
 
-    list<string>* types_temp = new list<string>();
+    //list<string>* types_temp = new list<string>();
 
-    types_temp->push_back(type1);
+   // types_temp->push_back(type1);
     cout<<"fail"<<endl;
 
-    parameter1->setNames(names_temp);
-    parameter1->setTypes(types_temp);
+//    parameter1->setNames(names_temp);
+//    parameter1->setTypes(types_temp);
     cout<<"end of 9 "<<endl;
 
     funcArgs->push_back(type1);
