@@ -186,7 +186,7 @@ public:
 
 class String : public Node {
 public:
-    //String();
+    String();
     String(string str);
     const string &getStr() const;
     void setStr(const string &str);

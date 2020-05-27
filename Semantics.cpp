@@ -646,7 +646,9 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
 
 Node *semantics40(Node *str) {
     cout<<"in 40"<<endl;
-    return str;
+    String* s = dynamic_cast<String*>(str);
+    Expression* e = new Expression(s->getStr(), "STRING");
+    return e;
 }
 
 Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
