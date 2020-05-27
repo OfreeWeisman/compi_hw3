@@ -740,6 +740,7 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     //check if the expressions are ok to relop
 
     checkLegalRelop(exp1, exp2, tables);
+
     int v1;
     int v2;
 
@@ -754,6 +755,7 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     } else {
         v2 = dynamic_cast<Num*>(exp2)->getValue();
     }
+    cout<<"Semantics46yes"<<endl;
 
     string r = dynamic_cast<Relop*>(RELOP)->getRelop();
 
