@@ -700,6 +700,7 @@ Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
 
 Node *semantics36(Node *id) {
    // cout<<"exp->id"<<endl;
+
     return id;
 }
 
@@ -824,9 +825,17 @@ void semantics14(Node* statement){
  //   delete(statement);
 }
 
+void checkExpBoolFromExpression(Node* operand1){
+    Expression* check = (dynamic_cast<Expression*>(operand1));
+    if(check->getType() != BOOL_ENUM){
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+}
+
+
 void semantics21(Node *exp) {
-    cout<<exp->getTypeAsString(exp->getType())<<endl;
-    checkExpBool(exp);
+    checkExpBoolFromExpression(exp);
    // delete(exp);
 }
 
