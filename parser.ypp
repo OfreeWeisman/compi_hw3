@@ -74,7 +74,7 @@ FormalsList	: FormalDecl													{$$ = semantics9($1);}
 			;
 FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2,globalTables);}
 			;
-Statements	: Marker_open Statement														{cout<<"statement"<<endl;}
+Statements	: Statement														{cout<<"statement"<<endl;}
 			| Statements Statement											{cout<<"statements statement"<<endl;}
 			;
 
@@ -97,7 +97,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{cout<< "2
 Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
 			| ID LPAREN RPAREN												{cout<< "empty call?"<<endl; semantics28($1,globalTables);}
 			;
-ExpList		: Exp															{$$ = semantics29($1);}
+ExpList		: Exp															{cout<<"29"<<endl;$$ = semantics29($1);}
 			| Exp COMMA ExpList												{$$ = semantics30($1,$2,$3);}
 			;
 Type		: INT															{$$ = semanticsTypeInt();}
@@ -111,7 +111,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| Call															{cout<<"37"<<endl;$$ = semantics37($1);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
-			| STRING														{$$ = semantics40($1);}
+			| STRING														{cout<<"40"<<endl;$$ = semantics40($1);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
 			| NOT Exp														{$$ = semantics43($2);}
