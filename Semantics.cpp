@@ -425,7 +425,7 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     //insert here the functions' parameters in the new scope
     auto it1 = p->getTypes()->begin();
     auto it2 = p->getNames()->begin();
-    int offset = 0;
+    int offset = -1;
     string curr_name ;
     string curr_type;
 
@@ -433,7 +433,7 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
         curr_name = *it2;
         curr_type = *it1;
         Symbol* s = new Symbol(curr_name, offset--, curr_type);
-        cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<endl;
+        cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<" offset "<< offset<<endl;
 
         tables->pushNewSymbol(s);
     }
