@@ -425,6 +425,17 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 }
 
 Node *semantics9(Node *formalsDecl) {
+    cout<<"9"<<endl;
+    Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
+    string id1 = parameter1->getId();
+    string type1 = parameter1->getTypeAsString(parameter1->getType());
+    list<string>* names_temp = new list<string>();
+    names_temp->push_back(id1);
+    list<string>* types_temp = new list<string>();
+    types_temp->push_back(type1);
+    parameter1->setNames(names_temp);
+    parameter1->setTypes(types_temp);
+    cout<<"end of 9 "<<endl;
     return formalsDecl;
 }
 
