@@ -645,6 +645,7 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
 }
 
 Node *semantics40(Node *str) {
+    cout<<"in 40"<<endl;
     return str;
 }
 
@@ -658,6 +659,8 @@ Node *semantics36(Node *id) {
 }
 
 Node *semantics37(Node *call) {
+    cout<<"in 37"<<endl;
+
     return call;
 }
 
@@ -674,6 +677,7 @@ Node* semantics28(Node *id, DataStructures* tables) {
 }
 
 Node *semantics29(Node *exp) {
+    cout<<"in 29"<<endl;
     return exp;
 }
 
