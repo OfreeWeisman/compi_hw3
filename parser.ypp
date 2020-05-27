@@ -85,7 +85,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
 			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
 			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4);}
-			| Call SC														{semantics18($1,$2);}
+			| Call SC														{cout<< "call sc" <<endl; semantics18($1,$2);}
 			| RETURN SC														{semantics19($1,$2,globalTables);}
 			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}
 			| BREAK SC														{semantics25($1,$2,inWhile);}
