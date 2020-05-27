@@ -74,8 +74,8 @@ FormalsList	: FormalDecl													{$$ = semantics9($1);}
 			;
 FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2,globalTables);}
 			;
-Statements	: Statement														{}
-			| Statements Statement											{}
+Statements	: Statement														{cout<<"statement"<<endl;}
+			| Statements Statement											{cout<<"statements statement"<<endl;}
 			;
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
