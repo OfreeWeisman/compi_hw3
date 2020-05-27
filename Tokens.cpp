@@ -129,14 +129,14 @@ Parameter::Parameter() {
 
 Expression::Expression() {
     setType(NULL_ENUM);
-    types = new list<string>();
+   //types = new list<string>();
 
 
 }
 
 Expression::Expression(const string &id, const string &type) : id(id), type(type) {
     setType(NULL_ENUM);
-    types = new list<string>();
+    //types = new list<string>();
 
 }
 
@@ -148,19 +148,19 @@ void Expression::setId(const string &id) {
     Expression::id = id;
 }
 
-const string &Expression::getType() const {
+const string &Expression::getExpType() const {
     return type;
 }
 
 void Expression::setTypeStr(const string &type) {
     Expression::type = type;
 }
-
+/*
 list<string> *Expression::getTypes()  {
     return types;
 }
-
-Expression::Expression(const string &id, const string &type, list<string> *types) : id(id), type(type), types(types) {}
+*/
+Expression::Expression(const string &id, const string &type, list<string> *types) : id(id), type(type) {}
 
 Relop::Relop() {
     setType(NULL_ENUM);

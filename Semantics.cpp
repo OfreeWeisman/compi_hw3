@@ -595,7 +595,7 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
     Expression* e2 = dynamic_cast<Expression*>(explist);
 
     list<string>* temp = combineLists(e1->getTypes(), e2->getTypes());
-    Expression* expression = new Expression(e1->getId(), e1->getType(), temp);
+    Expression* expression = new Expression(e1->getId(), e1->getExpType(), temp);
     delete(exp);
     delete(explist);
     delete(COMMA);

@@ -17,12 +17,6 @@ using namespace std;
 class Node{
 private:
     TypesEnum type;
-public:
-    list<string> *getTypes() {
-        return types;
-    }
-
-private:
     list<string>* types;
 
 public:
@@ -45,6 +39,9 @@ public:
     }
     void setTypes(string t){
         types->push_back(t);
+    }
+    list<string> *getTypes() {
+        return types;
     }
 };
 
@@ -135,10 +132,10 @@ public:
 
     const string &getId() const;
     void setId(const string &id);
-    const string &getType() const;
+    const string &getExpType() const;
     void setTypeStr(const string &type);
 
-    list<string> *getTypes();
+   // list<string> *getTypes();
 
 private:
     string id;
