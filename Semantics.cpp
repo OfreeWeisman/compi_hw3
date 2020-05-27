@@ -419,6 +419,7 @@ Node *semanticsTypeInt() {
 }
 
 void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
+    cout<<"semantics15"<<endl;
     //check if this id already exists in the symbol table
     searchIfPreDefined(id, tables);
 
@@ -433,6 +434,9 @@ void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
 
     Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
     tables->pushNewSymbol(new_symbol);
+
+    cout<<"end of semantics15"<<endl;
+
 
 }
 
