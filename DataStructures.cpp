@@ -22,6 +22,9 @@ void DataStructures::pushNewScope() {
         offsetsTable->top();
     }
     offsetsTable->push(last_offset);
+
+    cout<<"offset is now "<<last_offset<<endl;
+
 }
 
 void DataStructures::popScope() {
