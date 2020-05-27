@@ -744,6 +744,24 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     int v1;
     int v2;
 
+
+    string typeName1 = dynamic_cast<Id*>(exp1)->getIdName(); //should check if its "BYTE" OR "INT"
+    string typeName2 = dynamic_cast<Id*>(exp2)->getIdName();//should check if its "BYTE" OR "INT"
+
+    return new Bool();
+
+    if(typeName1 == "BYTE"){
+        v1 = dynamic_cast<Byte*>(exp1)->getValue();
+    } else {
+        v1 = dynamic_cast<Num*>(exp1)->getValue();
+    }
+
+    if(exp2->getType() == BYTE_ENUM){
+        v2 = dynamic_cast<Byte*>(exp2)->getValue();
+    } else {
+        v2 = dynamic_cast<Num*>(exp2)->getValue();
+    }
+/*
     if(exp1->getType() == BYTE_ENUM){
         v1 = dynamic_cast<Byte*>(exp1)->getValue();
     } else {
@@ -755,6 +773,7 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     } else {
         v2 = dynamic_cast<Num*>(exp2)->getValue();
     }
+    */
     cout<<"Semantics46yes"<<endl;
 
     string r = dynamic_cast<Relop*>(RELOP)->getRelop();
