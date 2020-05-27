@@ -12,7 +12,13 @@ DataStructures::DataStructures() {
 
 void DataStructures::pushNewScope() {
     symbolsTable->push(new list<Symbol*>());
-    int last_offset = offsetsTable->top();
+
+    int last_offset;
+    if(offsetsTable->size() == 0){
+        last_offset = 0;
+    }else{
+        offsetsTable->top();
+    }
     offsetsTable->push(last_offset);
 }
 
