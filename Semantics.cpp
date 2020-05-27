@@ -100,6 +100,7 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 
 
     if(func == nullptr){
+        cout<<"error getFuncUsingId"<<endl;
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -175,6 +176,8 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
     }
 
     if(func == nullptr){
+        cout<<"error getFunctionRetType"<<endl;
+
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -221,6 +224,7 @@ string getIdType(Node* id, DataStructures* tables) {
     }
 
     if(func == nullptr){
+        cout<<"error getIdType"<<endl;
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -468,11 +472,11 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
         string k  = *it3;
         cout<<"print out "<< k <<endl;
     }
-//    for(int i = 0; i < length; i++){
-//        cout<<*it1<<" "<<*it2<<endl;
-//        Symbol* s = new Symbol(*it2++, offset--, *it1++);
-//        tables->pushNewSymbol(s);
-//    }
+    for(int i = 0; i < length; i++){
+        cout<<*it1<<" "<<*it2<<endl;
+        Symbol* s = new Symbol(*it2++, offset--, *it1++);
+        tables->pushNewSymbol(s);
+    }
     return p;
 }
 
