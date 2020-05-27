@@ -187,7 +187,6 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 
     string ret_type = funcs_type.substr (pos);     // get from "live" to the end
 
-
     if(ret_type == "bool"){
         return new Bool();
     } else if(ret_type == "int"){
@@ -252,7 +251,7 @@ BoolEnum checkExpBool(Node* operand1){
     if(dynamic_cast<Bool*>(operand1)){
         return check->getBoolEnum();
     }else{
-        cout<< "problem? "<<endl;
+        cout<< "checkExpBool "<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -386,8 +385,8 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     searchIfPreDefined(id, tables);
 
     Parameter* p  = dynamic_cast<Parameter*>(formals);
-    cout<<"in open func "<<p->getNames()->size()<<endl;
-    cout<<"in open func "<<p->getTypes()->size()<<endl;
+    cout<<"in open func names size is "<<p->getNames()->size()<<endl;
+    cout<<"in open func types size is"<<p->getTypes()->size()<<endl;
 
 
     string name = dynamic_cast<Id*>(id)->getIdName();
@@ -443,15 +442,15 @@ void closeScope(DataStructures* globalTables){
     //print the top scope
     output::endScope();
     list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
-    cout<<"yes"<<endl;
+    cout<<"closescope"<<endl;
     Symbol* s;
-    cout<<"the size is "<<scope->size()<<endl;
+    cout<<"the number of symbols in this scope is "<<scope->size()<<endl;
     list<Symbol*>::iterator it = scope->begin();
     for(it ; it != scope->end(); it++){
         s = *it;
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
-    cout<<"yes"<<endl;
+    cout<<"closescope"<<endl;
     cout<<"before poping the table, the size of the top is "<<globalTables->getSymbolsTable()->top()->size()<<endl;
 
     globalTables->popScope();
@@ -491,7 +490,9 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
     string id_name = dynamic_cast<Id*>(id)->getIdName();
-    cout<<"name of the one with no type is "<<id_name <<endl;
+    string typestring = *(dynamic_cast<Id*>(id)->getTypes()->begin());
+    cout<<"semantics 11- name "<<id_name <<"type "<<typestring<<endl;
+    cout<<"get type as string does this return bool? "<<type->getTypeAsString(type->getType())<<endl;
     return new Parameter(type->getTypeAsString(type->getType()), id_name);
 
 }
@@ -521,7 +522,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 }
 
 Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
-    cout<<"9"<<endl;
+    cout<<"semantics 9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
     int s = parameter1->getTypes()->size();
