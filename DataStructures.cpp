@@ -28,13 +28,17 @@ void DataStructures::pushNewScope() {
 }
 
 void DataStructures::popScope() {
-    list<Symbol*> temp = *symbolsTable->top();
-    for(Symbol* s : temp){
-        //delete(s);
-        //delete(s);
+    if(!symbolsTable->empty()) {
+
+
+        list < Symbol * > temp = *symbolsTable->top();
+        for (Symbol *s : temp) {
+            //delete(s);
+            //delete(s);
+        }
+        symbolsTable->pop();
+        offsetsTable->pop();
     }
-    symbolsTable->pop();
-    offsetsTable->pop();
 }
 
 void DataStructures::pushNewSymbol(Symbol *s) {
