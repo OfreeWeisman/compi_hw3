@@ -5,8 +5,8 @@
 #include "DataStructures.h"
 
 DataStructures::DataStructures() {
-    offsetsTable = nullptr;
-    symbolsTable = nullptr;
+    offsetsTable = new stack<int>();
+    symbolsTable = new stack<list<Symbol*>*>();
 
 }
 
