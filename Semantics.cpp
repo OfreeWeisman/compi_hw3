@@ -58,12 +58,13 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 Symbol* getSymbolinList(list<Symbol *> *currList, string name){
     cout<<"getsymbolinlist"<<endl<<endl<<endl;
 
+
     list<Symbol*>::iterator it = currList->begin();
     Symbol* temp;
     for(it; it != currList->end(); it++){
         temp = *it;
         cout<<"in loop in symbol list and temps name is "<<temp->getName()<<endl;
-        if(temp->getName() == name){
+        if(temp->getType() == name){
             cout<<"returning from symbol in list with a symbol!"<<endl;
             return temp;
         }
