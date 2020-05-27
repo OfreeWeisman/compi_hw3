@@ -394,20 +394,16 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
 
     //fill here the functionArgs vector with the functType
 
-    int end = funcType.find("->");
-    string args = funcType.substr(1,end-1);
-    cout<<funcType<<endl;
-    cout<<end<<" args: "<<args<<endl;
-
-    int i = 0;
-    int j = 0;
-    string parameter;
-    while(i < funcType.length()){
-        i = funcType.find(",");
-        parameter = funcType.substr(j,i);
-        j=i;
-        functionArgs->push_back(parameter);
-    }
+//
+//    int i = 0;
+//    int j = 0;
+//    string parameter;
+//    while(i < funcType.length()){
+//        i = funcType.find(",");
+//        parameter = funcType.substr(j,i);
+//        j=i;
+//        functionArgs->push_back(parameter);
+//    }
 
 
 
@@ -509,6 +505,10 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     cout<<"9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
+
+    int s = parameter1->getTypes()->size();
+    int s2 = parameter1->getNames()->size();
+    cout<<"jjjj "<<s<<" "<<s2<<endl;
 
     string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
