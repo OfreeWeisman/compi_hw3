@@ -20,6 +20,7 @@ private:
     list<string>* types;
 
 public:
+    string str;
     Node(){
         type = NULL_ENUM;
     };
