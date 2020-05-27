@@ -690,9 +690,15 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
 
 Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
     Expression* e = dynamic_cast<Expression*>(explist);
+    cout<<"dynamic cast"<<endl;
     list<string>* types = e->getTypes();
+    cout<<"get types"<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables);
+    cout<<"create s"<<endl;
+
     checkValidArgs(types, s); //throw error if mismatch
+    cout<<"valid args"<<endl;
+
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
