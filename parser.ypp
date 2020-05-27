@@ -125,9 +125,8 @@ Marker_close    : /*epsilon*/                                               {clo
 %%
 
 int main(){
-    //globalScopesTable = new ScopesTable();
-
-    funcArgs = new  vector<string>();
+    cout<<"in main"<<endl;
+   funcArgs = new  vector<string>();
     globalTables = new DataStructures();
     inWhile = 0;
 	return yyparse();
