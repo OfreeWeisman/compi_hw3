@@ -67,12 +67,12 @@ RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{cout<<"retype void"<<endl; $$ = semantics6();}
 			;
 Formals		: /*epsilon*/													{cout<< " end of empty formals"<<endl;}
-			| FormalsList													{$$ = addParametersList($1,globalTables,funcArgs);}
+			| FormalsList													{count<< one formal<<endl; $$ = addParametersList($1,globalTables,funcArgs);}
 			;
 FormalsList	: FormalDecl													{semantics9($1);}
 			| FormalDecl COMMA FormalsList									{semantics10($1,$2,$3,globalTables, funcArgs);}
 			;
-FormalDecl	: Type ID														{semantics11($1,$2,globalTables);}
+FormalDecl	: Type ID														{cout<<"type id"<<endl; semantics11($1,$2,globalTables);}
 			;
 Statements	: Statement														{}
 			| Statements Statement											{}
