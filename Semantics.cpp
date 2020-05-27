@@ -45,6 +45,7 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
         tempSymbolTable->push(currList);
         symbolTables->pop();
     }
+    cout<<"push back intostack"<<endl;
     while (!tempSymbolTable->empty()) {
         list<Symbol *> *currList = tempSymbolTable->top();
         symbolTables->push(currList);
