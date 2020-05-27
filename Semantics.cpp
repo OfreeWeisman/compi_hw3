@@ -421,10 +421,10 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     p->setTypes(types_temp);
     funcArgs->insert(funcArgs->begin(), type1);
 
-    delete parameter1->getNames();
-    delete parameter2->getNames();
-    delete parameter1->getTypes();
-    delete parameter2->getTypes();
+  //  delete parameter1->getNames();
+  //  delete parameter2->getNames();
+  //  delete parameter1->getTypes();
+  //  delete parameter2->getTypes();
 
     return p;
 }
@@ -535,13 +535,13 @@ Node *semantics44(Node *exp1, Node *AND, Node *exp2) {
     BoolEnum b2 = checkExpBool(exp2);
 
     if(b1 == b2){
-        delete(exp2);
+     //   delete(exp2);
         return exp1;
     } else if(b1 == FALSE_ENUM) {
-        delete(exp2);
+     //   delete(exp2);
         return exp1;
     } else {
-        delete(exp1);
+     //   delete(exp1);
         return exp2;
     }
 
@@ -552,10 +552,10 @@ Node *semantics45(Node *exp1, Node *OR, Node *exp2) {
     BoolEnum b2 = checkExpBool(exp2);
 
     if(b1 == TRUE_ENUM){
-        delete(exp2);
+      //  delete(exp2);
         return exp1;
     } else {
-        delete(exp1);
+      //  delete(exp1);
         return exp2;
     }
 }
@@ -581,9 +581,9 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2) {
 
     string r = dynamic_cast<Relop*>(RELOP)->getRelop();
 
-    delete(exp1);
-    delete(exp2);
-    delete(RELOP);
+  //  delete(exp1);
+   // delete(exp2);
+  //  delete(RELOP);
 
     if(r == "<"){
         if (v1 < v2){
@@ -644,9 +644,9 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
     }
     string b = dynamic_cast<Relop*>(BINOP)->getRelop();
 
-    delete(exp1);
-    delete(exp2);
-    delete(BINOP);
+  //  delete(exp1);
+  //  delete(exp2);
+  //  delete(BINOP);
 
     if(b == "+"){
         if (type == INT_ENUM){
@@ -729,9 +729,9 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
 
     list<string>* temp = combineLists(e1->getTypes(), e2->getTypes());
     Expression* expression = new Expression(e1->getId(), e1->getExpType(), temp);
-    delete(exp);
-    delete(explist);
-    delete(COMMA);
+ //   delete(exp);
+ //   delete(explist);
+  //  delete(COMMA);
     return expression;
 }
 
@@ -768,13 +768,13 @@ void semantics25(Node *BREAK, Node *sc, int inWhile) {
 }
 
 void semantics18(Node *call, Node *sc) {
-    delete(call);
+  //  delete(call);
 }
 
 void semantics17(Node *id, Node *assign, Node *exp, Node *sc) {
     checkLegalAssignment(id,exp);
-    delete(id);
-    delete(exp);
+  //  delete(id);
+  //  delete(exp);
 }
 
 void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataStructures* tables) {
@@ -792,9 +792,9 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     tables->pushNewSymbol(new_symbol);
 
     checkLegalAssignment(id,exp);
-    delete(id);
-    delete(exp);
-    delete(type);
+  //  delete(id);
+  //  delete(exp);
+  //  delete(type);
 
 }
 
@@ -804,7 +804,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
-    delete(ret);
+   // delete(ret);
 }
 
 void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
@@ -813,32 +813,32 @@ void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
-    delete(ret);
-    delete(exp);
+  //  delete(ret);
+ //   delete(exp);
 }
 
 void semantics14(Node* statement){
-    delete(statement);
+ //   delete(statement);
 }
 
 void semantics21(Node *exp) {
     checkExpBool(exp);
-    delete(exp);
+   // delete(exp);
 }
 
 void semantics22(Node *exp) {
     checkExpBool(exp);
-    delete(exp);
+ //   delete(exp);
 }
 
 void semantics23(Node *exp) {
     checkExpBool(exp);
-    delete(exp);
+    //delete(exp);
 }
 
 void semantics24(Node *exp) {
     checkExpBool(exp);
-    delete(exp);
+  //  delete(exp);
 }
 
 
