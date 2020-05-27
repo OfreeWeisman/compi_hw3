@@ -23,6 +23,7 @@ public:
     string str;
     Node(){
         type = NULL_ENUM;
+        types = new list<string>;
     };
     virtual ~Node(){}
     TypesEnum getType() const {
