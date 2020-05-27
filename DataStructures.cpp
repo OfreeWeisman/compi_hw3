@@ -2,7 +2,9 @@
 // Created by Ofree on 5/25/2020.
 //
 
+#include <iostream>
 #include "DataStructures.h"
+using namespace std;
 
 DataStructures::DataStructures() {
     offsetsTable = new stack<int>();
@@ -32,6 +34,7 @@ void DataStructures::popScope() {
 }
 
 void DataStructures::pushNewSymbol(Symbol *s) {
+    cout<<"check symbol" << s->getName()<<endl;
     list<Symbol*>* temp = symbolsTable->top();
     //check if needed (to pop and push or maybe just top
     symbolsTable->pop();
