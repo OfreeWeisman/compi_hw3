@@ -198,6 +198,45 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 //
 }
 
+Node* getIdType(Node* id, DataStructures* tables) {
+    Id* i = dynamic_cast<Id*>(id);
+    string func_name = i->getIdName();
+    stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
+    //look through all lists in the stack. must create a copy and pop from there, then copy it back.
+    DataStructures *tempDS = new DataStructures();
+    stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+    list<Symbol *> *currList;
+    Symbol* func = nullptr;
+    while (!symbolTable->empty()) {
+        currList = symbolTable->top();
+        func = getSymbolinList(currList, func_name);
+        tempSymbolTable->push(currList);
+        symbolTable->pop();
+    }
+    list<Symbol *> *currListBack;
+    while (!tempSymbolTable->empty()) {
+        currListBack = tempSymbolTable->top();
+        symbolTable->push(currListBack);
+        tempSymbolTable->pop();
+    }
+
+    if(func == nullptr){
+        output::errorUndefFunc(yylineno, func_name);
+        exit(0);
+    }
+
+    string ret_type = func->getType();
+
+
+    if(ret_type == "bool"){
+        return new Bool();
+    } else if(ret_type == "int"){
+        return new Num();
+    } else {
+        return new Byte();
+    }
+}
+
 
 //----------------------------------------------Type Checking Functions-----------------------------------------------//
 //rule 2:
@@ -831,7 +870,7 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
         cout<<"check is not an id"<<endl;
     }
 
-    Node* n = getFunctionRetType(operand1, tables);
+    Node* n = getIdType(operand1, tables);
     Bool* b = dynamic_cast<Bool*>(n);
     if(b == nullptr){
         output::errorMismatch(yylineno);
