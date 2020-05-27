@@ -34,7 +34,7 @@ void DataStructures::popScope() {
 }
 
 void DataStructures::pushNewSymbol(Symbol *s) {
-    cout<<"check symbol" << s->getName()<<endl;
+    cout<<"check symbol " << s->getName()<<" " << s->getOffset()<<endl;
     list<Symbol*>* temp = symbolsTable->top();
     //check if needed (to pop and push or maybe just top
     symbolsTable->pop();
