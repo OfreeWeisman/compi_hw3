@@ -78,7 +78,8 @@ Statements	: Statement														{cout<<"statement"<<endl;}
 			| Statements Statement											{cout<<"statements statement"<<endl;}
 			;
 
-Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
+Statement : IF LPAREN Exp RPAREN Marker_open                                {cout<<"HERE"<<endl;}
+ |Statement Marker_close			{semantics21($3);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3);}
