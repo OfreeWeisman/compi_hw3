@@ -77,6 +77,8 @@ FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2
 Statements	: Statement														{cout<<"statement"<<endl;}
 			| Statements Statement											{cout<<"statements statement"<<endl;}
 			;
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
+
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
@@ -92,7 +94,6 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| CONTINUE SC													{cout<<"26"<<endl;semantics26($1,$2,inWhile);}
 			;
 
-Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
 
 Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
 			| ID LPAREN RPAREN												{cout<< "empty call?"<<endl; semantics28($1,globalTables);}
