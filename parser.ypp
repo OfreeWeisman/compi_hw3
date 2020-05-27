@@ -61,7 +61,7 @@ FuncDecl	: FuncDeclOpen FuncDeclInsert                                   {}
             ;
 FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              {openFuncScope($1,$2,globalTables,funcArgs);}
             ;
-FuncDeclInsert :LBRACE Statements RBRACE Marker_close                       {}
+FuncDeclInsert :LBRACE Statements Marker_close RBRACE                        {}
             ;
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
