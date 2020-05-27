@@ -117,7 +117,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| NOT Exp														{$$ = semantics43($2);}
 			| Exp AND Exp													{$$ = semantics44($1,$2,$3);}
 			| Exp OR Exp													{$$ = semantics45($1,$2,$3);}
-			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3);}
+			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3,globalTables);}
 			| Exp EQUALITY Exp												{$$ = semantics46($1,$2,$3,globalTables);}
 			;
 
