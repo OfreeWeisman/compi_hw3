@@ -420,8 +420,8 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
 
 //edit:
-    //Symbol* s = new Symbol(funcType, 0, name);
-    Symbol* s = new Symbol(type->getTypeAsString(types_enum), 0, name); // so only its return type.
+    Symbol* s = new Symbol(funcType, 0, name);
+    //Symbol* s = new Symbol(type->getTypeAsString(types_enum), 0, name); // so only its return type.
     tables->pushNewSymbol(s);
     tables->pushNewScope();
 
