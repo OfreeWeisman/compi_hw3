@@ -100,6 +100,15 @@ const string &Parameter::getId() {
 }
 
 Parameter::Parameter(const string &type, const string &id) : type(type), id(id) {
+    if(type == "STRING"){
+        setType(STRING_ENUM);
+    } else if (type == "INT"){
+        setType(INT_ENUM);
+    } else if (type == "BYTE"){
+        setType(BYTE_ENUM);
+    } else if(type == "VOID"){
+        setType(VOID_ENUM);
+    }
     setType(NULL_ENUM);
     names = new list<string>();
     types = new list<string>();
