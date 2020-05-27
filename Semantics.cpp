@@ -74,15 +74,18 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
     //look through all lists in the stack. must create a copy and pop from there, then copy it back.
     DataStructures *tempDS = new DataStructures();
     stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
+
     list<Symbol *> *currList;
     Symbol* func = nullptr;
     list<Symbol*>* funcs_args = nullptr;
+
     while (!symbolTable->empty()) {
         currList = symbolTable->top();
         func = getSymbolinList(currList, func_name);
         tempSymbolTable->push(currList);
         symbolTable->pop();
     }
+    cout<<"getsymbolinlist ended"<<endl;
     list<Symbol *> *currListBack;
     while (!tempSymbolTable->empty()) {
         currListBack = tempSymbolTable->top();
