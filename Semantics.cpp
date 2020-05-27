@@ -401,7 +401,10 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
         cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
     }
 
-
+    Id* i =  dynamic_cast<Id*>(id);
+    if(i == nullptr){
+        cout<<"i isnt id"<<endl;
+    }
     string name = dynamic_cast<Id*>(id)->getIdName();
     cout<<"first of alfffl"<<endl;
 
