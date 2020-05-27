@@ -158,7 +158,7 @@ public:
 
 class Binop : public Node {
 public:
-    Binop(const char* &binop);
+    Binop(const string &binop);
 
     const string &getBinop() const;
 
@@ -175,8 +175,8 @@ class String : public Node {
 public:
     String();
     String(char* str);
-    //const string &getStr() const;
-   // void setStr(const string &str);
+    const string &getStr() const;
+    void setStr(const string &str);
 
 private:
     string str;
