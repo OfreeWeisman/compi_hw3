@@ -89,12 +89,19 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
     list<Symbol *> *currListBack;
     while (!tempSymbolTable->empty()) {
         currListBack = tempSymbolTable->top();
-        if(getSymbolinList(symbolTable->top(),func_name)){ //since if its here, then the func is the next one.
-            funcs_args = currListBack;
+        if(!symbolTable->empty()) {
+            if (getSymbolinList(symbolTable->top(), func_name)) { //since if its here, then the func is the next one.
+                funcs_args = currListBack;
+                cout<<"succcccccccccccccc"<<endl;
+
+            }
         }
+
         symbolTable->push(currListBack);
         tempSymbolTable->pop();
     }
+
+    cout<<"succ"<<endl;
 
     if(func == nullptr){
         output::errorUndefFunc(yylineno, func_name);
