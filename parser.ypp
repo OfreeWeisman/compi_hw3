@@ -55,7 +55,7 @@
 Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
 Funcs		: /*epsilon*/													{}
-			| FuncDecl Funcs												//{output::printProductionRule(3);}
+			| FuncDecl Funcs												{}
 			;
 FuncDecl	: FuncDeclOpen FuncDeclInsert                                   {}
             ;
