@@ -114,7 +114,9 @@ Parameter::Parameter(const string &type, const string &id) : type(type), id(id) 
         setType(NULL_ENUM);
     }
     names = new list<string>();
+    names->push_back(id);
     types = new list<string>();
+    types->push_back(type);
 }
 
 list<string> *Parameter::getNames() {

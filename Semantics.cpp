@@ -395,9 +395,21 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
     //fill here the functionArgs vector with the functType
 
     int end = funcType.find("->");
-    string args = funcType.substr(0,end);
+    string args = funcType.substr(1,end-1);
     cout<<funcType<<endl;
     cout<<end<<" args: "<<args<<endl;
+
+    int i = 0;
+    int j = 0;
+    string parameter;
+    while(i < funcType.length()){
+        i = funcType.find(",");
+        parameter = funcType.substr(j,i);
+        j=i;
+        functionArgs->push_back(parameter);
+    }
+
+
 
     Symbol* s = new Symbol(funcType, 0, name);
     tables->pushNewSymbol(s);
@@ -515,7 +527,7 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     parameter1->setTypes(types_temp);
     cout<<"end of 9 "<<endl;
 
-    funcArgs->push_back("bool");
+    funcArgs->push_back(type1);
 
 
     return formalsDecl;
