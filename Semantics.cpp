@@ -391,10 +391,22 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
    // cout<<"makefunctiontype finished"<<endl;
 
     functionArgs->clear();
+
+    //fill here the functionArgs vector with the functType
+
+    int end = funcType.find("->");
+    string args = funcType.substr(0,end);
+    cout<<"args: "<<args<<endl;
+
     Symbol* s = new Symbol(funcType, 0, name);
     tables->pushNewSymbol(s);
    // cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
+    //insert here the parameters in the new scope
+
+
+
+
    // cout<<"push new scope finished"<<endl;
 
 }
@@ -475,7 +487,7 @@ Node *semantics9(Node *formalsDecl) {
     cout<<"9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
-    string id1 = parameter1->getId();
+    string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
     names_temp->push_back(id1);
 
