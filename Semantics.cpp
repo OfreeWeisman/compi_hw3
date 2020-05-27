@@ -5,6 +5,8 @@
 #include "Semantics.h"
 #include "Tokens.h"
 #include "NonTerminals.h"
+#include <iostream>
+using namespace std;
 extern int yylineno;
 
 
@@ -429,6 +431,8 @@ void setup(DataStructures* globalTables) {
     globalTables->pushNewSymbol(s1);
     Symbol* s2 = new Symbol("int -> void", 0, "printi");
     globalTables->pushNewSymbol(s2);
+
+    cout<<"end of setup"<<std::endl;
 }
 
 void cleanup(DataStructures* globalTables) {
