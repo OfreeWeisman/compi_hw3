@@ -404,7 +404,9 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
     string name = dynamic_cast<Id*>(id)->getIdName();
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
-    //cout<<type->getTypeAsString(types_enum)<<endl;
+    cout<<"first of all"<<endl;
+    cout<<type->getTypeAsString(types_enum)<<endl;
+    cout<<"second of all"<<endl;
 
    // cout<<"dynamic casts finished"<<endl;
 
