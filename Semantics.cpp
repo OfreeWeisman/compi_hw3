@@ -421,9 +421,18 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
    // cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
 
+
+
     //insert here the parameters in the new scope
+    auto it1 = p->getTypes()->begin();
+    auto it2 = p->getNames()->begin();
+    int offset = 0;
 
-
+    for(int i = 0; i < functionArgs->size(); i++){
+        cout<<*it1<<" "<<*it2<<endl;
+        Symbol* s = new Symbol(*it2++, offset--, *it1++);
+        tables->pushNewSymbol(s);
+    }
 
 
    // cout<<"push new scope finished"<<endl;
