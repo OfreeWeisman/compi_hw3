@@ -397,6 +397,7 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
     string id_name = dynamic_cast<Id*>(id)->getIdName();
+    cout<<"name of the one with no type is "<<id_name <<endl;
     return new Parameter(type->getTypeAsString(type->getType()), id_name);
 
 }
