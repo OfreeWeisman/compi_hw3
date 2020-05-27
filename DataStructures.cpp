@@ -69,7 +69,7 @@ void DataStructures::setSymbolsTable(stack<list<Symbol *> *> *symbolsTable) {
 
 
 Symbol::Symbol(const string &type, int offset, const string &name) : type(type), offset(offset), name(name) {
-    cout<<"Symbol constructor"<<endl;
+    cout<<"Symbol constructor with "<< name<<"    " << offset<<endl;
 }
 
 const string &Symbol::getType() const {
