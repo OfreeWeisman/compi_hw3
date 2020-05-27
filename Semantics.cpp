@@ -341,13 +341,14 @@ void checkLegalRelop(Node* operand1, Node* operand2,  DataStructures* tables){
 
     cout<<"s1 is "<<s1<<" s2 is "<<s2<<endl;
 
-    if(!dynamic_cast<Num*>(operand1)){
-        cout<<"operand1"<<endl;
-    }
-    if(!dynamic_cast<Byte*>(operand2)){
-        cout<<"operand2"<<endl;
-    }
+    if((s1 == "INT" || s1 =="BYTE") && (s2 == "INT" || s2 =="BYTE")){
 
+    }else{
+        cout<<"checkLegalRelop"<<endl;
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
+    /*
     if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
        (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
     } else {
@@ -355,6 +356,7 @@ void checkLegalRelop(Node* operand1, Node* operand2,  DataStructures* tables){
         output::errorMismatch(yylineno);
         exit(0);
     }
+     */
 }
 
 //rule 9:
