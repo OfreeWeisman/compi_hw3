@@ -379,6 +379,7 @@ void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
 }
 
 Node *semanticsTypeByte() {
+    cout<<"semanticsTypeByte"<<endl;
     return new Type(BYTE_ENUM);
 }
 
