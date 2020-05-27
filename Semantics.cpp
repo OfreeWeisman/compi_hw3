@@ -402,6 +402,7 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
     tables->pushNewSymbol(s);
    // cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
+
     //insert here the parameters in the new scope
 
 
@@ -445,6 +446,11 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     int length = names->size();
     cout<<"enter- names size "<<length<<endl;
 
+    vector<string>::iterator it3 = funcArgs->begin();
+    for(it3; it3 != funcArgs->end(); it3++){
+        string k  = *it3;
+        cout<<"print out "<< k <<endl;
+    }
     for(int i = 0; i < length; i++){
         cout<<*it1<<" "<<*it2<<endl;
         Symbol* s = new Symbol(*it2++, offset--, *it1++);
