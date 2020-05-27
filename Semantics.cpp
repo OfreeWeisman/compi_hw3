@@ -364,6 +364,9 @@ void closeScope(DataStructures* globalTables){
 
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
+    if(p==nullptr){
+        cout <<"p is null"<< endl;
+    }
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
     list<string>::iterator it1 = names->begin();
