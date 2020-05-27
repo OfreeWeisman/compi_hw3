@@ -56,16 +56,11 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 }
 
 Symbol* getSymbolinList(list<Symbol *> *currList, string name){
-    cout<<"getsymbolinlist"<<endl<<endl<<endl;
-
-
     list<Symbol*>::iterator it = currList->begin();
     Symbol* temp;
     for(it; it != currList->end(); it++){
         temp = *it;
-        cout<<"in loop in symbol list and temps name is "<<temp->getName()<<"  type is "<< temp->getType()<<endl;
         if(temp->getName() == name){
-            cout<<"returning from symbol in list with a symbol!"<<endl;
             return temp;
         }
     }
@@ -206,10 +201,8 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 }
 
 string getIdType(Node* id, DataStructures* tables) {
-    cout<<"getIdType"<<endl<<endl<<endl;
     Id* i = dynamic_cast<Id*>(id);
     string func_name = i->getIdName();
-    cout<<"name of id."<<func_name<<endl;
 
     stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
     //look through all lists in the stack. must create a copy and pop from there, then copy it back.
@@ -239,8 +232,7 @@ string getIdType(Node* id, DataStructures* tables) {
         exit(0);
     }
 
-    cout<<"the id i got is of type "<<func->getType()<<" and name is "<< func->getName()<<endl;
-    cout<<"and now the size should be 1 "<<tables->getSymbolsTable()->top()->size()<<endl;
+
     return func->getType();
 //    cout<<"ret type is "<<ret_type<<endl;
 //
@@ -465,11 +457,8 @@ void closeScope(DataStructures* globalTables){
         s = *it;
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
-    cout<<"closescope"<<endl;
-    cout<<"before poping the table, the size of the top is "<<globalTables->getSymbolsTable()->top()->size()<<endl;
 
     globalTables->popScope();
-    cout<<"after poping the table, the size of the top is "<<globalTables->getSymbolsTable()->top()->size()<<endl;
 }
 
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
@@ -539,19 +528,15 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
 
     int s = parameter1->getTypes()->size();
     int s2 = parameter1->getNames()->size();
-    cout<<"size of the names and types lists "<<s<<" "<<s2<<endl;
 
     string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
     names_temp->push_back(id1);
 
-    cout<<"before type 1 is "<<endl;
     if(parameter1->getType() == NULL_ENUM){
-        cout<<"null"<<endl;
         cout<<"null"<<endl;
     }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
-    cout<<"type 1 is "<<type1<<endl;
 
     //list<string>* types_temp = new list<string>();
 
@@ -559,10 +544,8 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
 
 //    parameter1->setNames(names_temp);
 //    parameter1->setTypes(types_temp);
-    cout<<"end of 9 "<<endl;
 
     funcArgs->push_back(type1);
-
 
     return parameter1;
 }

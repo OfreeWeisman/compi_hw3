@@ -124,7 +124,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 
 Marker1         : /*epsilon*/                                               {setup(globalTables);}
 Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
-Marker_close    : /*epsilon*/                                               {cout<<"close"<<endl; closeScope(globalTables);}
+Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
 
 %%
 
