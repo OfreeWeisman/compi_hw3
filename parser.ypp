@@ -59,45 +59,45 @@ Funcs		: /*epsilon*/													{}
 			;
 FuncDecl	: FuncDeclOpen FuncDeclInsert                                   {}
             ;
-FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              {cout<<"before"<<endl; openFuncScope($1,$2,globalTables,funcArgs);cout<<"after"<<endl;}
+FuncDeclOpen: RetType ID LPAREN Formals RPAREN                              { openFuncScope($1,$2,globalTables,funcArgs);}
             ;
-FuncDeclInsert :LBRACE Statements Marker_close RBRACE                       {cout<<"end of empty body"<<endl;}
+FuncDeclInsert :LBRACE Statements Marker_close RBRACE                       {}
             ;
 RetType		: Type															{$$ = semantics5($1);}
-			| VOID															{cout<<"retype void"<<endl; $$ = semantics6();}
+			| VOID															{$$ = semantics6();}
 			;
-Formals		: /*epsilon*/													{cout<< " end of empty formals"<<endl;}
-			| FormalsList													{cout<< "one formal"<<endl; $$ = addParametersList($1,globalTables,funcArgs);}
+Formals		: /*epsilon*/													{}
+			| FormalsList													{$$ = addParametersList($1,globalTables,funcArgs);}
 			;
 FormalsList	: FormalDecl													{$$ = semantics9($1);}
 			| FormalDecl COMMA FormalsList									{$$ = semantics10($1,$2,$3,globalTables, funcArgs);}
 			;
-FormalDecl	: Type ID														{cout<<"type id"<<endl; $$ = semantics11($1,$2,globalTables);}
+FormalDecl	: Type ID														{ $$ = semantics11($1,$2,globalTables);}
 			;
-Statements	: Statement														{cout<<"statement"<<endl;}
-			| Statements Statement											{cout<<"statements statement"<<endl;}
+Statements	: Statement														{}
+			| Statements Statement											{}
 			;
 
-Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{cout<< "21" << endl; semantics21($3);}
+Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3);}
       | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
-			| Type ID SC													{cout<<"15"<<endl;semantics15($1,$2,$3, globalTables);}
-			| Type ID ASSIGN Exp SC											{cout<<"16"<<endl;semantics16($1,$2,$3,$4,$5, globalTables);}
-			| ID ASSIGN Exp SC												{cout<<"17"<<endl;semantics17($1,$2,$3,$4);}
-			| Call SC														{cout<<"18"<<endl;semantics18($1,$2);}
-			| RETURN SC														{cout<<"19"<<endl;semantics19($1,$2,globalTables);}
-			| RETURN Exp SC													{cout<<"20"<<endl;semantics20($1,$2,$3,globalTables);}
-			| BREAK SC														{cout<<"25"<<endl;semantics25($1,$2,inWhile);}
-			| CONTINUE SC													{cout<<"26"<<endl;semantics26($1,$2,inWhile);}
+			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
+			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
+			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4);}
+			| Call SC														{semantics18($1,$2);}
+			| RETURN SC														{semantics19($1,$2,globalTables);}
+			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}
+			| BREAK SC														{semantics25($1,$2,inWhile);}
+			| CONTINUE SC													{semantics26($1,$2,inWhile);}
 			;
 
 
-Call		: ID LPAREN ExpList RPAREN										{cout << "call? " <<endl; semantics27($1,$2,$3,$4,globalTables);}
-			| ID LPAREN RPAREN												{cout<< "empty call?"<<endl; semantics28($1,globalTables);}
+Call		: ID LPAREN ExpList RPAREN										{ semantics27($1,$2,$3,$4,globalTables);}
+			| ID LPAREN RPAREN												{ semantics28($1,globalTables);}
 			;
-ExpList		: Exp															{cout<<"29"<<endl;$$ = semantics29($1);}
+ExpList		: Exp															{$$ = semantics29($1);}
 			| Exp COMMA ExpList												{$$ = semantics30($1,$2,$3);}
 			;
 Type		: INT															{$$ = semanticsTypeInt();}
@@ -107,11 +107,11 @@ Type		: INT															{$$ = semanticsTypeInt();}
 Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| Exp MUL_OP Exp												{$$ = semantics35($1,$2,$3);}
 			| Exp PLUS_OP Exp												{$$ = semantics35($1,$2,$3);}
-			| ID															{cout<<"36"<<endl; $$ = semantics36($1);}
-			| Call															{cout<<"37"<<endl;$$ = semantics37($1);}
+			| ID															{$$ = semantics36($1);}
+			| Call															{$$ = semantics37($1);}
 			| NUM															{$$ = semantics38($1);}
 			| NUM B															{$$ = semantics39($1,$2);}
-			| STRING														{cout<<"40"<<endl;$$ = semantics40($1);}
+			| STRING														{$$ = semantics40($1);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
 			| NOT Exp														{$$ = semantics43($2);}
@@ -122,8 +122,8 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			;
 
 
-Marker1         : /*epsilon*/                                               {cout << "marker1" << endl;setup(globalTables);}
-Marker_open     : /*epsilon*/                                               {openScope(globalTables);cout << "marker open returned" << endl;}
+Marker1         : /*epsilon*/                                               {setup(globalTables);}
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
 Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
 
 %%
