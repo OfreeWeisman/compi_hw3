@@ -78,7 +78,7 @@ Statements	: Statement														{cout<<"the end of statement"<<endl;}
 			| Statements Statement											{}
 			;
 
-Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3);}
+Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3, globalTables);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
       |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3);}
