@@ -370,10 +370,10 @@ void closeScope(DataStructures* globalTables){
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
     cout<<"yes"<<endl;
-    cout<<"before poping the table, the size of the top is "<<globalTables->getSymbolsTable()->size()<<endl;
+    cout<<"before poping the table, the size of the top is "<<globalTables->getSymbolsTable()->top()->size()<<endl;
 
     globalTables->popScope();
-    cout<<"after poping the table, the size of the top is "<<globalTables->getSymbolsTable()->size()<<endl;
+    cout<<"after poping the table, the size of the top is "<<globalTables->getSymbolsTable()->top()->size()<<endl;
 }
 
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
