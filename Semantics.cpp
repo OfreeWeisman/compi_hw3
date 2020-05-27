@@ -427,6 +427,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 Node *semantics9(Node *formalsDecl) {
     cout<<"9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
+    cout<<"fail"<<endl;
     string id1 = parameter1->getId();
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     list<string>* names_temp = new list<string>();
