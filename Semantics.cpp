@@ -383,8 +383,11 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     list<string>::iterator it1 = names->begin();
     list<string>::iterator it2 = types->begin();
 
+    cout<<"enter"<<endl;
     int offset = -1;
     int length = names->size();
+    cout<<"enter- names size "<<length<<endl;
+
     for(int i = 0; i < length; i++){
         Symbol* s = new Symbol(*it2++, offset--, *it1++);
         tables->pushNewSymbol(s);
