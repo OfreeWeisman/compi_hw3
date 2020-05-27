@@ -334,6 +334,13 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
 //rule 8:
 void checkLegalRelop(Node* operand1, Node* operand2){
     //check both operands are numerical
+    if(!dynamic_cast<Num*>(operand1)){
+        cout<<"operand1"<<endl;
+    }
+    if(!dynamic_cast<Byte*>(operand2)){
+        cout<<"operand2"<<endl;
+    }
+
     if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
        (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
     } else {
