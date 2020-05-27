@@ -56,11 +56,14 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
 }
 
 Symbol* getSymbolinList(list<Symbol *> *currList, string name){
+    cout<<"getsymbolinlist"<<endl<<endl<<endl;
+
     list<Symbol*>::iterator it = currList->begin();
     Symbol* temp;
     for(it; it != currList->end(); it++){
         temp = *it;
         if(temp->getName() == name){
+            cout<<"returning from symbol in list with a symbol!"<<endl;
             return temp;
         }
     }
@@ -201,8 +204,11 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 }
 
 string getIdType(Node* id, DataStructures* tables) {
+    cout<<"getIdType"<<endl<<endl<<endl;
     Id* i = dynamic_cast<Id*>(id);
     string func_name = i->getIdName();
+    cout<<"name of id."<<func_name<<endl;
+
     stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
     //look through all lists in the stack. must create a copy and pop from there, then copy it back.
     DataStructures *tempDS = new DataStructures();
@@ -215,6 +221,7 @@ string getIdType(Node* id, DataStructures* tables) {
         tempSymbolTable->push(currList);
         symbolTable->pop();
     }
+
     list<Symbol *> *currListBack;
     while (!tempSymbolTable->empty()) {
         currListBack = tempSymbolTable->top();
@@ -222,6 +229,7 @@ string getIdType(Node* id, DataStructures* tables) {
         tempSymbolTable->pop();
     }
 
+    cout<<"and now the size should be 1 "<<tables->getSymbolsTable()->top()->size()<<endl;
     if(func == nullptr){
         cout<<"error getIdType"<<endl;
         output::errorUndefFunc(yylineno, func_name);
@@ -433,14 +441,11 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
         curr_name = *it2;
         curr_type = *it1;
         cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<" offset "<< offset<<endl;
-
         Symbol* s = new Symbol(curr_name, offset--, curr_type);
 
         tables->pushNewSymbol(s);
     }
 
-
-   // cout<<"push new scope finished"<<endl;
 
 }
 
