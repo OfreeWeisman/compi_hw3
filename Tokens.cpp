@@ -108,7 +108,7 @@ Parameter::Parameter(const string &type, const string &id) : type(type), id(id) 
         setType(BYTE_ENUM);
     } else if(type == "VOID"){
         setType(VOID_ENUM);
-    } else if ( type == "BOOL"){
+    } else if (type == "BOOL"){
         setType(BOOL_ENUM);
     }
     setType(NULL_ENUM);
@@ -212,7 +212,6 @@ String::String() {
 
 String::String(string str) : str(str) {
     setType(STRING_ENUM);
-
     setTypes("STRING");
 
 }
