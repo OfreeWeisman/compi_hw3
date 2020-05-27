@@ -32,7 +32,7 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
  * throws an error if symbol already exists somewhere in the stack.
  */
 void searchIfPreDefined(Node* id, DataStructures* tables) {
-    Id *i = dynamic_cast<Id *>(id);
+    Id *i = dynamic_cast<Id*>(id);
     string name = i->getIdName();
 
     stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
@@ -330,8 +330,11 @@ void openScope(DataStructures* tables){
 void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>* functionArgs) {
     //add the scope name to the current scope and then open the new scope
     searchIfPreDefined(id, tables);
+
     string name = dynamic_cast<Id*>(id)->getIdName();
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
+    cout<<types_enum<<endl;
+
     cout<<"dynamic casts finished"<<endl;
 
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
