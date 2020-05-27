@@ -198,7 +198,7 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 //
 }
 
-Node* getIdType(Node* id, DataStructures* tables) {
+string getIdType(Node* id, DataStructures* tables) {
     Id* i = dynamic_cast<Id*>(id);
     string func_name = i->getIdName();
     stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
@@ -225,16 +225,16 @@ Node* getIdType(Node* id, DataStructures* tables) {
         exit(0);
     }
 
-    string ret_type = func->getType();
-    cout<<"ret type is "<<ret_type<<endl;
-
-    if(ret_type == "BOOL"){
-        return new Bool();
-    } else if(ret_type == "INT"){
-        return new Num();
-    } else {
-        return new Byte();
-    }
+    return func->getType();
+//    cout<<"ret type is "<<ret_type<<endl;
+//
+//    if(ret_type == "BOOL"){
+//        return new Bool();
+//    } else if(ret_type == "INT"){
+//        return new Num();
+//    } else {
+//        return new Byte();
+//    }
 }
 
 
