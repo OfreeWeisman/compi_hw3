@@ -177,12 +177,12 @@ class Str : public Node{
 public:
     Str(const string &str);
 
-public:
-
 private:
     string str;
 public:
 };
+
+
 
 class String : public Node {
 public:

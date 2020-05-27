@@ -203,6 +203,7 @@ String::String(string str) : str(str) {
     cout<<"string constructor"<<endl;
     setType(STRING_ENUM);
     setTypes("STRING");
+    cout<<"string constructor end"<<endl;
 
 }
 
