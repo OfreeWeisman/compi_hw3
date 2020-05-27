@@ -370,6 +370,7 @@ void closeScope(DataStructures* globalTables){
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
     cout<<"yes"<<endl;
+    cout<<"before poping the table, the size of the top is "<<globalTables->getSymbolsTable()->size()<<endl;
 
     globalTables->popScope();
     cout<<"after poping the table, the size of the top is "<<globalTables->getSymbolsTable()->size()<<endl;
