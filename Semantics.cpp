@@ -15,6 +15,7 @@ extern int yylineno;
  * throws an error if that symbol already exists
  */
 void symbolExistsinList(list<Symbol*>* currList, string name){
+    cout<<"SymbolExistsList"<<endl;
     list<Symbol*>::iterator it = currList->begin();
     for(it; it != currList->end(); it++){
         Symbol* temp = *it;
@@ -23,6 +24,8 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
             exit(0);
         }
     }
+    cout<<"SymbolExistsListFINISH"<<endl;
+
 }
 
 /*
