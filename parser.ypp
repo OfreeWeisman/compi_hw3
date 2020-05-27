@@ -50,9 +50,6 @@
 
 %%
 
-Marker1         : /*epsilon*/                                               {setup(globalTables);}
-Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
-Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
 
 Program 	: Marker1 Funcs													{cleanup(globalTables);}
 			;
@@ -119,6 +116,12 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3);}
 			| Exp EQUALITY Exp												{$$ = semantics46($1,$2,$3);}
 			;
+
+
+Marker1         : /*epsilon*/                                               {setup(globalTables);}
+Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
+Marker_close    : /*epsilon*/                                               {closeScope(globalTables);}
+
 %%
 
 int main(){
