@@ -437,7 +437,7 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     vector<string>::iterator it3 = funcArgs->begin();
     for(it3; it3 != funcArgs->end(); it3++){
         string k  = *it3;
-        cout<< k <<endl;
+        cout<<"print out "<< k <<endl;
     }
     for(int i = 0; i < length; i++){
         cout<<*it1<<" "<<*it2<<endl;
