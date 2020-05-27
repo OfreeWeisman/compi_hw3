@@ -74,6 +74,18 @@ void semantics19(Node* ret, Node* sc, DataStructures* tables);
 //rule 20 : Statement -> RETURN Exp SC
 void semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
 
+//rule 21 : Statement -> IF LPAREN Exp RPAREN Statement
+void semantics21(Node* exp);
+
+//rule 22 : IF LPAREN Exp RPAREN Statement ELSE Statement
+void semantics22(Node* exp);
+
+//rule 23 : Statement -> WHILE LPAREN Exp RPAREN Statement
+void semantics23(Node* exp);
+
+//rule 24 : WHILE LPAREN Exp RPAREN Statement ELSE Statement
+void semantics24(Node* exp);
+
 //rule 25 : Statement -> BREAK SC
 void semantics25(Node* BREAK, Node* sc, int inWhile);
 

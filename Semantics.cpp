@@ -143,6 +143,8 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 /*
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
 ?????????????????????????????????????????????
+
+ the return type is the type of the symbol after the "->"
 */
 
     string ret_type;
@@ -259,9 +261,6 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
     return type;
 
 }
-
-
-
 
 //-----------------------------------------------Semantics Functions--------------------------------------------------//
 
@@ -702,6 +701,26 @@ void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
 
 void semantics14(Node* statement){
     delete(statement);
+}
+
+void semantics21(Node *exp) {
+    checkExpBool(exp);
+    delete(exp);
+}
+
+void semantics22(Node *exp) {
+    checkExpBool(exp);
+    delete(exp);
+}
+
+void semantics23(Node *exp) {
+    checkExpBool(exp);
+    delete(exp);
+}
+
+void semantics24(Node *exp) {
+    checkExpBool(exp);
+    delete(exp);
 }
 
 
