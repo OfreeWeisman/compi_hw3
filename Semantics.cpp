@@ -15,7 +15,7 @@ extern int yylineno;
  * throws an error if that symbol already exists
  */
 void symbolExistsinList(list<Symbol*>* currList, string name){
-    cout<<"SymbolExistsList"<<endl;
+   // cout<<"SymbolExistsList"<<endl;
     list<Symbol*>::iterator it = currList->begin();
     for(it; it != currList->end(); it++){
         Symbol* temp = *it;
@@ -24,7 +24,7 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
             exit(0);
         }
     }
-    cout<<"SymbolExistsListFINISH"<<endl;
+  //  cout<<"SymbolExistsListFINISH"<<endl;
 
 }
 
@@ -45,13 +45,13 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
         tempSymbolTable->push(currList);
         symbolTables->pop();
     }
-    cout<<"push back intostack"<<endl;
+  //  cout<<"push back intostack"<<endl;
     while (!tempSymbolTable->empty()) {
         list<Symbol *> *currList = tempSymbolTable->top();
         symbolTables->push(currList);
         tempSymbolTable->pop();
     }
-    cout<<"searchIfPreDefinedFINISHED"<<endl;
+  //  cout<<"searchIfPreDefinedFINISHED"<<endl;
 
 }
 
@@ -85,15 +85,12 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
         tempSymbolTable->push(currList);
         symbolTable->pop();
     }
-    cout<<"getsymbolinlist ended"<<endl;
     list<Symbol *> *currListBack;
     while (!tempSymbolTable->empty()) {
         currListBack = tempSymbolTable->top();
         if(!symbolTable->empty()) {
             if (getSymbolinList(symbolTable->top(), func_name)) { //since if its here, then the func is the next one.
                 funcs_args = currListBack;
-                cout<<"succcccccccccccccc"<<endl;
-
             }
         }
 
@@ -101,7 +98,6 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
         tempSymbolTable->pop();
     }
 
-    cout<<"succ"<<endl;
 
     if(func == nullptr){
         output::errorUndefFunc(yylineno, func_name);
@@ -120,17 +116,14 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
 
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
-    cout<<"1"<<endl;
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
     list<Symbol*>* l = new list<Symbol*>();
     list<Symbol*>::iterator it = funcs_args->begin();
-    cout<<"1"<<endl;
 
     Symbol* func;
     for(it; it != funcs_args->end(); it++){
         func = *it;
         if(func->getOffset() < 0){
-            cout<<"1"<<endl;
 
             l->push_back(func);
         }
@@ -338,9 +331,7 @@ Node *semanticsTypeBool() {
 }
 
 void openScope(DataStructures* tables){
-    cout<<"marker open start"<<endl;
     tables->pushNewScope();
-    cout<<"marker open finish"<<endl;
 
 }
 
@@ -350,19 +341,19 @@ void openFuncScope(Node *type, Node *id, DataStructures* tables, vector<string>*
 
     string name = dynamic_cast<Id*>(id)->getIdName();
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
-    cout<<type->getTypeAsString(types_enum)<<endl;
+    //cout<<type->getTypeAsString(types_enum)<<endl;
 
-    cout<<"dynamic casts finished"<<endl;
+   // cout<<"dynamic casts finished"<<endl;
 
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
-    cout<<"makefunctiontype finished"<<endl;
+   // cout<<"makefunctiontype finished"<<endl;
 
     functionArgs->clear();
     Symbol* s = new Symbol(funcType, 0, name);
     tables->pushNewSymbol(s);
-    cout<<"push new symbolFinished"<<endl;
+   // cout<<"push new symbolFinished"<<endl;
     tables->pushNewScope();
-    cout<<"push new scope finished"<<endl;
+   // cout<<"push new scope finished"<<endl;
 
 }
 
@@ -382,7 +373,7 @@ void closeScope(DataStructures* globalTables){
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
     if(p==nullptr){
-        cout <<"p is null"<< endl;
+      //  cout <<"p is null"<< endl;
     }
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
@@ -462,18 +453,18 @@ Node* semanticsFalse(){
 
 void setup(DataStructures* globalTables) {
     globalTables->pushNewScope();
-    cout<<"1"<<std::endl;
+   // cout<<"1"<<std::endl;
     vector<string>* temp = new vector<string>();
     temp->push_back("STRING");
     Symbol* s1 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "print");
     temp->clear();
-    cout<<"2"<<std::endl;
+  //  cout<<"2"<<std::endl;
 
     globalTables->pushNewSymbol(s1);
-    cout<<"3"<<std::endl;
+   // cout<<"3"<<std::endl;
     temp->push_back("INT");
     Symbol* s2 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "printi");
-    cout<<"1"<<std::endl;
+  //  cout<<"1"<<std::endl;
     temp->clear();
 
     globalTables->pushNewSymbol(s2);
@@ -485,7 +476,7 @@ void setup(DataStructures* globalTables) {
 
     }
 
-    cout<<"end of setup"<<std::endl;
+   // cout<<"end of setup"<<std::endl;
 }
 
 void cleanup(DataStructures* globalTables) {
@@ -659,7 +650,7 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
 }
 
 Node *semantics40(Node *str) {
-    cout<<"in 40"<<endl;
+   // cout<<"in 40"<<endl;
     String* s = dynamic_cast<String*>(str);
     Expression* e = new Expression(s->getStr(), "STRING");
     return e;
@@ -670,12 +661,12 @@ Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
 }
 
 Node *semantics36(Node *id) {
-    cout<<"exp->id"<<endl;
+   // cout<<"exp->id"<<endl;
     return id;
 }
 
 Node *semantics37(Node *call) {
-    cout<<"in 37"<<endl;
+   // cout<<"in 37"<<endl;
 
     return call;
 }
@@ -693,7 +684,7 @@ Node* semantics28(Node *id, DataStructures* tables) {
 }
 
 Node *semantics29(Node *exp) {
-    cout<<"in 29"<<endl;
+   // cout<<"in 29"<<endl;
     return exp;
 }
 
@@ -711,14 +702,14 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
 
 Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
     Expression* e = dynamic_cast<Expression*>(explist);
-    cout<<"dynamic cast"<<endl;
+   // cout<<"dynamic cast"<<endl;
     list<string>* types = e->getTypes();
-    cout<<"get types"<<endl;
+  //  cout<<"get types"<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables);
-    cout<<"create s"<<endl;
+   // cout<<"create s"<<endl;
 
     checkValidArgs(types, s); //throw error if mismatch
-    cout<<"valid args"<<endl;
+  //  cout<<"valid args"<<endl;
 
     //find the function in the symbol table
     //get the retType of the function

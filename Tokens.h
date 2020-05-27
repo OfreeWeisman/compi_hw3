@@ -44,12 +44,10 @@ public:
         }
     }
     void setTypes(string t){
-        cout<<"begsetTypes"<<endl;
         if(!types){
             types = new list<string>();
         }
         types->push_back(t);
-        cout<<"end set types"<<endl;
 
     }
     list<string> *getTypes() {
