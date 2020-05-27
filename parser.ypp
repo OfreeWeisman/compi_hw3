@@ -90,8 +90,8 @@ Statement : IF LPAREN Exp RPAREN Statement								   // {output::printProduction
 			| BREAK SC														{semantics25($1,$2,inWhile);}
 			| CONTINUE SC													{semantics26($1,$2,inWhile);}
 			;
-Call		: ID LPAREN ExpList RPAREN										{semantics27($1,$2,$3,$4,globalTables;}
-			| ID LPAREN RPAREN												{semantics28($1,$2,$3);}
+Call		: ID LPAREN ExpList RPAREN										{semantics27($1,$2,$3,$4,globalTables);}
+			| ID LPAREN RPAREN												{semantics28($1,globalTables);}
 			;
 ExpList		: Exp															{$$ = semantics29($1);}
 			| Exp COMMA ExpList												{$$ = semantics30($1,$2,$3);}
@@ -110,7 +110,7 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| STRING														{$$ = semantics40($1);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
-			| NOT Exp														{$$ = semantics43($1,$2);}
+			| NOT Exp														{$$ = semantics43($2);}
 			| Exp AND Exp													{$$ = semantics44($1,$2,$3);}
 			| Exp OR Exp													{$$ = semantics45($1,$2,$3);}
 			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3);}
