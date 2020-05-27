@@ -173,7 +173,7 @@ private:
 
 class String : public Node {
 public:
-    String();
+    //String();
     String(char* str);
     const string &getStr() const;
     void setStr(const string &str);
