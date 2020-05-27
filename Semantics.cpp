@@ -110,14 +110,18 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
 
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
-
+    cout<<"1"<<endl;
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
     list<Symbol*>* l = new list<Symbol*>();
     list<Symbol*>::iterator it = funcs_args->begin();
+    cout<<"1"<<endl;
+
     Symbol* func;
     for(it; it != funcs_args->end(); it++){
         func = *it;
         if(func->getOffset() < 0){
+            cout<<"1"<<endl;
+
             l->push_back(func);
         }
     }
