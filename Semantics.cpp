@@ -32,7 +32,13 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
  * throws an error if symbol already exists somewhere in the stack.
  */
 void searchIfPreDefined(Node* id, DataStructures* tables) {
+    cout<<"searchIfPreDefined"<<endl;
+
     Id *i = dynamic_cast<Id*>(id);
+    if(!i){
+         cout<<"i is not id"<<endl;
+
+    }
     string name = i->getIdName();
 
     stack<list<Symbol *> *> *symbolTables = tables->getSymbolsTable();
@@ -45,13 +51,13 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
         tempSymbolTable->push(currList);
         symbolTables->pop();
     }
-  //  cout<<"push back intostack"<<endl;
+
     while (!tempSymbolTable->empty()) {
         list<Symbol *> *currList = tempSymbolTable->top();
         symbolTables->push(currList);
         tempSymbolTable->pop();
     }
-  //  cout<<"searchIfPreDefinedFINISHED"<<endl;
+    cout<<"searchIfPreDefinedFINISHED"<<endl;
 
 }
 
