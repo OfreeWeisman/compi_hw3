@@ -108,10 +108,11 @@ Parameter::Parameter(const string &type, const string &id) : type(type), id(id) 
         setType(BYTE_ENUM);
     } else if(type == "VOID"){
         setType(VOID_ENUM);
-    } else if ( type == "BOOL"){
+    } else if ( type == "BOOL") {
         setType(BOOL_ENUM);
+    }else{
+        setType(NULL_ENUM);
     }
-    setType(NULL_ENUM);
     names = new list<string>();
     types = new list<string>();
 }
