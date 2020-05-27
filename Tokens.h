@@ -35,6 +35,7 @@ public:
             case INT_ENUM : return "int";
             case BOOL_ENUM : return "bool";
             case BYTE_ENUM : return "byte";
+            case VOID_ENUM : return "void";
         }
     }
     void setTypes(string t){
