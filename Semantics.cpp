@@ -463,9 +463,9 @@ void setup(DataStructures* globalTables) {
     temp->clear();
 
     globalTables->pushNewSymbol(s2);
-    list<Symbol*> scope = globalTables->getSymbolsTable()->top();
-    list<Symbol*>::iterator it = scope.begin();
-    for(it; it != scope.end(); it++ ){
+    list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
+    list<Symbol*>::iterator it = scope->begin();
+    for(it; it != scope->end(); it++ ){
         Symbol* s = *it;
         output::printID(s->getName(),s->getOffset(), s->getType());
 
