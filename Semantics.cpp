@@ -927,7 +927,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     tables->pushNewSymbol(new_symbol);
     cout<<"Semantics 16 6"<<endl;
 
-    checkLegalAssignment(id,exp);
+    checkLegalAssignment(type,exp);
     cout<<"Semantics 16 finish"<<endl;
 
     //  delete(id);
