@@ -271,6 +271,7 @@ BoolEnum checkExpBool(Node* operand1){
 //rule 6+7:
 //TODO: what else should we be checking here?
 void checkLegalAssignment(Node* id, Node* exp){
+    cout<<"checkLegalAssignment"<<endl;
     //it is legal to assign byte to int
     Id* i = dynamic_cast<Id*>(id);
     string id_type = i->getTypeAsString(i->getType());
@@ -287,6 +288,8 @@ void checkLegalAssignment(Node* id, Node* exp){
         output::errorMismatch(yylineno);
         exit(0);
     }
+
+    cout<<"endcheckLegalAssignment"<<endl;
 
 }
 
