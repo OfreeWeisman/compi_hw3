@@ -212,4 +212,7 @@ void String::setStr(const string &str) {
 }
 
 
-Str::Str(const string &str) : str(str) {}
+Str::Str(const string &str) : str(str) {
+    setType(STRING_ENUM);
+    setTypes("STRING");
+}
