@@ -59,16 +59,11 @@ Symbol* getSymbolinList(list<Symbol *> *currList, string name){
     }
     return nullptr;
 }
-
-/*
- * only returns the func's arguments.
- */
-list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
+list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 
     Id* i = dynamic_cast<Id*>(id);
     string func_name = i->getIdName();
     stack<list<Symbol*>*>* symbolTable = tables->getSymbolsTable();
-
     //look through all lists in the stack. must create a copy and pop from there, then copy it back.
     DataStructures *tempDS = new DataStructures();
     stack<list<Symbol *> *> *tempSymbolTable = tempDS->getSymbolsTable();
@@ -76,17 +71,18 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
     Symbol* func = nullptr;
     list<Symbol*>* funcs_args = nullptr;
     while (!symbolTable->empty()) {
-       currList = symbolTable->top();
-        if(func != nullptr){
-            funcs_args = currList;
-        }
-       func = getSymbolinList(currList, func_name);
-       tempSymbolTable->push(currList);
-       symbolTable->pop();
+        currList = symbolTable->top();
+        func = getSymbolinList(currList, func_name);
+        tempSymbolTable->push(currList);
+        symbolTable->pop();
     }
+    list<Symbol *> *currListBack;
     while (!tempSymbolTable->empty()) {
-        list<Symbol *> *currList = tempSymbolTable->top();
-        symbolTable->push(currList);
+        currListBack = tempSymbolTable->top();
+        if(getSymbolinList(symbolTable->top(),func_name)){ //since if its here, then the func is the next one.
+            funcs_args = currListBack;
+        }
+        symbolTable->push(currListBack);
         tempSymbolTable->pop();
     }
 
@@ -95,9 +91,25 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
         exit(0);
     }
 
+
+    return funcs_args;
+
+}
+
+
+/*
+ * only returns the func's arguments.
+ */
+list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
+
+
+
+    list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
+
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
     list<Symbol*>* l = new list<Symbol*>();
     list<Symbol*>::iterator it = funcs_args->begin();
+    Symbol* func;
     for(it; it != funcs_args->end(); it++){
         func = *it;
         if(func->getOffset() < 0){
@@ -122,20 +134,30 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
 }
 
 //TODO:to finish this up
-Node* getFunctionRetType(Node* node, DataStructures* tables){
+Node* getFunctionRetType(Node* id, DataStructures* tables){
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
     //type_name is the string of the type
 
+/*
+    list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
+?????????????????????????????????????????????
+*/
 
-//    if(type_name == "bool"){
-//        return new Bool();
-//    } else if(type_name == "int"){
-//        return new Num();
-//    } else {
-//        return new Byte();
-//    }
+    string ret_type;
+
+    if(ret_type == "bool"){
+        return new Bool();
+    } else if(ret_type == "int"){
+        return new Num();
+    } else {
+        return new Byte();
+    }
+
+
+
+//
 }
 
 
