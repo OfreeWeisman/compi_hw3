@@ -197,7 +197,7 @@ void Binop::setBinop(const string &binop) {
 //    setTypes("STRING");
 //}
 
-String::String(char* str) : str((string)str) {
+String::String(string str) : str(str) {
     setType(STRING_ENUM);
     setTypes("STRING");
 
