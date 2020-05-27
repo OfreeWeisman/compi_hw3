@@ -197,7 +197,7 @@ String::String() {
     setTypes("STRING");
 }
 
-String::String(const string &str) : str(str) {
+String::String(char* str) : str((string)str) {
     setType(STRING_ENUM);
     setTypes("STRING");
 
