@@ -268,7 +268,7 @@ void checkExpBool(Node* operand1, DataStructures* tables){
         type = operand1->getTypeAsString(operand1->getType());
     }
     if(type != "BOOL"){
-        cout<< "checkExpBool "<<endl;
+        cout<< "checkExpBool "<<type<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
