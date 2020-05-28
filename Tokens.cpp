@@ -19,7 +19,7 @@ const string &Id::getIdName() const {
 
 Bool::Bool(BoolEnum boolEnum) : boolEnum(boolEnum) {
     setType(BOOL_ENUM);
-    setTypes("bool");
+    setTypes("BOOL");
 
 }
 
@@ -40,7 +40,7 @@ Bool::Bool() {
 Num::Num(char* strValue) : strValue(strValue) {
     value = atoi(strValue);
     setType(INT_ENUM);
-    setTypes("int");
+    setTypes("INT");
 
 }
 
@@ -62,7 +62,7 @@ void Num::setStrValue(const string &strValue) {
 
 Num::Num() {
     setType(INT_ENUM);
-    setTypes("int");
+    setTypes("INT");
 }
 
 int Byte::getValue() const {
@@ -76,7 +76,7 @@ void Byte::setValue(int value) {
 Byte::Byte(char *strValue) : strValue(strValue){
     value = atoi(strValue);
     setType(BYTE_ENUM);
-    setTypes("byte");
+    setTypes("BYTE");
 
 
 }

@@ -207,6 +207,9 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 }
 
 string getIdType(Node* id, DataStructures* tables) {
+
+    //only for ids (ignore the name func)
+
     Id* i = dynamic_cast<Id*>(id);
     string func_name = i->getIdName();
 
@@ -234,7 +237,7 @@ string getIdType(Node* id, DataStructures* tables) {
 
     if(func == nullptr){
         cout<<"error getIdType"<<endl;
-        output::errorUndefFunc(yylineno, func_name);
+        output::errorUndef(yylineno, func_name);
         exit(0);
     }
 
@@ -255,17 +258,23 @@ string getIdType(Node* id, DataStructures* tables) {
 //----------------------------------------------Type Checking Functions-----------------------------------------------//
 //rule 2:
 
-BoolEnum checkExpBool(Node* operand1){
+void checkExpBool(Node* operand1, DataStructures* tables){
     //cout<<operand1->getTypeAsString(operand1->getType())<<endl;
 
-    Bool* check = (dynamic_cast<Bool*>(operand1));
-    if(dynamic_cast<Bool*>(operand1)){
-        return check->getBoolEnum();
-    }else{
+    string type = getIdType(operand1, tables);
+    if(type != "BOOL"){
         cout<< "checkExpBool "<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
+//    Bool* check = (dynamic_cast<Bool*>(operand1));
+//    if(dynamic_cast<Bool*>(operand1)){
+//        return check->getBoolEnum();
+//    }else{
+//        cout<< "checkExpBool "<<endl;
+//        output::errorMismatch(yylineno);
+//        exit(0);
+//    }
 }
 
 //rule 6+7:
@@ -700,45 +709,50 @@ void cleanup(DataStructures* globalTables) {
 
 }
 
-Node *semantics43(Node *expression) {
-    BoolEnum b = checkExpBool(expression);
-    if(FALSE_ENUM == b){
-        dynamic_cast<Bool*>(expression)->setBoolEnum(TRUE_ENUM);
-        return expression;
-    } else {
-        dynamic_cast<Bool*>(expression)->setBoolEnum(FALSE_ENUM);
-        return expression;
-    }
+Node *semantics43(Node *expression,DataStructures* tables) {
+    checkExpBool(expression, tables);
+//    if(FALSE_ENUM == b){
+//        dynamic_cast<Bool*>(expression)->setBoolEnum(TRUE_ENUM);
+//        return expression;
+//    } else {
+//        dynamic_cast<Bool*>(expression)->setBoolEnum(FALSE_ENUM);
+//        return expression;
+//    }
+    return new Bool();
 }
 
-Node *semantics44(Node *exp1, Node *AND, Node *exp2) {
-    BoolEnum b1 = checkExpBool(exp1);
-    BoolEnum b2 = checkExpBool(exp2);
+Node *semantics44(Node *exp1, Node *AND, Node *exp2,DataStructures* tables) {
+    checkExpBool(exp1, tables);
+    checkExpBool(exp2, tables);
+    return new Bool();
 
-    if(b1 == b2){
-     //   delete(exp2);
-        return exp1;
-    } else if(b1 == FALSE_ENUM) {
-     //   delete(exp2);
-        return exp1;
-    } else {
-     //   delete(exp1);
-        return exp2;
-    }
+
+//    if(b1 == b2){
+//     //   delete(exp2);
+//        return exp1;
+//    } else if(b1 == FALSE_ENUM) {
+//     //   delete(exp2);
+//        return exp1;
+//    } else {
+//     //   delete(exp1);
+//        return exp2;
+//    }
 
 }
 
-Node *semantics45(Node *exp1, Node *OR, Node *exp2) {
-    BoolEnum b1 = checkExpBool(exp1);
-    BoolEnum b2 = checkExpBool(exp2);
+Node *semantics45(Node *exp1, Node *OR, Node *exp2,DataStructures* tables) {
+    checkExpBool(exp1,tables);
+    checkExpBool(exp2,tables);
+    return new Bool();
 
-    if(b1 == TRUE_ENUM){
-      //  delete(exp2);
-        return exp1;
-    } else {
-      //  delete(exp1);
-        return exp2;
-    }
+
+//    if(b1 == TRUE_ENUM){
+//      //  delete(exp2);
+//        return exp1;
+//    } else {
+//      //  delete(exp1);
+//        return exp2;
+//    }
 }
 
 Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
@@ -1064,18 +1078,18 @@ void semantics21(Node *exp, DataStructures* tables) {
    // delete(exp);
 }
 
-void semantics22(Node *exp) {
-    checkExpBool(exp);
+void semantics22(Node *exp,DataStructures* tables) {
+    checkExpBool(exp,tables);
  //   delete(exp);
 }
 
-void semantics23(Node *exp) {
-    checkExpBool(exp);
+void semantics23(Node *exp,DataStructures* tables) {
+    checkExpBool(exp,tables);
     //delete(exp);
 }
 
-void semantics24(Node *exp) {
-    checkExpBool(exp);
+void semantics24(Node *exp,DataStructures* tables) {
+    checkExpBool(exp,tables);
   //  delete(exp);
 }
 

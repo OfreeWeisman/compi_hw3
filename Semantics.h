@@ -78,13 +78,13 @@ void semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
 void semantics21(Node* exp, DataStructures* tables);
 
 //rule 22 : IF LPAREN Exp RPAREN Statement ELSE Statement
-void semantics22(Node* exp);
+void semantics22(Node* exp, DataStructures* tables);
 
 //rule 23 : Statement -> WHILE LPAREN Exp RPAREN Statement
-void semantics23(Node* exp);
+void semantics23(Node* exp, DataStructures* tables);
 
 //rule 24 : WHILE LPAREN Exp RPAREN Statement ELSE Statement
-void semantics24(Node* exp);
+void semantics24(Node* exp, DataStructures* tables);
 
 //rule 25 : Statement -> BREAK SC
 void semantics25(Node* BREAK, Node* sc, int inWhile);
@@ -141,13 +141,13 @@ Node* semanticsTrue();
 Node* semanticsFalse();
 
 //rule 43 : Exp -> NOT Exp
-Node* semantics43(Node* expression);
+Node* semantics43(Node* expression,DataStructures* tables);
 
 //rule 44 : Exp -> Exp AND Exp
-Node* semantics44(Node* exp1, Node* AND, Node* exp2);
+Node* semantics44(Node* exp1, Node* AND, Node* exp2,DataStructures* tables);
 
 //rule 45 : Exp -> Exp OR Exp
-Node* semantics45(Node* exp1, Node* OR, Node* exp2);
+Node* semantics45(Node* exp1, Node* OR, Node* exp2,DataStructures* tables);
 
 //rule 46 : Exp -> Exp RELOP Exp
 Node* semantics46(Node* exp1, Node* RELOP, Node* exp2, DataStructures* tables);
