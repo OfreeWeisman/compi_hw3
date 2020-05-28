@@ -80,8 +80,8 @@ Statements	: Statement														{cout<<"the end of statement"<<endl;}
 
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3, globalTables);}
       |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3,globalTables);}
-      |  WHILE Marker_WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3,globalTables,inWhile);}
-      |  WHILE Marker_WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3,globalTables,inWhile);}
+      |  WHILE Marker_WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3,globalTables,&inWhile);}
+      |  WHILE Marker_WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3,globalTables,&inWhile);}
       | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
 			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
@@ -89,8 +89,8 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| Call SC														{semantics18($1,$2);}
 			| RETURN SC														{semantics19($1,$2,globalTables);}
 			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}
-			| BREAK SC														{semantics25($1,$2,inWhile);}
-			| CONTINUE SC													{semantics26($1,$2,inWhile);}
+			| BREAK SC														{semantics25($1,$2,&inWhile);}
+			| CONTINUE SC													{semantics26($1,$2,&inWhile);}
 			;
 
 

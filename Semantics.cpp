@@ -260,8 +260,13 @@ string getIdType(Node* id, DataStructures* tables) {
 
 void checkExpBool(Node* operand1, DataStructures* tables){
     //cout<<operand1->getTypeAsString(operand1->getType())<<endl;
-
-    string type = getIdType(operand1, tables);
+    Id* i = dynamic_cast<Id*>(operand1);
+    string type;
+    if(i){
+        type = getIdType(operand1, tables);
+    } else {
+        type = operand1->getTypeAsString(operand1->getType());
+    }
     if(type != "BOOL"){
         cout<< "checkExpBool "<<endl;
         output::errorMismatch(yylineno);
@@ -981,15 +986,15 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
 
 }
 
-void semantics26(Node *cont, Node *sc, int inWhile) {
-    if(!inWhile){
+void semantics26(Node *cont, Node *sc, int* inWhile) {
+    if(*inWhile == 0){
         output::errorUnexpectedContinue(yylineno);
         exit(0);
     }
 }
 
-void semantics25(Node *BREAK, Node *sc, int inWhile) {
-    if(inWhile == 0){
+void semantics25(Node *BREAK, Node *sc, int* inWhile) {
+    if(*inWhile == 0){
         output::errorUnexpectedBreak(yylineno);
         exit(0);
     }
@@ -1098,14 +1103,14 @@ void semantics22(Node *exp,DataStructures* tables) {
  //   delete(exp);
 }
 
-void semantics23(Node *exp,DataStructures* tables, int inWhile) {
-    inWhile--;
+void semantics23(Node *exp,DataStructures* tables, int* inWhile) {
+    *inWhile--;
     checkExpBool(exp,tables);
     //delete(exp);
 }
 
-void semantics24(Node *exp,DataStructures* tables, int inWhile) {
-    inWhile--;
+void semantics24(Node *exp,DataStructures* tables, int* inWhile) {
+    *inWhile--;
     checkExpBool(exp,tables);
   //  delete(exp);
 }

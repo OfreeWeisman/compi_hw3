@@ -81,16 +81,16 @@ void semantics21(Node* exp, DataStructures* tables);
 void semantics22(Node* exp, DataStructures* tables);
 
 //rule 23 : Statement -> WHILE LPAREN Exp RPAREN Statement
-void semantics23(Node* exp, DataStructures* tables,int inWhile);
+void semantics23(Node* exp, DataStructures* tables,int* inWhile);
 
 //rule 24 : WHILE LPAREN Exp RPAREN Statement ELSE Statement
-void semantics24(Node* exp, DataStructures* tables,int inWhile);
+void semantics24(Node* exp, DataStructures* tables,int* inWhile);
 
 //rule 25 : Statement -> BREAK SC
-void semantics25(Node* BREAK, Node* sc, int inWhile);
+void semantics25(Node* BREAK, Node* sc, int* inWhile);
 
 //rule 26 : Statement -> CONTINUE SC
-void semantics26(Node* cont, Node* sc, int inWhile);
+void semantics26(Node* cont, Node* sc, int* inWhile);
 
 //rule 27 : Call -> ID LPAREN Explist RPAREN
 Node* semantics27(Node* id, Node* lparen, Node* explist, Node* rparen, DataStructures* tables);
