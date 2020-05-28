@@ -1223,6 +1223,11 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
     cout<<returnType<<endl;
+    int pos = returnType.find("->");      // position of "live" in str
+
+    string ret_type = returnType.substr(pos, returnType.size());
+    cout<<returnType<<endl;
+
     if (returnType != "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
