@@ -438,7 +438,7 @@ void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
     string name = dynamic_cast<Id*>(id)->getIdName();
 
     int offset= tables->getOffsetsTable()->top();
-
+    tables->getOffsetsTable()->pop();
     tables->getOffsetsTable()->push(offset+1);
 
     Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
