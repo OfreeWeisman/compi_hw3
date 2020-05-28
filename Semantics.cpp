@@ -731,7 +731,7 @@ void cleanup(DataStructures* globalTables) {
     for(it; it != list->end(); it++){
         Symbol* s = *it;
         cout<<"check main "<<s->getType()<<endl;
-        if(s->getName() == "main" && s->getType()=="VOID"){
+        if(s->getName() == "main" && s->getType()=="()->VOID"){
             is_main = true;
             break;
         }
