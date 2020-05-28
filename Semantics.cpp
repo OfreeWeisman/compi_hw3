@@ -1295,7 +1295,7 @@ void semantics22(Node *exp,DataStructures* tables) {
  //   delete(exp);
 }
 
-void semantics23ס(Node *exp,DataStructures* tables, int* inWhile) {
+void semantics23(Node *exp,DataStructures* tables, int* inWhile) {
     int i = *inWhile;
     i--;
     *inWhile = i;
