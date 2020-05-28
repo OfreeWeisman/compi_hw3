@@ -693,11 +693,17 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
     Parameter* parameter2 = dynamic_cast<Parameter*>(formalsList);
     string id1 = parameter1->getId();
+    cout<<"id1 10 "<<endl;
+
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     string id2 = parameter2->getId();
+    cout<<"id2 10 "<<endl;
+
     string type2 = parameter2->getTypeAsString(parameter2->getType());
 
     Parameter* p = new Parameter(type2.append(",").append(type1),id2.append(",").append(id1));
+    cout<<"semantics parameter "<<endl;
+
     list<string>* names_temp = combineLists(parameter1->getNames(),parameter2->getNames());
     p->setNames(names_temp);
     list<string>* types_temp = combineLists(parameter1->getTypes(),parameter2->getTypes());
