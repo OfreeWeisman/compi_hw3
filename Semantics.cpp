@@ -1006,6 +1006,9 @@ Node *semantics40(Node *str) {
    // cout<<"in 40"<<endl;
     String* s = dynamic_cast<String*>(str);
     Expression* e = new Expression(s->getStr(), "STRING");
+    //
+    e->setTypes("STRING");
+    //
     return e;
 }
 
