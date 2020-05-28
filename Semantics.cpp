@@ -418,6 +418,12 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     cout<<"checkValidArgs"<<endl;
     Id* i = dynamic_cast<Id*>(id);
 
+    if(i->getIdName() == "print" && args->size() == 1 && (*args->begin())->getType()== "STRING"){
+        return;
+    } else if (i->getIdName() == "printi" && args->size() == 1 && ((*args->begin())->getType()== "INT"|| (*args->begin())->getType()== "BYTE")){
+        return;
+    }
+
     auto it = types->begin();
 
     vector<string>* vec = new vector<string>();
