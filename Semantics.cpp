@@ -1022,10 +1022,10 @@ Node *semantics37(Node *call) {
     return call;
 }
 
-Node* semantics28(Node *id, DataStructures* tables) {
+Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) {
     Id* i = dynamic_cast<Id*>(id);
     vector<string>* args = new vector<string>();
-    list<Symbol*>* s = getFunctionsArgs(id, tables); // search if id exists
+    list<Symbol*>* s = getFunctionsArgs(id, tables,functionArgs); // search if id exists
     if(!s->empty()){
         output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
     }

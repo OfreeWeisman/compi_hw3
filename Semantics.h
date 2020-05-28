@@ -96,7 +96,7 @@ void semantics26(Node* cont, Node* sc, int* inWhile);
 Node* semantics27(Node* id, Node* lparen, Node* explist, Node* rparen, DataStructures* tables, vector<string>* args);
 
 //rule 28 : Call -> ID LPAREN RPAREN
-Node* semantics28(Node* id, DataStructures* tables);
+Node* semantics28(Node* id, DataStructures* tables,vector<string>* args);
 
 //rule 29 : Explist -> Exp
 Node* semantics29(Node* exp);
