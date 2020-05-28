@@ -317,7 +317,7 @@ void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
 
 
 void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
-    cout<<"checkLegalAssignment"<<endl;
+    cout<<"checkLegalAssignmentwhentypegiven"<<endl;
     //it is legal to assign byte to int
     Type* t = dynamic_cast<Type*>(type);
 
@@ -342,7 +342,7 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
         exit(0);
     }
 
-    cout<<"endcheckLegalAssignment"<<endl;
+    cout<<"endcheckLegalAssignmentwhentypegiven"<<endl;
 
 }
 
@@ -1204,7 +1204,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     string name = dynamic_cast<Id*>(id)->getIdName();
     cout<<"Semantics 16 3 "<<endl;
 
-    checkLegalAssignmentWhenTypeGiven(id,exp);
+    checkLegalAssignmentWhenTypeGiven(type,exp);
 
     int offset;
     cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
