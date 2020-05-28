@@ -540,6 +540,7 @@ Node *semanticsTypeBool() {
 }
 
 void openScope(DataStructures* tables){
+    cout<<" open scope  "<<endl;
     tables->pushNewScope();
 
 }
