@@ -614,7 +614,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     string id2 = parameter2->getId();
     string type2 = parameter2->getTypeAsString(parameter2->getType());
-    Parameter* p = new Parameter(id1.append(",").append(id2), type1.append(",").append(type2));
+    Parameter* p = new Parameter(id2.append(",").append(id1), type2.append(",").append(type1));
     list<string>* names_temp = combineLists(parameter2->getNames(),parameter1->getNames());
     p->setNames(names_temp);
     list<string>* types_temp = combineLists(parameter2->getTypes(),parameter1->getTypes());
