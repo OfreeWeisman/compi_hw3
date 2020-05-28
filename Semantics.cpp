@@ -1259,11 +1259,15 @@ void semantics14(Node* statement){
 
 void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
     Id* check = (dynamic_cast<Id*>(operand1));
+    string type;
     if(!check){
         cout<<"check is not an id"<<endl;
+        type = operand1->getTypeAsString(operand1->getType());
+    } else {
+        type = getIdType(operand1, tables);
+
     }
 
-    string type = getIdType(operand1, tables);
    // cout<<n->getType()<<endl;
     //Bool* b = dynamic_cast<Bool*>(n);
     if(type != "BOOL"){
