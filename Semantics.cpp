@@ -625,8 +625,8 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     auto it = types_temp->begin();
     cout<<*it << " 1 "<< *(++it) << "2"<<endl;
     p->setTypes(types_temp);
-    funcArgs->push_back(type1);
-    //funcArgs->insert(funcArgs->begin(), "bool");
+    //funcArgs->push_back(type1);
+    funcArgs->insert(funcArgs->begin(), type1);
 
   //  delete parameter1->getNames();
   //  delete parameter2->getNames();
