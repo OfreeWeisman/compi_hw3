@@ -183,7 +183,6 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 
     if(func == nullptr){
         cout<<"error getFunctionRetType"<<endl;
-
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -598,6 +597,7 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
 }
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
+    cout<<"semantics 11 "<<endl;
     string id_name = dynamic_cast<Id*>(id)->getIdName();
     Type* temp = dynamic_cast<Type*>(type);
     string typestring =temp->getTypeAsString(temp->getType());
