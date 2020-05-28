@@ -782,7 +782,7 @@ void setup(DataStructures* globalTables) {
     Symbol* s1 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "print");
     //maketemp->clear();
   //  cout<<"2"<<std::endl;
-
+    temp->clear();
     globalTables->pushNewSymbol(s1);
    // cout<<"3"<<std::endl;
     temp->push_back("INT");
