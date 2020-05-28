@@ -417,7 +417,7 @@ TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
 }
 
 //rule 14:
-void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
+void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     //compare the lists
     cout<<"checkValidArgs"<<endl;
     cout<<*types->begin()<<endl; // got STRING! :)
@@ -448,9 +448,9 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
 
     vector<string>* vec = new vector<string>();
     for(it; it != args->end(); it++){
-        Symbol* s = *it;
+        //Symbol* s = *it;
         cout<<"creating the vector now - "<<*it<<endl;
-        vec->push_back(s->getType());
+        //vec->push_back(s->getType());
     }
 
     if(types->size() != args->size()){
@@ -463,7 +463,7 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     Symbol* s;
     string name;
     for(itt; itt!=types->end(); itt++,itt2++){
-        s = *itt2;
+        //s = *itt2;
         cout<<"s is  "<<s<<endl;
         cout<<"name is "<<name<<endl;
         name = *itt;
@@ -1074,22 +1074,34 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     cout<<"size of the types list (should be 3)"<< types->size()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables, args);
     cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
-    Id* i = dynamic_cast<Id*>(id);
 
     string type_list = getIdType(id,tables);
     //type lis is (BOOL,INT,INT)->VOID . break the type list
     cout<<type_list<<endl;
-
+    list<string>* arguments = new list<string>();
     int pos = type_list.find(")");      // position of "live" in str
 
-    string ret_type = type_list.substr(1,pos);
+    string ret_type = type_list.substr(1,pos-1);
+    int len = ret_type.size();
+    int i= 0;
+    int j = 0;
+    string param_type;
     cout<<ret_type<<endl;
+
+    while(pos<len){
+        pos = ret_type.find(",");
+        param_type = ret_type.substr(0,pos-1);
+        ret_type = ret_type.substr(pos+1, len-1);
+        arguments->push_back(param_type);
+        cout<<param_type<<endl;
+
+    }
 
     //cout<<"ofree: "<< symbol->getType()<<endl;
 
     // cout<<"create s"<<endl;
 
-    checkValidArgs(types,id, s); //throw error if mismatch
+    checkValidArgs(types,id, arguments); //throw error if mismatch
   //  cout<<"valid args"<<endl;
 
     //find the function in the symbol table
