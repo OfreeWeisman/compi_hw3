@@ -1050,7 +1050,7 @@ cout<<"semantics 30"<<endl;
     list<string>* l2 = explist->getTypes();
     cout<<" size of  ltwo "<<l2->size()<<endl;
 
-    list<string>* temp = combineLists(l2, l1);
+    list<string>* temp = combineLists(l1, l2);
 
     exp->setTypesList(temp);
 
