@@ -19,7 +19,7 @@ void DataStructures::pushNewScope() {
     if(offsetsTable->size() == 0){
         last_offset = 0;
     }else{
-        last_offset = offsetsTable->top();
+        last_offset = offsetsTable->top()+1;
     }
     offsetsTable->push(last_offset);
 

@@ -1009,18 +1009,15 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
-       if(offset == 0){
-           offset = -1; // the symbol before this one was a function, so they offset stays 0.
-       }
     }else{
-        offset = -1;
+        offset = 0;
     }
     cout<<"Semantics 16 4 "<<endl;
 
     tables->getOffsetsTable()->push(offset+1);
     cout<<"Semantics 16 5"<<endl;
 
-    Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
+    Symbol* new_symbol = new Symbol(typeString, offset ,name );
     tables->pushNewSymbol(new_symbol);
     cout<<"Semantics 16 6"<<endl;
 
