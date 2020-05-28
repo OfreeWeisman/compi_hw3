@@ -619,7 +619,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     p->setNames(names_temp);
     list<string>* types_temp = combineLists(parameter2->getTypes(),parameter1->getTypes());
     p->setTypes(types_temp);
-    funcArgs->push_back("BOOL");
+    //funcArgs->push_back("BOOL");
     //funcArgs->insert(funcArgs->begin(), "bool");
 
   //  delete parameter1->getNames();
