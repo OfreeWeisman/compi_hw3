@@ -1087,6 +1087,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     int j = 0;
     string param_type;
     cout<<ret_type<<endl;
+    pos = 0;
 
     while(pos<len){
         pos = ret_type.find(",");
