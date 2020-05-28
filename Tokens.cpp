@@ -33,7 +33,7 @@ void Bool::setBoolEnum(BoolEnum boolEnum) {
 
 Bool::Bool() {
     setType(BOOL_ENUM);
-    setTypes("bool");
+    setTypes("BOOL");
 }
 
 

@@ -754,9 +754,7 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     //string typeName2 = dynamic_cast<Id*>(exp2)->getIdName();//should check if its "BYTE" OR "INT"
 
 
-    Bool* b = new Bool();
-    b->setTypes("BOOL");
-    return b;
+    return new Bool();
 //    Expression* exp = new Expression();
 //    exp->setTypes("BOOL");
 
