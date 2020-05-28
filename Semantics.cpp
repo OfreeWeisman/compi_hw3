@@ -461,14 +461,15 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
 
     auto itt = types->begin();
     auto itt2 = args->begin();
-    Symbol* s;
+    string s;
     string name;
     for(itt; itt!=types->end(); itt++,itt2++){
-        //s = *itt2;
+        s = *itt2;
+        name = *itt;
+
         cout<<"s is  "<<s<<endl;
         cout<<"name is "<<name<<endl;
-        name = *itt;
-        if(s->getType() != name){
+        if(s!= name){
             output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
             exit(0);
         }
