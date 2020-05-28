@@ -1077,7 +1077,13 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     Id* i = dynamic_cast<Id*>(id);
 
     string type_list = getIdType(id,tables);
+    //type lis is (BOOL,INT,INT)->VOID . break the type list
     cout<<type_list<<endl;
+
+    int pos = type_list.find(")");      // position of "live" in str
+
+    string ret_type = type_list.substr(1,pos);
+    cout<<ret_type<<endl;
 
     //cout<<"ofree: "<< symbol->getType()<<endl;
 
