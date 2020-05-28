@@ -159,7 +159,7 @@ list<string>* combineLists(list<string>* list1, list<string>* list2){
 
 
 //TODO:to finish this up
-Node* getFunctionRetType(Node* id, DataStructures* tables){
+string getFunctionRetType(Node* id, DataStructures* tables){
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
@@ -196,13 +196,7 @@ Node* getFunctionRetType(Node* id, DataStructures* tables){
 
     string ret_type = funcs_type.substr (pos);     // get from "live" to the end
 
-    if(ret_type == "bool"){
-        return new Bool();
-    } else if(ret_type == "int"){
-        return new Num();
-    } else {
-        return new Byte();
-    }
+    return ret_type;
 
 
 
@@ -1069,14 +1063,14 @@ Node *semantics37(Node *call) {
     return call;
 }
 
-Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) {
+void semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) {
     Id* i = dynamic_cast<Id*>(id);
     vector<string>* args = new vector<string>();
     list<Symbol*>* s = getFunctionsArgs(id, tables,functionArgs); // search if id exists
     if(!s->empty()){
         output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
     }
-    return getFunctionRetType(id, tables);
+    //return getFunctionRetType(id, tables);
 
 
 }
@@ -1111,7 +1105,7 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
     return exp;
 }
 
-Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
+void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
     //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
@@ -1159,7 +1153,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //find the function in the symbol table
     //get the retType of the function
     //return New of this type
-    return getFunctionRetType(id,tables);
+    //return getFunctionRetType(id,tables);
 
 }
 
@@ -1228,7 +1222,8 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 
 void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    if (returnType == "VOID") {
+    cout<<returnType<<endl;
+    if (returnType != "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -1237,7 +1232,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 
 void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    if (returnType != "VOID") {
+    if (returnType == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
