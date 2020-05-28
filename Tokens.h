@@ -53,6 +53,10 @@ public:
     list<string> *getTypes() {
         return types;
     }
+
+    void setTypesList(list<string> *types) {
+        Node::types = types;
+    }
 };
 
 class Type : public Node{
