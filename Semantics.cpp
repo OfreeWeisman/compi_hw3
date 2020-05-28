@@ -1228,7 +1228,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 
 void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    if (returnType != "void") {
+    if (returnType != "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -1237,7 +1237,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 
 void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    if (returnType == "void") {
+    if (returnType == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
