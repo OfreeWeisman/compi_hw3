@@ -450,7 +450,7 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     for(it; it != args->end(); it++){
         //Symbol* s = *it;
         cout<<"creating the vector now - "<<*it<<endl;
-        //vec->push_back(s->getType());
+        vec->push_back(*it);
     }
 
     if(types->size() != args->size()){
@@ -1100,6 +1100,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
 
 
         }
+        arguments->push_back(ret_type);
     }
 
 
