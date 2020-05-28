@@ -25,12 +25,12 @@ void setup(DataStructures* globalTables);
 void openScope(DataStructures* tables);
 
 //rule 1 : Program -> Funcs
-void cleanup (DataStructures* globalTables);
+void cleanup (DataStructures* globalTables, vector<string>* funcArgs);
 
 //rule 4 : FuncDecl -> 𝑅𝑒𝑡𝑇𝑦𝑝𝑒 𝐼𝐷 𝐿𝑃𝐴𝑅𝐸𝑁 𝐹𝑜𝑟𝑚𝑎𝑙𝑠 𝑅𝑃𝐴𝑅𝐸𝑁 𝐿𝐵𝑅𝐴𝐶𝐸 𝑆𝑡𝑎𝑡𝑒𝑚𝑒𝑛𝑡𝑠 𝑅𝐵𝑅𝐴𝐶
 void openFuncScope(Node* type, Node* id, Node* formals, DataStructures* globalTables, vector<string>* funcArgs);
 
-void closeScope(DataStructures* globalTables);
+void closeScope(DataStructures* globalTables, vector<string>* funcArgs);
 
 //rule 5 : RetType -> TYPE
 Node* semantics5(Node* type);

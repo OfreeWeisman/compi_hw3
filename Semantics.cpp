@@ -614,7 +614,7 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
 
 }
 
-void closeScope(DataStructures* globalTables){
+void closeScope(DataStructures* globalTables, vector<string>* funcArgs){
     //print the top scope
     output::endScope();
     list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
@@ -626,7 +626,7 @@ void closeScope(DataStructures* globalTables){
         s = *it;
         output::printID(s->getName(),s->getOffset(), s->getType());
     }
-
+    funcArgs->clear();
     globalTables->popScope();
 }
 
@@ -790,7 +790,7 @@ void setup(DataStructures* globalTables) {
    // cout<<"end of setup"<<std::endl;
 }
 
-void cleanup(DataStructures* globalTables) {
+void cleanup(DataStructures* globalTables, vector<string>* funcArgs) {
 //    Id* i = new Id("main");
 //    string type = getIdType(i,globalTables);
     //find main
@@ -810,9 +810,8 @@ void cleanup(DataStructures* globalTables) {
         exit(0);
     }
 
-
     cout<<"cleanup"<<endl;
-    closeScope(globalTables);
+    closeScope(globalTables, funcArgs);
   //  globalTables->popScope();
 
 }
