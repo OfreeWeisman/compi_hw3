@@ -966,21 +966,41 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
 Node *semantics35(Node *exp1, Node *BINOP, Node *exp2,DataStructures* tables) {
     checkLegalBinop(exp1, exp2,tables);
 
-    int v1;
-    int v2;
+    cout<<"back from check binop"<<endl;
 
-    if(exp1->getType() == BYTE_ENUM){
-        v1 = dynamic_cast<Byte*>(exp1)->getValue();
+    string t1;
+    string t2;
+
+    Id* i1 = dynamic_cast<Id*>(exp1);
+    Id* i2 = dynamic_cast<Id*>(exp2);
+     if(i1){
+         t1 = getIdType(exp1, tables);
+     } else {
+         t1 = exp1->getTypeAsString(exp1->getType());
+     }
+    if(i2){
+        t2 = getIdType(exp2, tables);
     } else {
-        v1 = dynamic_cast<Num*>(exp1)->getValue();
+        t2= exp2->getTypeAsString(exp2->getType());
     }
 
-    if(exp2->getType() == BYTE_ENUM){
-        v2 = dynamic_cast<Byte*>(exp2)->getValue();
-    } else {
-        v2 = dynamic_cast<Num*>(exp2)->getValue();
-    }
-    string b = dynamic_cast<Relop*>(BINOP)->getRelop();
+    if(t1 == "BYTE" && t2 == "BYTE"){
+         return new Byte();
+     } else {
+         return new Num();
+     }
+//    if(exp1->getType() == BYTE_ENUM){
+//        v1 = dynamic_cast<Byte*>(exp1)->getValue();
+//    } else {
+//        v1 = dynamic_cast<Num*>(exp1)->getValue();
+//    }
+//
+//    if(exp2->getType() == BYTE_ENUM){
+//        v2 = dynamic_cast<Byte*>(exp2)->getValue();
+//    } else {
+//        v2 = dynamic_cast<Num*>(exp2)->getValue();
+//    }
+//    string b = dynamic_cast<Relop*>(BINOP)->getRelop();
 
   //  delete(exp1);
   //  delete(exp2);
