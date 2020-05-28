@@ -1201,6 +1201,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     string name = dynamic_cast<Id*>(id)->getIdName();
     cout<<"Semantics 16 3 "<<endl;
 
+    checkLegalAssignment(id,exp,tables);
 
     int offset;
     cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
