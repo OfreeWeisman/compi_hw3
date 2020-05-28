@@ -75,7 +75,7 @@ FormalsList	: FormalDecl													{$$ = semantics9($1,funcArgs);}
 FormalDecl	: Type ID														{ $$ = semantics11($1,$2,globalTables);}
 			;
 Statements	: Statement														{cout<<"the end of statement"<<endl;}
-			| Statements Statement											{}
+			| Statements Statement											{cout<< "out of statments?<<endl;"}
 			;
 
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3, globalTables);}
