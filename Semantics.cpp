@@ -413,8 +413,37 @@ TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
 }
 
 //rule 14:
-void checkValidArgs(list<string>* types, list<Symbol*>* args){
+void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     //compare the lists
+    Id* i = dynamic_cast<Id*>(id);
+
+    auto it = types->begin();
+
+    vector<string>* vec = new vector<string>();
+    for(it; it != types->end(); it++){
+        vec->push_back(*it);
+    }
+
+    if(types->size() != args->size()){
+        output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
+        exit(0);
+    }
+
+    auto itt = types->begin();
+    auto itt2 = args->begin();
+    Symbol* s;
+    string name;
+    for(itt; itt!=types->end(); itt++,itt2++){
+        s = *itt2;
+        cout<<"s is  "<<s<<endl;
+        cout<<"name is "<<name<<endl;
+        name = *itt;
+        if(s->getType() != name){
+            output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
+            exit(0);
+        }
+    }
+
 }
 
 //rule 16:
@@ -1009,7 +1038,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
 
     // cout<<"create s"<<endl;
 
-    checkValidArgs(types, s); //throw error if mismatch
+    checkValidArgs(types,id, s); //throw error if mismatch
   //  cout<<"valid args"<<endl;
 
     //find the function in the symbol table
