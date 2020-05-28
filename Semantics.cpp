@@ -1006,6 +1006,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 
 
     int offset;
+    cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
     }else{
