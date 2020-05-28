@@ -452,11 +452,12 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
         cout<<"creating the vector now - "<<*it<<endl;
         vec->push_back(*it);
     }
-
+/*
     if(types->size() != args->size()){
         output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
         exit(0);
     }
+    */
 
     auto itt = types->begin();
     auto itt2 = args->begin();
@@ -1046,7 +1047,7 @@ Node *semantics29(Node *exp) {
 Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
   //  Expression* e1 = dynamic_cast<Expression*>(exp);
    // Expression* e2 = dynamic_cast<Expression*>(explist);
-cout<<"semantics 30"<<endl;
+    cout<<"semantics 30"<<endl;
 
     list<string>* l1 = exp->getTypes();
 
@@ -1071,6 +1072,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
+
     cout<<"size of the types list (should be 3)"<< types->size()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables, args);
     cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
