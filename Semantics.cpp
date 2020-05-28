@@ -416,14 +416,15 @@ TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
 void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     //compare the lists
     cout<<"checkValidArgs"<<endl;
-    cout<<*types->begin()<<endl;
+    cout<<*types->begin()<<endl; // got STRING! :)
 
     Id* i = dynamic_cast<Id*>(id);
 
     if(i->getIdName() == "print"){
-        Symbol* symbol = *args->begin();
+        //Symbol* symbol = *args->begin();
+        //string type = symbol->getType();
+        string type = *types->begin();
 
-        string type = symbol->getType();
         if(args->size() != 1 || type != "STRING"){
 
           //  cout<< "check valid " << type << end;
