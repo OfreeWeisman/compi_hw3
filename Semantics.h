@@ -63,7 +63,7 @@ void semantics15(Node* type, Node* id, Node* sc, DataStructures* tables);
 void semantics16(Node* type, Node* id, Node* assign, Node* exp, Node* sc, DataStructures* tables);
 
 //rule 17 : Statement -> ID ASSIGN Exp SC
-void semantics17(Node* id, Node* assign, Node* exp, Node* sc);
+void semantics17(Node* id, Node* assign, Node* exp, Node* sc,DataStructures* tables);
 
 //rule 18 : Statement -> Call SC
 void semantics18(Node* call, Node* sc);

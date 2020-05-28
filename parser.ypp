@@ -85,7 +85,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
       | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
 			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
-			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4);}
+			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4,globalTables);}
 			| Call SC														{semantics18($1,$2);}
 			| RETURN SC														{semantics19($1,$2,globalTables);}
 			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}

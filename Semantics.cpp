@@ -287,29 +287,30 @@ void checkExpBool(Node* operand1, DataStructures* tables){
 
 //rule 6+7:
 //TODO: what else should we be checking here?
-void checkLegalAssignment(Node* id, Node* exp){
+void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
     cout<<"checkLegalAssignment"<<endl;
     //it is legal to assign byte to int
     Id* i = dynamic_cast<Id*>(id);
     if(i == nullptr){
         cout<<"i isnt id "<<endl;
     }
-    string id_type = i->getTypeAsString(i->getType());
+    string id_type = getIdType(id,tables);
     cout<<"id type "<<id_type << endl;
 
+    string exp_type = exp->getTypeAsString(exp->getType());
 
-    Num* num = dynamic_cast<Num*>(exp);
-    Byte* byte = dynamic_cast<Byte*>(exp);
-    Bool* b =  dynamic_cast<Bool*>(exp);
+//    Num* num = dynamic_cast<Num*>(exp);
+//    Byte* byte = dynamic_cast<Byte*>(exp);
+//    Bool* b =  dynamic_cast<Bool*>(exp);
 
 
-    if(id_type == "int" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
+    if(id_type == "INT" && (exp_type!= "INT" && exp_type!="BYTE")){ //we've received an int, but the expression isn't int nor byte.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "bool" && !b){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BOOL" && exp_type!="BOOL"){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "byte" && !byte){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BYTE" && exp_type!="BYTE"){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -1141,8 +1142,8 @@ void semantics18(Node *call, Node *sc) {
   //  delete(call);
 }
 
-void semantics17(Node *id, Node *assign, Node *exp, Node *sc) {
-    checkLegalAssignment(id,exp);
+void semantics17(Node *id, Node *assign, Node *exp, Node *sc,DataStructures* tables) {
+    checkLegalAssignment(id,exp,tables);
   //  delete(id);
   //  delete(exp);
 }
