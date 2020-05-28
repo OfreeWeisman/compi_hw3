@@ -131,7 +131,7 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
     for(it; it != funcs_args->end(); it++){
         func = *it;
         if(func->getOffset() < 0){
-
+            cout<<"function args? "<<func->getType()<<endl;
             l->push_back(func);
         }
     }
@@ -440,12 +440,13 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
         }
     }
 
-    auto it = types->begin();
+    auto it = args->begin();
 
     vector<string>* vec = new vector<string>();
-    for(it; it != types->end(); it++){
+    for(it; it != args->end(); it++){
+        Symbol* s = *it;
         cout<<"creating the vector now - "<<*it<<endl;
-        vec->push_back(*it);
+        vec->push_back(s->getType());
     }
 
     if(types->size() != args->size()){
@@ -678,8 +679,8 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     auto it = types_temp->begin();
     cout<<*it << " 1 "<< *(++it) << "2"<<endl;
     p->setTypes(types_temp);
-    funcArgs->push_back(type1);
-    //funcArgs->insert(funcArgs->begin(), type1);
+    //funcArgs->push_back(type1);
+    funcArgs->insert(funcArgs->begin(), type1);
 
   //  delete parameter1->getNames();
   //  delete parameter2->getNames();
