@@ -1095,6 +1095,9 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
         ret_type = ret_type.substr(pos+1, len-1);
         arguments->push_back(param_type);
         cout<<param_type<<endl;
+        if (ret_type.length() == 0){
+            break;
+        }
 
     }
 
