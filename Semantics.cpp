@@ -1169,6 +1169,7 @@ void semantics26(Node *cont, Node *sc, int* inWhile) {
 
 void semantics25(Node *BREAK, Node *sc, int* inWhile) {
     if(*inWhile == 0){
+        cout<<"in whileeeeee " <<*inWhile<<endl;
         output::errorUnexpectedBreak(yylineno);
         exit(0);
     }
