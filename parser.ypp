@@ -52,7 +52,7 @@
 %%
 
 
-Program 	: Marker1 Funcs													{cleanup(globalTables);}
+Program 	: Marker1 Funcs													{cleanup(globalTables,funcArgs);}
 			;
 Funcs		: /*epsilon*/													{}
 			| FuncDecl Funcs												{}
