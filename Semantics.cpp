@@ -649,7 +649,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     string type2 = parameter2->getTypeAsString(parameter2->getType());
     cout<<"type two is "<<type2<<endl;
 
-    Parameter* p = new Parameter(id2.append(",").append(id1), type2.append(",").append(type1));
+    Parameter* p = new Parameter(type2.append(",").append(type1),id2.append(",").append(id1));
     list<string>* names_temp = combineLists(parameter1->getNames(),parameter2->getNames());
     p->setNames(names_temp);
     list<string>* types_temp = combineLists(parameter1->getTypes(),parameter2->getTypes());
