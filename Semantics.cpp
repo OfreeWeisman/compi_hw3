@@ -1015,9 +1015,15 @@ Node *semantics29(Node *exp) {
 Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
   //  Expression* e1 = dynamic_cast<Expression*>(exp);
    // Expression* e2 = dynamic_cast<Expression*>(explist);
+cout<<"semantics 30"<<endl;
 
     list<string>* l1 = exp->getTypes();
+
+    cout<<" size of  lone "<<l1->size()<<endl;
+
     list<string>* l2 = explist->getTypes();
+    cout<<" size of  ltwo "<<l2->size()<<endl;
+
     list<string>* temp = combineLists(l2, l1);
 
     exp->setTypesList(temp);
