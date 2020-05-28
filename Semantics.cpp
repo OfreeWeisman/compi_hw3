@@ -1074,32 +1074,34 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     cout<<"size of the types list (should be 3)"<< types->size()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables, args);
     cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
-
-    string type_list = getIdType(id,tables);
-    //type lis is (BOOL,INT,INT)->VOID . break the type list
-    cout<<type_list<<endl;
+    Id* i = dynamic_cast<Id*>(id);
     list<string>* arguments = new list<string>();
-    int pos = type_list.find(")");      // position of "live" in str
 
-    string ret_type = type_list.substr(1,pos-1);
-    int len = ret_type.size();
-    int i= 0;
-    int j = 0;
-    string param_type;
-    cout<<ret_type<<endl;
-    pos = 0;
+    if(i->getIdName() != "print" && i->getIdName()!="printi"){
+        string type_list = getIdType(id,tables);
+        //type lis is (BOOL,INT,INT)->VOID . break the type list
+        cout<<type_list<<endl;
+        int pos = type_list.find(")");      // position of "live" in str
 
-    while(pos<len){
-        pos = ret_type.find(",");
-        param_type = ret_type.substr(0,pos-1);
-        ret_type = ret_type.substr(pos+1, len-1);
-        arguments->push_back(param_type);
-        cout<<param_type<<endl;
-        if (ret_type.length() == 0){
-            break;
+        string ret_type = type_list.substr(1,pos-1);
+        int len = ret_type.size();
+        string param_type;
+        cout<<ret_type<<endl;
+        pos = 0;
+
+        while(pos<len){
+            pos = ret_type.find(",");
+            param_type = ret_type.substr(0,pos-1);
+            ret_type = ret_type.substr(pos+1, len-1);
+            arguments->push_back(param_type);
+            cout<<param_type<<endl;
+            if (ret_type.length() == 0){
+                break;
+            }
+
         }
-
     }
+
 
     //cout<<"ofree: "<< symbol->getType()<<endl;
 
