@@ -1228,7 +1228,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     string ret_type = returnType.substr(pos+2, returnType.size());
     cout<<ret_type<<endl;
 
-    if (returnType != "VOID") {
+    if (ret_type != "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -1237,7 +1237,12 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 
 void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    if (returnType == "VOID") {
+    int pos = returnType.find("->");      // position of "live" in str
+
+    string ret_type = returnType.substr(pos+2, returnType.size());
+    cout<<ret_type<<endl;
+
+    if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
     }
