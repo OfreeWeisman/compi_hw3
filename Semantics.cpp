@@ -615,11 +615,11 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     string id2 = parameter2->getId();
     string type2 = parameter2->getTypeAsString(parameter2->getType());
     Parameter* p = new Parameter(id1.append(",").append(id2), type1.append(",").append(type2));
-    list<string>* names_temp = combineLists(parameter1->getNames(), parameter2->getNames());
+    list<string>* names_temp = combineLists(parameter2->getNames(),parameter1->getNames());
     p->setNames(names_temp);
-    list<string>* types_temp = combineLists(parameter1->getTypes(), parameter2->getTypes());
+    list<string>* types_temp = combineLists(parameter2->getTypes(),parameter1->getTypes());
     p->setTypes(types_temp);
-    funcArgs->push_back("bool");
+    funcArgs->push_back("BOOL");
     //funcArgs->insert(funcArgs->begin(), "bool");
 
   //  delete parameter1->getNames();
@@ -980,8 +980,8 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
    // Expression* e2 = dynamic_cast<Expression*>(explist);
 
     list<string>* l1 = exp->getTypes();
-    list<string>* l2= explist->getTypes();
-    list<string>* temp = combineLists(l1, l2);
+    list<string>* l2 = explist->getTypes();
+    list<string>* temp = combineLists(l2, l1);
 
     exp->setTypesList(temp);
 
