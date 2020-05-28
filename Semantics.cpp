@@ -754,11 +754,11 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
     //string typeName2 = dynamic_cast<Id*>(exp2)->getIdName();//should check if its "BYTE" OR "INT"
 
 
-//    Bool* b = new Bool();
-//    b->setTypes("BOOL");
-//    return b;
-    Expression* exp = new Expression();
-    exp->setTypes("BOOL");
+    Bool* b = new Bool();
+    b->setTypes("BOOL");
+    return b;
+//    Expression* exp = new Expression();
+//    exp->setTypes("BOOL");
 
 /*
     if(exp1->getType() == BYTE_ENUM){
@@ -934,9 +934,9 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
 }
 
 Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
-    Expression* e = dynamic_cast<Expression*>(explist);
+    //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
-    list<string>* types = e->getTypes();
+    list<string>* types = explist->getTypes();
     cout<<"ofree: "<< *types->begin()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables);
     Symbol* symbol = *s->begin();
