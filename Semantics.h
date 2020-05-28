@@ -117,7 +117,7 @@ Node* semanticsTypeBool();
 Node* semantics34(Node* lparen, Node* exp, Node* rparen);
 
 //rule 35 : Exp -> Exp BINOP Exp
-Node* semantics35(Node* exp1, Node* BINOP, Node* exp2);
+Node* semantics35(Node* exp1, Node* BINOP, Node* exp2,DataStructures* tables);
 
 //rule 36 : Exp -> ID
 Node* semantics36(Node* id,DataStructures* tables);

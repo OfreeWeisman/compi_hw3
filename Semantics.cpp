@@ -402,15 +402,33 @@ TypesEnum checkLogicalOp(Node* operand1, Node* operand2){
 }
 
 //rule 10:
-TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
+void checkLegalBinop(Node* operand1, Node* operand2,  DataStructures* tables) {
     //check both operands are numerical
-    TypesEnum type1 = operand1->getType();
-    TypesEnum type2 = operand2->getType();
+    Id* i1= dynamic_cast<Id*>(operand1);
+    Id* i2= dynamic_cast<Id*>(operand2);
+    string s1;
+    string s2;
+    if(i1) {
+        s1 = getIdType(operand1, tables);
+    } else {
+        s1 = operand1->getTypeAsString(operand1->getType());
+    }
 
-    if (type1 == type2) {
-        return type1;
-    } else if ((type1 == INT_ENUM || type1 == BYTE_ENUM) && (type2 == INT_ENUM || type2 == BYTE_ENUM)) {
-        return INT_ENUM;
+    if(i2) {
+        s2 = getIdType(operand2, tables);
+    } else {
+        s2 = operand2->getTypeAsString(operand2->getType());
+    }
+
+
+
+//    TypesEnum type1 = operand1->getType();
+//    TypesEnum type2 = operand2->getType();
+//
+    if (s1 == s2) {
+        return ;
+    } else if ((s1 == "INT" || s1 == "BYTE") && (s2 == "INT" || s2 == "BYTE")) {
+        return;
     } else {
         output::errorMismatch(yylineno);
         exit(0);
@@ -945,8 +963,8 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
 
 }
 
-Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
-    TypesEnum type = checkLegalBinop(exp1, exp2);
+Node *semantics35(Node *exp1, Node *BINOP, Node *exp2,DataStructures* tables) {
+    checkLegalBinop(exp1, exp2,tables);
 
     int v1;
     int v2;
@@ -967,41 +985,41 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2) {
   //  delete(exp1);
   //  delete(exp2);
   //  delete(BINOP);
-
-    if(b == "+"){
-        if (type == INT_ENUM){
-            Num* n = new Num();
-            n->setValue(v1+v2);
-            return n;
-
-        } else {
-            Byte* b = new Byte();
-            b->setValue(v1+v2);
-            return b;
-        }
-    } else if (b == "-"){
-        if (type == INT_ENUM){
-            Num* n = new Num();
-            n->setValue(v1-v2);
-            return n;
-
-        } else {
-            Byte* b = new Byte();
-            b->setValue(v1-v2);
-            return b;
-        }
-    } else if (b == "*"){
-        if (type == INT_ENUM){
-            Num* n = new Num();
-            n->setValue(v1+v2);
-            return n;
-
-        } else {
-            Byte* b = new Byte();
-            b->setValue(v1*v2);
-            return b;
-        }
-    }
+//
+//    if(b == "+"){
+//        if (type == INT_ENUM){
+//            Num* n = new Num();
+//            n->setValue(v1+v2);
+//            return n;
+//
+//        } else {
+//            Byte* b = new Byte();
+//            b->setValue(v1+v2);
+//            return b;
+//        }
+//    } else if (b == "-"){
+//        if (type == INT_ENUM){
+//            Num* n = new Num();
+//            n->setValue(v1-v2);
+//            return n;
+//
+//        } else {
+//            Byte* b = new Byte();
+//            b->setValue(v1-v2);
+//            return b;
+//        }
+//    } else if (b == "*"){
+//        if (type == INT_ENUM){
+//            Num* n = new Num();
+//            n->setValue(v1+v2);
+//            return n;
+//
+//        } else {
+//            Byte* b = new Byte();
+//            b->setValue(v1*v2);
+//            return b;
+//        }
+//    }
 }
 
 Node *semantics40(Node *str) {
