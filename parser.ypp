@@ -94,7 +94,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			;
 
 
-Call		: ID LPAREN ExpList RPAREN										{semantics27($1,$2,$3,$4,globalTables);}
+Call		: ID LPAREN ExpList RPAREN										{semantics27($1,$2,$3,$4,globalTables,funcArgs);}
 			| ID LPAREN RPAREN												{semantics28($1,globalTables);}
 			;
 ExpList		: Exp															{$$ = semantics29($1);}

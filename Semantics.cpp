@@ -120,7 +120,7 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 /*
  * only returns the func's arguments.
  */
-list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
+list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables, vector<string>* args){
 
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
@@ -133,6 +133,7 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables){
         if(func->getOffset() < 0){
             cout<<"function args? "<<func->getType()<<endl;
             l->push_back(func);
+            args->push_back(func->getType());
         }
     }
     return l;
@@ -1063,12 +1064,12 @@ cout<<"semantics 30"<<endl;
     return exp;
 }
 
-Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables) {
+Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
     //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
     cout<<"size of the types list (should be 3)"<< types->size()<<endl;
-    list<Symbol*>* s = getFunctionsArgs(id, tables);
+    list<Symbol*>* s = getFunctionsArgs(id, tables, args);
     cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
 
     //cout<<"ofree: "<< symbol->getType()<<endl;
