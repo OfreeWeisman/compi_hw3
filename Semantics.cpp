@@ -425,7 +425,7 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
         //string type = symbol->getType();
         string type = *types->begin();
 
-        if(args->size() != 1 || type != "STRING"){
+        if(types->size() != 1 || type != "STRING"){
 
           //  cout<< "check valid " << type << end;
 
