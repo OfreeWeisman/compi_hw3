@@ -989,7 +989,7 @@ void semantics26(Node *cont, Node *sc, int inWhile) {
 }
 
 void semantics25(Node *BREAK, Node *sc, int inWhile) {
-    if(!inWhile){
+    if(inWhile == 0){
         output::errorUnexpectedBreak(yylineno);
         exit(0);
     }
