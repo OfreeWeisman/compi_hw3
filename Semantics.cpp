@@ -452,12 +452,12 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
         cout<<"creating the vector now - "<<*it<<endl;
         vec->push_back(*it);
     }
-/*
+
     if(types->size() != args->size()){
         output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
         exit(0);
     }
-    */
+
 
     cout<<"one size is "<<types->size()<<" two size is "<<args->size()<<endl;
 
