@@ -722,8 +722,8 @@ void setup(DataStructures* globalTables) {
 }
 
 void cleanup(DataStructures* globalTables) {
-    Id* i = new Id("main");
-    string type = getIdType(i,globalTables);
+//    Id* i = new Id("main");
+//    string type = getIdType(i,globalTables);
     //find main
     list<Symbol*>* list = globalTables->getSymbolsTable()->top();
     auto it = list->begin();
