@@ -1009,6 +1009,9 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
+       if(offset == 0){
+           offset = -1; // the symbol before this one was a function, so they offset stays 0.
+       }
     }else{
         offset = -1;
     }
