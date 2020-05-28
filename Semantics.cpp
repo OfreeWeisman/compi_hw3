@@ -1010,7 +1010,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
     }else{
-        offset = 0;
+        offset = -1;
     }
     cout<<"Semantics 16 4 "<<endl;
 
