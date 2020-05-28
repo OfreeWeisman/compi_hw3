@@ -1295,13 +1295,17 @@ void semantics22(Node *exp,DataStructures* tables) {
 }
 
 void semantics23(Node *exp,DataStructures* tables, int* inWhile) {
-    *inWhile--;
+    int i = *inWhile;
+    i--;
+    *inWhile = i;
     checkExpBool(exp,tables);
     //delete(exp);
 }
 
 void semantics24(Node *exp,DataStructures* tables, int* inWhile) {
-    *inWhile--;
+    int i = *inWhile;
+    i--;
+    *inWhile = i;
     checkExpBool(exp,tables);
   //  delete(exp);
 }
