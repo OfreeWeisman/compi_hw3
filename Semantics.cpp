@@ -418,10 +418,24 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     cout<<"checkValidArgs"<<endl;
     Id* i = dynamic_cast<Id*>(id);
 
-    if(i->getIdName() == "print" && args->size() == 1 && (*args->begin())->getType()== "STRING"){
-        return;
-    } else if (i->getIdName() == "printi" && args->size() == 1 && ((*args->begin())->getType()== "INT"|| (*args->begin())->getType()== "BYTE")){
-        return;
+    if(i->getIdName() == "print"){
+        if(args->size() != 1 || (*args->begin())->getType()!= "STRING"){
+            vector<string>* vec = new vector<string>();
+            vec->push_back("STRING");
+            output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
+            exit(0);
+        } else {
+            return;
+        }
+    } else if (i->getIdName() == "printi"){
+        if(args->size() != 1 || ((*args->begin())->getType()!= "INT"&& (*args->begin())->getType()!= "BYTE")){
+            vector<string>* vec = new vector<string>();
+            vec->push_back("INT");
+            output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
+            exit(0);
+        } else {
+            return;
+        }
     }
 
     auto it = types->begin();
