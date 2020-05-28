@@ -763,6 +763,7 @@ Node *semantics39(Node *num, Node *b) {
     Num* number = dynamic_cast<Num*>(num);
     int value = number->getValue();
     if(value<= 255 && value > 0){
+        cout<<"the byte value is "<<value<<endl;
         return num;
     } else {
         output::errorByteTooLarge(yylineno,number->getStrValue());
@@ -1294,7 +1295,7 @@ void semantics22(Node *exp,DataStructures* tables) {
  //   delete(exp);
 }
 
-void semantics23(Node *exp,DataStructures* tables, int* inWhile) {
+void semantics23ס(Node *exp,DataStructures* tables, int* inWhile) {
     int i = *inWhile;
     i--;
     *inWhile = i;
