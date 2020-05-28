@@ -1076,6 +1076,9 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
     Id* i = dynamic_cast<Id*>(id);
 
+    string type_list = getIdType(id,tables);
+    cout<<type_list<<endl;
+
     //cout<<"ofree: "<< symbol->getType()<<endl;
 
     // cout<<"create s"<<endl;
