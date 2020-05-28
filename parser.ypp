@@ -5,6 +5,8 @@
 	#include "ScopesTable.h"
 	#include "Tokens.h"
 	using namespace std;
+
+	#define YYINITDEPTH 5000
 	int yylex();
 	extern int yylineno;
 
