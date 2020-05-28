@@ -1013,7 +1013,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
         offset = 0;
     }
     cout<<"Semantics 16 4 "<<endl;
-
+    tables->getOffsetsTable()->pop();
     tables->getOffsetsTable()->push(offset+1);
     cout<<"Semantics 16 5"<<endl;
 

@@ -31,6 +31,7 @@ private:
 class DataStructures {
     stack<int>* offsetsTable;
     stack<list<Symbol*>*>* symbolsTable;
+    int offset;
 public:
     DataStructures();
     void popScope();
