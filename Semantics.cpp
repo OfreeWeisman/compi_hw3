@@ -523,6 +523,7 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
 //-----------------------------------------------Semantics Functions--------------------------------------------------//
 
 Node *semanticsTypeInt() {
+    cout<<"semanticsTypeInt"<<endl;
     return new Type(INT_ENUM);
 }
 
@@ -554,6 +555,8 @@ Node *semanticsTypeByte() {
 }
 
 Node *semanticsTypeBool() {
+    cout<<"semanticsTypeBool"<<endl;
+
     return new Type(BOOL_ENUM);
 }
 
