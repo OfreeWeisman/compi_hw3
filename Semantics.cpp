@@ -459,6 +459,8 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     }
     */
 
+    cout<<"one size is "<<types->size()<<" two size is "<<args->size()<<endl;
+
     auto itt = types->begin();
     auto itt2 = args->begin();
     string s;
