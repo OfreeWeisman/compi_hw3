@@ -767,6 +767,7 @@ Node *semantics39(Node *num, Node *b) {
         return num;
     } else {
         output::errorByteTooLarge(yylineno,number->getStrValue());
+        exit(0);
     }
 }
 
