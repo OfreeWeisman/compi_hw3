@@ -344,29 +344,43 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
 void checkLegalRelop(Node* operand1, Node* operand2,  DataStructures* tables){
     //check both operands are numerical
     Id* i1= dynamic_cast<Id*>(operand1);
+    Id* i2= dynamic_cast<Id*>(operand2);
+    string s1;
+    string s2;
+    if(i1) {
+        s1 = getIdType(operand1, tables);
+    } else {
+        s1 = operand1->getTypeAsString(operand1->getType());
+    }
 
-    string s1= getIdType(operand1, tables);
-    string s2 = getIdType(operand2,tables);
+    if(i2) {
+        s2 = getIdType(operand2, tables);
+    } else {
+        s2 = operand2->getTypeAsString(operand2->getType());
+    }
+
 
     cout<<"s1 is "<<s1<<" s2 is "<<s2<<endl;
 
     if((s1 == "INT" || s1 =="BYTE") && (s2 == "INT" || s2 =="BYTE")){
 
-    }else{
+    }else {
         cout<<"checkLegalRelop"<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
-    /*
-    if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
-       (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
-    } else {
-        cout<<"checkLegalRelop"<<endl;
-        output::errorMismatch(yylineno);
-        exit(0);
-    }
-     */
+
+//    if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
+//       (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
+//
+//    }else {
+//            cout<<"checkLegalRelop"<<endl;
+//            output::errorMismatch(yylineno);
+//            exit(0);
+//    }
 }
+
+
 
 //rule 9:
 TypesEnum checkLogicalOp(Node* operand1, Node* operand2){
