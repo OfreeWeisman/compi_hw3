@@ -441,7 +441,7 @@ void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
     tables->getOffsetsTable()->pop();
     tables->getOffsetsTable()->push(offset+1);
 
-    Symbol* new_symbol = new Symbol(typeString, offset+1 ,name );
+    Symbol* new_symbol = new Symbol(typeString, offset ,name );
     tables->pushNewSymbol(new_symbol);
 
     cout<<"end of semantics15"<<endl;
