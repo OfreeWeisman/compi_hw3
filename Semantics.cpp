@@ -422,6 +422,7 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
 
     vector<string>* vec = new vector<string>();
     for(it; it != types->end(); it++){
+        cout<<"creating the vector now - "<<*it<<endl;
         vec->push_back(*it);
     }
 
