@@ -660,11 +660,8 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     list<string>::iterator it1 = names->begin();
     list<string>::iterator it2 = types->begin();
 
-    cout<<"enter"<<endl;
     int offset = -1;
     int length = names->size();
-    cout<<"enter- names size "<<length<<endl;
-    cout<<"addParameters.."<<funcArgs->size()<<endl;
     vector<string>::iterator it3 = funcArgs->begin();
     for(it3; it3 != funcArgs->end(); it3++){
         string k  = *it3;
@@ -679,7 +676,6 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
 }
 
 Node* semantics11(Node *type, Node *id, DataStructures *tables) {
-    cout<<"semantics 11 "<<endl;
     string id_name = dynamic_cast<Id*>(id)->getIdName();
     Type* temp = dynamic_cast<Type*>(type);
     string typestring =temp->getTypeAsString(temp->getType());
@@ -695,10 +691,8 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     Parameter* parameter2 = dynamic_cast<Parameter*>(formalsList);
     string id1 = parameter1->getId();
     string type1 = parameter1->getTypeAsString(parameter1->getType());
-    cout<<"type one is "<<type1<<endl;
     string id2 = parameter2->getId();
     string type2 = parameter2->getTypeAsString(parameter2->getType());
-    cout<<"type two is "<<type2<<endl;
 
     Parameter* p = new Parameter(type2.append(",").append(type1),id2.append(",").append(id1));
     list<string>* names_temp = combineLists(parameter1->getNames(),parameter2->getNames());
@@ -733,13 +727,6 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
         cout<<"null"<<endl;
     }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
-
-    //list<string>* types_temp = new list<string>();
-
-   // types_temp->push_back(type1);
-
-//    parameter1->setNames(names_temp);
-//    parameter1->setTypes(types_temp);
 
     funcArgs->push_back(type1);
 
@@ -799,17 +786,7 @@ void setup(DataStructures* globalTables) {
     temp->clear();
 
     globalTables->pushNewSymbol(s2);
-    /*
-    list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
-    list<Symbol*>::iterator it = scope->begin();
-    for(it; it != scope->end(); it++ ){
-        Symbol* s = *it;
-        output::printID(s->getName(),s->getOffset(), s->getType());
 
-    }
-     */
-
-   // cout<<"end of setup"<<std::endl;
 }
 
 void cleanup(DataStructures* globalTables, vector<string>* funcArgs) {
@@ -885,11 +862,9 @@ Node *semantics45(Node *exp1, Node *OR, Node *exp2,DataStructures* tables) {
 }
 
 Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
-    cout<<"Semantics46"<<endl;
     //check if the expressions are ok to relop
 
     checkLegalRelop(exp1, exp2, tables);
-    cout<<"Semantics46back"<<endl;
 
     int v1;
     int v2;
@@ -1085,21 +1060,17 @@ void semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) 
 
 Node *semantics29(Node *exp) {
    // cout<<"in 29"<<endl;
-   cout<<"semantics 29"<<endl;
     return exp;
 }
 
 Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
   //  Expression* e1 = dynamic_cast<Expression*>(exp);
    // Expression* e2 = dynamic_cast<Expression*>(explist);
-    cout<<"semantics 30"<<endl;
 
     list<string>* l1 = exp->getTypes();
 
-    cout<<" size of  lone "<<l1->size()<<endl;
 
     list<string>* l2 = explist->getTypes();
-    cout<<" size of  ltwo "<<l2->size()<<endl;
 
     list<string>* temp = combineLists(l1, l2);
 
@@ -1118,9 +1089,7 @@ void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruct
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
 
-    cout<<"size of the types list (should be 3)"<< types->size()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables, args);
-    cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
     Id* i = dynamic_cast<Id*>(id);
     list<string>* arguments = new list<string>();
 
@@ -1196,34 +1165,26 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     searchIfPreDefined(id, tables);
 
     TypesEnum t = dynamic_cast<Type*>(type)->getType();
-    cout<<"Semantics 16 1"<<endl;
 
     string typeString = type->getTypeAsString(t);
-    cout<<"Semantics 16 2 "<<endl;
 
     string name = dynamic_cast<Id*>(id)->getIdName();
-    cout<<"Semantics 16 3 "<<endl;
 
     checkLegalAssignmentWhenTypeGiven(type,exp);
 
     int offset;
-    cout<<"offset! "<<tables->getOffsetsTable()->size()<<endl;
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
     }else{
         offset = 0;
     }
-    cout<<"Semantics 16 4 "<<endl;
     tables->getOffsetsTable()->pop();
     tables->getOffsetsTable()->push(offset+1);
-    cout<<"Semantics 16 5"<<endl;
 
     Symbol* new_symbol = new Symbol(typeString, offset ,name );
     tables->pushNewSymbol(new_symbol);
-    cout<<"Semantics 16 6"<<endl;
 
     //checkLegalAssignmentWhenTypeGiven(type,exp);
-    cout<<"Semantics 16 finish"<<endl;
 
     //  delete(id);
   //  delete(exp);
@@ -1276,7 +1237,7 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
 
     }
 
-   // cout<<n->getType()<<endl;
+
     //Bool* b = dynamic_cast<Bool*>(n);
     if(type != "BOOL"){
         output::errorMismatch(yylineno);
