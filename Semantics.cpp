@@ -608,11 +608,15 @@ Node* semantics11(Node *type, Node *id, DataStructures *tables) {
 
 Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     //cocongfl two lists to build the parameters list of the function
+    cout<<"semantics 10 "<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
     Parameter* parameter2 = dynamic_cast<Parameter*>(formalsList);
     string id1 = parameter1->getId();
     string type1 = parameter1->getTypeAsString(parameter1->getType());
+    cout<<"type one is "<<type1<<endl;
     string id2 = parameter2->getId();
+    cout<<"type two is "<<type2<<endl;
+
     string type2 = parameter2->getTypeAsString(parameter2->getType());
     Parameter* p = new Parameter(id2.append(",").append(id1), type2.append(",").append(type1));
     list<string>* names_temp = combineLists(parameter2->getNames(),parameter1->getNames());
