@@ -79,9 +79,9 @@ Statements	: Statement														{cout<<"the end of statement"<<endl;}
 			;
 
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3, globalTables);}
-      |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3);}
-      |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3);}
-      |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3);}
+      |  IF LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close					    {semantics22($3,globalTables);}
+      |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close		    {semantics23($3,globalTables);}
+      |  WHILE LPAREN Exp RPAREN Marker_open Statement Marker_close ELSE Marker_open Statement Marker_close				    {semantics24($3,globalTables);}
       | LBRACE Marker_open Statements Marker_close RBRACE					{semantics14($3);}
 			| Type ID SC													{semantics15($1,$2,$3, globalTables);}
 			| Type ID ASSIGN Exp SC											{semantics16($1,$2,$3,$4,$5, globalTables);}
@@ -114,9 +114,9 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| STRING														{$$ = semantics40($1);}
 			| TRUE															{$$ = semanticsTrue();}
 			| FALSE															{$$ = semanticsFalse();}
-			| NOT Exp														{$$ = semantics43($2);}
-			| Exp AND Exp													{$$ = semantics44($1,$2,$3);}
-			| Exp OR Exp													{$$ = semantics45($1,$2,$3);}
+			| NOT Exp														{$$ = semantics43($2,globalTables);}
+			| Exp AND Exp													{$$ = semantics44($1,$2,$3,globalTables);}
+			| Exp OR Exp													{$$ = semantics45($1,$2,$3,globalTables);}
 			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3,globalTables);cout<<"out of 46"<<endl;}
 			| Exp EQUALITY Exp												{$$ = semantics46($1,$2,$3,globalTables);}
 			;
