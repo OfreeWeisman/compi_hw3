@@ -419,10 +419,12 @@ void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     Id* i = dynamic_cast<Id*>(id);
 
     if(i->getIdName() == "print"){
-        string type = (*args->begin())->getType();
-        if(args->size() != 1 || type!= "STRING"){
+        Symbol* symbol = *args->begin();
 
-            cout<< "checkvalid " <<type << end;
+        string type = symbol->getType();
+        if(args->size() != 1 || type != "STRING"){
+
+          //  cout<< "check valid " << type << end;
 
             vector<string>* vec = new vector<string>();
             vec->push_back("STRING");
