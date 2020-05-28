@@ -1034,8 +1034,10 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
-    //cout<<"ofree: "<< *types->begin()<<endl;
+    cout<<"size of the types list (should be 3)"<< types->size()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables);
+    cout<<"size of the function  args (should be 3)"<< s->size()<<endl;
+
     //cout<<"ofree: "<< symbol->getType()<<endl;
 
     // cout<<"create s"<<endl;
