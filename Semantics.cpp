@@ -123,6 +123,9 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables, vector<string>* args){
 
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
+    if(funcs_args == nullptr){
+        cout<<"funcargs == null"<<endl;
+    }
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
     list<Symbol*>* l = new list<Symbol*>();
     list<Symbol*>::iterator it = funcs_args->begin();
@@ -759,7 +762,7 @@ void setup(DataStructures* globalTables) {
     vector<string>* temp = new vector<string>();
     temp->push_back("STRING");
     Symbol* s1 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "print");
-    temp->clear();
+    maketemp->clear();
   //  cout<<"2"<<std::endl;
 
     globalTables->pushNewSymbol(s1);
