@@ -331,13 +331,13 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
     Bool* b =  dynamic_cast<Bool*>(exp);
 
 
-    if(id_type == "int" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
+    if(id_type == "INT" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "bool" && !b){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BOOL" && !b){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "byte" && !byte){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BYTE" && !byte){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -1222,7 +1222,7 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     tables->pushNewSymbol(new_symbol);
     cout<<"Semantics 16 6"<<endl;
 
-    checkLegalAssignmentWhenTypeGiven(type,exp);
+    //checkLegalAssignmentWhenTypeGiven(type,exp);
     cout<<"Semantics 16 finish"<<endl;
 
     //  delete(id);
