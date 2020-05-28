@@ -120,7 +120,7 @@ Node* semantics34(Node* lparen, Node* exp, Node* rparen);
 Node* semantics35(Node* exp1, Node* BINOP, Node* exp2);
 
 //rule 36 : Exp -> ID
-Node* semantics36(Node* id);
+Node* semantics36(Node* id,DataStructures* tables);
 
 //rule 37 : Exp -> Call
 Node* semantics37(Node* call);

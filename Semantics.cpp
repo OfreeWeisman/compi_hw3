@@ -1016,9 +1016,10 @@ Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
     return exp;
 }
 
-Node *semantics36(Node *id) {
+Node *semantics36(Node *id,DataStructures* tables) {
    // cout<<"exp->id"<<endl;
-
+    string type = getIdType(id, tables);
+    id->setTypes(type);
     return id;
 }
 

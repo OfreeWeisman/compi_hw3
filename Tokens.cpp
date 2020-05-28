@@ -91,7 +91,7 @@ bool Byte::isValidByte() {
 
 Byte::Byte() {
     setType(BYTE_ENUM);
-    setTypes("byte");
+    setTypes("BYTE");
 
 }
 
