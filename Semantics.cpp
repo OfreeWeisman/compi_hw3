@@ -415,6 +415,7 @@ TypesEnum checkLegalBinop(Node* operand1, Node* operand2) {
 //rule 14:
 void checkValidArgs(list<string>* types,Node* id, list<Symbol*>* args){
     //compare the lists
+    cout<<"checkValidArgs"<<endl;
     Id* i = dynamic_cast<Id*>(id);
 
     auto it = types->begin();
