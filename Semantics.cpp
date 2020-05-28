@@ -722,6 +722,26 @@ void setup(DataStructures* globalTables) {
 }
 
 void cleanup(DataStructures* globalTables) {
+    Id* i = new Id("main");
+    string type = getIdType(i,globalTables);
+    //find main
+    list<Symbol*>* list = globalTables->getSymbolsTable()->top();
+    auto it = list->begin();
+    bool is_main = false;
+    for(it; it != list->end(); it++){
+        Symbol* s = *it;
+        cout<<"check main "<<s->getType()<<endl;
+        if(s->getName() == "main" && s->getType()=="VOID"){
+            is_main = true;
+            break;
+        }
+    }
+    if(!is_main){
+        output::errorMainMissing();
+        exit(0);
+    }
+
+
     cout<<"cleanup"<<endl;
     closeScope(globalTables);
   //  globalTables->popScope();
