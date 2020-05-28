@@ -753,8 +753,12 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
    // string typeName1 = dynamic_cast<Id*>(exp1)->getIdName(); //should check if its "BYTE" OR "INT"
     //string typeName2 = dynamic_cast<Id*>(exp2)->getIdName();//should check if its "BYTE" OR "INT"
 
-    return new Bool();
 
+//    Bool* b = new Bool();
+//    b->setTypes("BOOL");
+//    return b;
+    Expression* exp = new Expression();
+    exp->setTypes("BOOL");
 
 /*
     if(exp1->getType() == BYTE_ENUM){
@@ -933,9 +937,12 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = e->getTypes();
-  //  cout<<"get types"<<endl;
+    cout<<"ofree: "<< *types->begin()<<endl;
     list<Symbol*>* s = getFunctionsArgs(id, tables);
-   // cout<<"create s"<<endl;
+    Symbol* symbol = *s->begin();
+    cout<<"ofree: "<< symbol->getType()<<endl;
+
+    // cout<<"create s"<<endl;
 
     checkValidArgs(types, s); //throw error if mismatch
   //  cout<<"valid args"<<endl;
