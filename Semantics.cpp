@@ -1093,11 +1093,11 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
             pos = ret_type.find(",");
             param_type = ret_type.substr(0,pos-1);
             ret_type = ret_type.substr(pos+1, len-1);
+            len = ret_type.size();
+
             arguments->push_back(param_type);
             cout<<param_type<<endl;
-            if (ret_type.length() == 0){
-                break;
-            }
+
 
         }
     }
