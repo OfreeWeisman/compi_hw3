@@ -701,7 +701,9 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 
     string type2 = parameter2->getTypeAsString(parameter2->getType());
 
-    cout<<"length of type 2 +1 "<<type1.size()+type2.size()<<endl;
+    cout<<"length of type 2 +1 "<<(type2.append(",").append(type1)).size()<<endl;
+    string s;
+    cout<<"max size "<<s.max_size()<<endl;
 
     Parameter* p = new Parameter(type2.append(",").append(type1),id2.append(",").append(id1));
     cout<<"semantics parameter "<<endl;
