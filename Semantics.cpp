@@ -25,7 +25,7 @@ string findFuncInScope(list<Symbol*>* l){
 
         }
     }
-    return nullptr;
+    return "";
 
 
 }
@@ -38,7 +38,7 @@ string findClosestFunction(DataStructures* tables){
         list<Symbol*>* scope = tables->getSymbolsTable()->top();
         tables_num--;
         type = findFuncInScope(scope);
-        if (type != nullptr){
+        if (type != ""){
 
             break;
             //return type;
