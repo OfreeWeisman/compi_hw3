@@ -705,6 +705,9 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     string s;
     cout<<"max size "<<s.max_size()<<endl;
 
+    cout<<"before appending -type 2   "<<type2<<" type 1-  "<<type1<<endl;
+
+
     string tnew =type2.append(",").append(type1);
     string idnew = id2.append(",").append(id1);
     cout<<"now they are  "<<tnew << " and    " <<idnew<<endl;
