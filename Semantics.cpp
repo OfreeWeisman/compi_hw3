@@ -655,7 +655,8 @@ Node *semantics39(Node *num, Node *b) {
 }
 
 Node* semanticsTrue(){
-    return new Bool(TRUE_ENUM);
+    //return new Bool(TRUE_ENUM);
+    return new Bool();
 }
 
 Node* semanticsFalse(){
@@ -1103,6 +1104,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
+
     return exp;
   //  delete(ret);
  //   delete(exp);
