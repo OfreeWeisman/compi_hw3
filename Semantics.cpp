@@ -1105,6 +1105,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
+    cout<< exp->getTypeAsString(exp->getType())<<endl;
 
     return exp;
   //  delete(ret);

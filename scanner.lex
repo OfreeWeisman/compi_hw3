@@ -55,8 +55,8 @@ SPACES			([\t\n\r ])
 {AND}			{return AND;}
 {OR}			{return OR;}
 {NOT}			{return NOT;}
-{TRUE}			{yylval = new Bool(TRUE_ENUM); return TRUE;}
-{FALSE}			{yylval = new Bool(FALSE_ENUM); return FALSE;}
+{TRUE}			{yylval = new Bool(); return TRUE;}
+{FALSE}			{yylval = new Bool(); return FALSE;}
 {RETURN}		{return RETURN;}
 {IF}			{return IF;}
 {ELSE}			{return ELSE;}
