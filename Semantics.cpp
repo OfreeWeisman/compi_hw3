@@ -693,11 +693,10 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
     Parameter* parameter2 = dynamic_cast<Parameter*>(formalsList);
     string id1 = parameter1->getId();
-    cout<<"id1 10 "<<endl;
 
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     string id2 = parameter2->getId();
-    cout<<"id2 10 "<<endl;
+    cout<<"id2 before appending is  "<<id2<< " and id 1 is " << id1<<endl;
 
     string type2 = parameter2->getTypeAsString(parameter2->getType());
 
