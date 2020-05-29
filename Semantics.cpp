@@ -1205,6 +1205,8 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         exp_type = exp->getTypeAsString(exp->getType());
 
     }
+
+    cout<<"Exp type "<<exp_type<<endl;
     if(exp_type != ret_type || !(exp_type=="BYTE" && ret_type == "INT")){
         output::errorMismatch(yylineno);
         exit(0);
