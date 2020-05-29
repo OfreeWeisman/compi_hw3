@@ -1185,7 +1185,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
 
     //string returnType = getFunctionRetTypeFromTable(tables);
     string returnType = findClosestFunction(tables);
-    cout<< "return type "<<returnType<<endl;
+    //cout<< "return type "<<returnType<<endl;
 
   //  cout<< "back from get function re type"<<endl;
 
@@ -1195,7 +1195,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     //string ret_type = returnType.substr(pos+2, returnType.size());
     string ret_type = returnType.substr(pos+2);
 
-      cout<< "ret type "<< ret_type<<endl;
+     // cout<< "ret type "<< ret_type<<endl;
     string exp_type;
     Id* i = dynamic_cast<Id*>(exp);
     if(i){
@@ -1205,7 +1205,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
 
     }
 
-    cout<<"Exp type "<<exp_type<<endl;
+    //cout<<"Exp type "<<exp_type<<endl;
     if(exp_type != ret_type){
         if(!(exp_type=="BYTE" && ret_type == "INT")){
         output::errorMismatch(yylineno);
