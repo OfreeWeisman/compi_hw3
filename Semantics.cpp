@@ -463,7 +463,11 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
 
     auto it = inner_scope->back();
     Symbol* function = it;
-    cout << "in get function ret type from tables"<<function->getName()<<endl;
+    while(function->getOffset()<0){
+        it++;
+        function = it;
+    }
+    cout << "in get function ret type from tables "<<function->getName()<<endl;
     //Symbol* function = inner_scope->back();
     string type = function->getType();
     tables->getSymbolsTable()->push(top_scope);
