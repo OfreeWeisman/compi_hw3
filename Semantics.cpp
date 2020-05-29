@@ -1186,7 +1186,8 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
 
     //string returnType = getFunctionRetTypeFromTable(tables);
     string returnType = findClosestFunction(tables);
-  //  cout<< returnType<<endl;
+    //cout<< returnType<<endl;
+
   //  cout<< "back from get function re type"<<endl;
 
   //  cout<< returnType<<endl;
@@ -1200,8 +1201,10 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     Id* i = dynamic_cast<Id*>(exp);
     if(i){
         exp_type = getIdType(exp, tables);
+    } else {
+        exp_type = exp->getTypeAsString(exp->getType());
+
     }
-      exp_type = exp->getTypeAsString(exp->getType());
     if(exp_type != ret_type || !(exp_type=="BYTE" && ret_type == "INT")){
         output::errorMismatch(yylineno);
         exit(0);
