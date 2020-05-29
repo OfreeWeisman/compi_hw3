@@ -701,7 +701,7 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 
     string type2 = parameter2->getTypeAsString(parameter2->getType());
 
-    cout<<"length of type 2 +1 "<<(type2.append(",").append(type1)).size()<<endl;
+    cout<<"length of type 2 +1 "<<(id2.append(",").append(id1)).size()<<endl;
     string s;
     cout<<"max size "<<s.max_size()<<endl;
 
@@ -729,8 +729,8 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     cout<<"semantics 9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
-    int s = parameter1->getTypes()->size();
-    int s2 = parameter1->getNames()->size();
+   // int s = parameter1->getTypes()->size();
+   // int s2 = parameter1->getNames()->size();
 
     string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
