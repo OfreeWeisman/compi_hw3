@@ -656,11 +656,12 @@ Node *semantics39(Node *num, Node *b) {
 
 Node* semanticsTrue(){
     //return new Bool(TRUE_ENUM);
+    cout<<"true?"<< endl;
     return new Bool();
 }
 
 Node* semanticsFalse(){
-    return new Bool(FALSE_ENUM);
+    return new Bool();
 }
 
 void setup(DataStructures* globalTables) {
