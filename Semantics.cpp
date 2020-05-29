@@ -16,8 +16,8 @@ extern int yylineno;
 string findFuncInScope(list<Symbol*>* l){
 
     Symbol* s;
-    auto it = l->end();
-    for(it; it != l->begin(); it--){
+    auto it = l->rbegin();
+    for(it; it != l->rend(); it++){
         s = *it;
 //        if(s->getName() == "print" || s->getName()=="printi"){
 //            continue;
