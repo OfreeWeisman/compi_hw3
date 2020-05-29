@@ -747,6 +747,7 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
         cout<<"null"<<endl;
     }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
+    cout<<"im in semantics 9 the type is "<<type1<<" and id is  "<<id1<<endl;
 
     funcArgs->push_back(type1);
 
