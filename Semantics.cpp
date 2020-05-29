@@ -451,7 +451,11 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
     list<Symbol*>* top_scope = tables->getSymbolsTable()->top();
     tables->getSymbolsTable()->pop();
     list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
-    Symbol* function = inner_scope->back();
+    auto it = inner_scope->back();
+    it--;
+    Symbol* function = it;
+    cout << "in get function ret type from tables"<<function->getName()<<endl;
+    //Symbol* function = inner_scope->back();
     string type = function->getType();
     tables->getSymbolsTable()->push(top_scope);
 
