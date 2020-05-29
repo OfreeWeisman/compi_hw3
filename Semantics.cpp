@@ -450,7 +450,7 @@ bool checkIfWhileTypes(Node* exp){
 string getFunctionRetTypeFromTable(DataStructures* tables){
     cout<< "start of get function ret type from tables" << endl;
     list<Symbol*>* top_scope = tables->getSymbolsTable()->top();
-    cout<< top_scope->size() << endl;
+   // cout<< top_scope->size() << endl;
 
     tables->getSymbolsTable()->pop();
 //
@@ -462,7 +462,7 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
     //
     list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
     cout<< "inner scope" << endl;
-    cout<< inner_scope->size() << endl;
+   // cout<< inner_scope->size() << endl;
 
     auto it = inner_scope->back();
     Symbol* function = it;
@@ -1123,7 +1123,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
     cout<< "back from get function re type"<<endl;
 
-    cout<< returnType<<endl;
+  //  cout<< returnType<<endl;
 
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
@@ -1131,7 +1131,7 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
-    cout<< exp->getTypeAsString(exp->getType())<<endl;
+    //cout<< exp->getTypeAsString(exp->getType())<<endl;
 
     return exp;
   //  delete(ret);
@@ -1161,7 +1161,7 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
 void semantics21(Node *exp, Node* stmt, DataStructures* tables) {
     cout<<"start of semantics 21"<<endl;
 
-    cout<<exp->getTypeAsString(exp->getType());
+  //  cout<<exp->getTypeAsString(exp->getType());
     checkExpBool(exp, tables);
     cout<<"end of semantics 21"<<endl;
 
