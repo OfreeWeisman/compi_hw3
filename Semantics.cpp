@@ -292,6 +292,7 @@ void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
     cout<<"id type "<<id_type << endl;
 
     string exp_type = exp->getTypeAsString(exp->getType());
+    cout << "exp type is "<<exp_type<<endl;
 
 //    Num* num = dynamic_cast<Num*>(exp);
 //    Byte* byte = dynamic_cast<Byte*>(exp);
