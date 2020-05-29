@@ -1146,6 +1146,9 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
 
         while(pos<len){
             pos = ret_type.find(",");
+            if(pos==string::npos){
+                break;
+            }
             param_type = ret_type.substr(0,pos);
             ret_type = ret_type.substr(pos+1, len-1);
             len = ret_type.size();
