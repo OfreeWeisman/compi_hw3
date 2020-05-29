@@ -292,6 +292,7 @@ void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
     cout<<"id type "<<id_type << endl;
 
     string exp_type = exp->getTypeAsString(exp->getType());
+    cout << "exp type is "<<exp_type<<endl;
 
 //    Num* num = dynamic_cast<Num*>(exp);
 //    Byte* byte = dynamic_cast<Byte*>(exp);
@@ -498,9 +499,11 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
 
         cout<<"args  is  "<<s<<endl;
         cout<<"types  is "<<name<<endl;
-        if(s == "NUM" && name == "BYTE"){ ///changed this !!
+        if(s == "INT" && name == "BYTE"){ ///changed this !!
             continue;
-        }else if(s!= name){
+        }
+
+        if(s!= name){
             output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
             exit(0);
         }
