@@ -453,6 +453,7 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
     tables->getSymbolsTable()->pop();
     list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
     cout<< "inner scope" << endl;
+    cout<< inner_scope->size() << endl;
 
     auto it = inner_scope->back();
     it--;
