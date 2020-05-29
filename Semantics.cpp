@@ -487,7 +487,7 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
 
         cout<<"s is  "<<s<<endl;
         cout<<"name is "<<name<<endl;
-        if(s == "BYTE" && name == "INT"){
+        if(s == "INT" && name == "BYTE"){ ///switched it!!! checking with the tests...
             continue;
         }
         if(s!= name){
