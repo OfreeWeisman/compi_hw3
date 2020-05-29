@@ -326,21 +326,32 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
     cout<<"id type "<<id_type << endl;
 
 
-    Num* num = dynamic_cast<Num*>(exp);
-    Byte* byte = dynamic_cast<Byte*>(exp);
-    Bool* b =  dynamic_cast<Bool*>(exp);
+//    Num* num = dynamic_cast<Num*>(exp);
+//    Byte* byte = dynamic_cast<Byte*>(exp);
+//    Bool* b =  dynamic_cast<Bool*>(exp);
+    auto it = exp->getTypes()->begin();
+    string exp_type = *it;
 
-
-    if(id_type == "INT" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
+    if(id_type == "INT" && (exp_type!= "INT" && exp_type!="BYTE")){ //we've received an int, but the expression isn't int nor byte.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "BOOL" && !b){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BOOL" && exp_type!="BOOL"){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
-    }else if(id_type == "BYTE" && !byte){ //we've received a bool, but the expression isn't a bool.
+    }else if(id_type == "BYTE" && exp_type!="BYTE"){ //we've received a bool, but the expression isn't a bool.
         output::errorMismatch(yylineno);
         exit(0);
     }
+//    if(id_type == "INT" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
+//        output::errorMismatch(yylineno);
+//        exit(0);
+//    }else if(id_type == "BOOL" && !b){ //we've received a bool, but the expression isn't a bool.
+//        output::errorMismatch(yylineno);
+//        exit(0);
+//    }else if(id_type == "BYTE" && !byte){ //we've received a bool, but the expression isn't a bool.
+//        output::errorMismatch(yylineno);
+//        exit(0);
+//    }
 
     cout<<"endcheckLegalAssignmentwhentypegiven"<<endl;
 
@@ -1065,7 +1076,7 @@ Node *semantics37(Node *call) {
     return call;
 }
 
-void semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) {
+Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) {
     Id* i = dynamic_cast<Id*>(id);
     vector<string>* args = new vector<string>();
     list<Symbol*>* s = getFunctionsArgs(id, tables,functionArgs); // search if id exists
@@ -1073,6 +1084,9 @@ void semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs) 
         output::errorPrototypeMismatch(yylineno, i->getIdName(), *args);
     }
     //return getFunctionRetType(id, tables);
+    string retType = getFunctionRetType(id,tables);
+    Expression* expression= new Expression();
+    expression->setTypes(retType);
 
 
 }
@@ -1103,7 +1117,7 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
     return exp;
 }
 
-void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
+Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
     //Expression* e = dynamic_cast<Expression*>(explist);
    // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
@@ -1150,6 +1164,10 @@ void semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruct
     //get the retType of the function
     //return New of this type
     //return getFunctionRetType(id,tables);
+    string retType = getFunctionRetType(id,tables);
+    Expression* expression= new Expression();
+    expression->setTypes(retType);
+
 
 }
 

@@ -93,10 +93,10 @@ void semantics25(Node* BREAK, Node* sc, int* inWhile);
 void semantics26(Node* cont, Node* sc, int* inWhile);
 
 //rule 27 : Call -> ID LPAREN Explist RPAREN
-void semantics27(Node* id, Node* lparen, Node* explist, Node* rparen, DataStructures* tables, vector<string>* args);
+Node* semantics27(Node* id, Node* lparen, Node* explist, Node* rparen, DataStructures* tables, vector<string>* args);
 
 //rule 28 : Call -> ID LPAREN RPAREN
-void semantics28(Node* id, DataStructures* tables,vector<string>* args);
+Node* semantics28(Node* id, DataStructures* tables,vector<string>* args);
 
 //rule 29 : Explist -> Exp
 Node* semantics29(Node* exp);
