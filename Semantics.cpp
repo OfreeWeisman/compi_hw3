@@ -1098,7 +1098,10 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 }
 
 Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
+
     string returnType = getFunctionRetTypeFromTable(tables);
+    cout<< returnType<<endl;
+
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
     if (ret_type == "VOID") {
