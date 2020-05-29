@@ -15,7 +15,6 @@ extern int yylineno;
  * throws an error if that symbol already exists
  */
 void symbolExistsinList(list<Symbol*>* currList, string name){
-   // cout<<"SymbolExistsList"<<endl;
     list<Symbol*>::iterator it = currList->begin();
     for(it; it != currList->end(); it++){
         Symbol* temp = *it;
@@ -24,7 +23,6 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
             exit(0);
         }
     }
-  //  cout<<"SymbolExistsListFINISH"<<endl;
 
 }
 
@@ -32,12 +30,8 @@ void symbolExistsinList(list<Symbol*>* currList, string name){
  * throws an error if symbol already exists somewhere in the stack.
  */
 void searchIfPreDefined(Node* id, DataStructures* tables) {
-    cout<<"searchIfPreDefined"<<endl;
-
     Id *i = dynamic_cast<Id*>(id);
     if(!i){
-         cout<<"i is not id"<<endl;
-
     }
     string name = i->getIdName();
 
@@ -57,7 +51,6 @@ void searchIfPreDefined(Node* id, DataStructures* tables) {
         symbolTables->push(currList);
         tempSymbolTable->pop();
     }
-    cout<<"searchIfPreDefinedFINISHED"<<endl;
 
 }
 
@@ -106,7 +99,6 @@ list<Symbol*>* getFuncUsingId(Node* id, DataStructures* tables){
 
 
     if(func == nullptr){
-        cout<<"error getFuncUsingId"<<endl;
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -124,7 +116,6 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables, vector<string>
 
     list<Symbol*>* funcs_args = getFuncUsingId(id, tables);
     if(funcs_args == nullptr){
-        cout<<"funcargs == null"<<endl;
     }
     //I've got the paramter list. now I'll only take out the negative offsets which are the arguments of the function.
     list<Symbol*>* l = new list<Symbol*>();
@@ -134,7 +125,6 @@ list<Symbol*>* getFunctionsArgs(Node* id, DataStructures* tables, vector<string>
     for(it; it != funcs_args->end(); it++){
         func = *it;
         if(func->getOffset() < 0){
-            cout<<"function args? "<<func->getType()<<endl;
             l->push_back(func);
             args->push_back(func->getType());
         }
@@ -186,7 +176,6 @@ string getFunctionRetType(Node* id, DataStructures* tables){
     }
 
     if(func == nullptr){
-        cout<<"error getFunctionRetType"<<endl;
         output::errorUndefFunc(yylineno, func_name);
         exit(0);
     }
@@ -233,14 +222,12 @@ string getIdType(Node* id, DataStructures* tables) {
     }
 
     if(func == nullptr){
-        cout<<"error getIdType"<<endl;
         output::errorUndef(yylineno, func_name);
         exit(0);
     }
 
 
     return func->getType();
-//    cout<<"ret type is "<<ret_type<<endl;
 //
 //    if(ret_type == "BOOL"){
 //        return new Bool();
@@ -256,7 +243,6 @@ string getIdType(Node* id, DataStructures* tables) {
 //rule 2:
 
 void checkExpBool(Node* operand1, DataStructures* tables){
-    //cout<<operand1->getTypeAsString(operand1->getType())<<endl;
     Id* i = dynamic_cast<Id*>(operand1);
     string type;
     if(i){
@@ -265,7 +251,6 @@ void checkExpBool(Node* operand1, DataStructures* tables){
         type = operand1->getTypeAsString(operand1->getType());
     }
     if(type != "BOOL"){
-        cout<< "checkExpBool "<<type<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
@@ -282,23 +267,12 @@ void checkExpBool(Node* operand1, DataStructures* tables){
 //rule 6+7:
 //TODO: what else should we be checking here?
 void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
-    cout<<"checkLegalAssignment"<<endl;
     //it is legal to assign byte to int
     Id* i = dynamic_cast<Id*>(id);
     if(i == nullptr){
-        cout<<"i isnt id "<<endl;
     }
     string id_type = getIdType(id,tables);
-    cout<<"id type "<<id_type << endl;
-
     string exp_type = exp->getTypeAsString(exp->getType());
-    cout << "exp type is "<<exp_type<<endl;
-
-//    Num* num = dynamic_cast<Num*>(exp);
-//    Byte* byte = dynamic_cast<Byte*>(exp);
-//    Bool* b =  dynamic_cast<Bool*>(exp);
-
-
     if(id_type == "INT" && (exp_type!= "INT" && exp_type!="BYTE")){ //we've received an int, but the expression isn't int nor byte.
         output::errorMismatch(yylineno);
         exit(0);
@@ -310,26 +284,16 @@ void checkLegalAssignment(Node* id, Node* exp ,DataStructures* tables){
         exit(0);
     }
 
-    cout<<"endcheckLegalAssignment"<<endl;
-
 }
 
 
 
 
 void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
-    cout<<"checkLegalAssignmentwhentypegiven"<<endl;
     //it is legal to assign byte to int
     Type* t = dynamic_cast<Type*>(type);
-
-
     string id_type =  t->getTypeAsString(t->getType());
-    cout<<"id type "<<id_type << endl;
 
-
-//    Num* num = dynamic_cast<Num*>(exp);
-//    Byte* byte = dynamic_cast<Byte*>(exp);
-//    Bool* b =  dynamic_cast<Bool*>(exp);
     auto it = exp->getTypes()->begin();
     string exp_type = *it;
 
@@ -343,19 +307,6 @@ void checkLegalAssignmentWhenTypeGiven(Node* type, Node* exp){
         output::errorMismatch(yylineno);
         exit(0);
     }
-//    if(id_type == "INT" && (!num && !byte)){ //we've received an int, but the expression isn't int nor byte.
-//        output::errorMismatch(yylineno);
-//        exit(0);
-//    }else if(id_type == "BOOL" && !b){ //we've received a bool, but the expression isn't a bool.
-//        output::errorMismatch(yylineno);
-//        exit(0);
-//    }else if(id_type == "BYTE" && !byte){ //we've received a bool, but the expression isn't a bool.
-//        output::errorMismatch(yylineno);
-//        exit(0);
-//    }
-
-    cout<<"endcheckLegalAssignmentwhentypegiven"<<endl;
-
 }
 
 //rule 8:
@@ -377,25 +328,12 @@ void checkLegalRelop(Node* operand1, Node* operand2,  DataStructures* tables){
         s2 = operand2->getTypeAsString(operand2->getType());
     }
 
-
-    cout<<"s1 is "<<s1<<" s2 is "<<s2<<endl;
-
     if((s1 == "INT" || s1 =="BYTE") && (s2 == "INT" || s2 =="BYTE")){
 
     }else {
-        cout<<"checkLegalRelop"<<endl;
         output::errorMismatch(yylineno);
         exit(0);
     }
-
-//    if((dynamic_cast<Num*>(operand1) || dynamic_cast<Byte*>(operand1)) &&
-//       (dynamic_cast<Num*>(operand2) || dynamic_cast<Byte*>(operand2))){
-//
-//    }else {
-//            cout<<"checkLegalRelop"<<endl;
-//            output::errorMismatch(yylineno);
-//            exit(0);
-//    }
 }
 
 
@@ -429,11 +367,6 @@ void checkLegalBinop(Node* operand1, Node* operand2,  DataStructures* tables) {
         s2 = operand2->getTypeAsString(operand2->getType());
     }
 
-
-
-//    TypesEnum type1 = operand1->getType();
-//    TypesEnum type2 = operand2->getType();
-//
     if (s1 == s2) {
         return ;
     } else if ((s1 == "INT" || s1 == "BYTE") && (s2 == "INT" || s2 == "BYTE")) {
@@ -447,8 +380,6 @@ void checkLegalBinop(Node* operand1, Node* operand2,  DataStructures* tables) {
 //rule 14:
 void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     //compare the lists
-    cout<<"checkValidArgs"<<endl;
-    cout<<*types->begin()<<endl; // got STRING! :)
     Id* i = dynamic_cast<Id*>(id);
     if(i->getIdName() == "print"){
         string type = *types->begin();
@@ -477,10 +408,8 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     vector<string>* vec = new vector<string>();
     for(it; it != args->end(); it++){
         //Symbol* s = *it;
-        cout<<"creating the vector now - "<<*it<<endl;
         vec->push_back(*it);
     }
-    cout<<"one size is "<<types->size()<<" two size is "<<args->size()<<endl;
 
     if(types->size() != args->size()){
         output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
@@ -496,9 +425,6 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
     for(itt; itt!=types->end(); itt++,itt2++){
         name = *itt;
         s = *itt2;
-
-        cout<<"args  is  "<<s<<endl;
-        cout<<"types  is "<<name<<endl;
         if(s == "INT" && name == "BYTE"){ ///changed this !!
             continue;
         }
@@ -536,12 +462,10 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
 //-----------------------------------------------Semantics Functions--------------------------------------------------//
 
 Node *semanticsTypeInt() {
-    cout<<"semanticsTypeInt"<<endl;
     return new Type(INT_ENUM);
 }
 
 void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
-    cout<<"semantics15"<<endl;
     //check if this id already exists in the symbol table
     searchIfPreDefined(id, tables);
 
@@ -557,24 +481,17 @@ void semantics15(Node *type, Node *id, Node *sc, DataStructures* tables) {
     Symbol* new_symbol = new Symbol(typeString, offset ,name );
     tables->pushNewSymbol(new_symbol);
 
-    cout<<"end of semantics15"<<endl;
-
-
 }
 
 Node *semanticsTypeByte() {
-    cout<<"semanticsTypeByte"<<endl;
     return new Type(BYTE_ENUM);
 }
 
 Node *semanticsTypeBool() {
-    cout<<"semanticsTypeBool"<<endl;
-
     return new Type(BOOL_ENUM);
 }
 
 void openScope(DataStructures* tables){
-    cout<<" open scope  "<<endl;
     tables->pushNewScope();
 
 }
@@ -586,8 +503,6 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     Parameter* p  = dynamic_cast<Parameter*>(formals);
     if(p){
         if(p->getNames()){
-            cout<<"in open func names size is "<<p->getNames()->size()<<endl;
-            cout<<"in open func types size is "<<p->getTypes()->size()<<endl;
         }
     }
 
@@ -597,36 +512,14 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
     string name = dynamic_cast<Id*>(id)->getIdName();
 
     TypesEnum types_enum = dynamic_cast<Type*>(type)->getType();
-    cout<<type->getTypeAsString(types_enum)<<endl;
-
-   // cout<<"dynamic casts finished"<<endl;
-
     string funcType = output::makeFunctionType(type->getTypeAsString(types_enum), *functionArgs);
-    cout<<"makefunctiontype in open funcscope returns "<< funcType<<endl;
-
     functionArgs->clear();
-
-    //fill here the functionArgs vector with the functType
-
-//
-//    int i = 0;
-//    int j = 0;
-//    string parameter;
-//    while(i < funcType.length()){
-//        i = funcType.find(",");
-//        parameter = funcType.substr(j,i);
-//        j=i;
-//        functionArgs->push_back(parameter);
-//    }
 
 
 //edit:
     Symbol* s = new Symbol(funcType, 0, name);
-    //Symbol* s = new Symbol(type->getTypeAsString(types_enum), 0, name); // so only its return type.
     tables->pushNewSymbol(s);
     tables->pushNewScope();
-
-
 
     //insert here the functions' parameters in the new scope
     if(p){
@@ -640,7 +533,6 @@ void openFuncScope(Node *type, Node *id, Node* formals, DataStructures* tables, 
             for(it1; it1 != p->getTypes()->end(); it1++,it2++){
                 curr_name = *it2;
                 curr_type = *it1;
-                cout<<"inserting the symbol to the functions list. type is  "<<curr_type<<" name is "<<curr_name<<" offset "<< offset<<endl;
                 Symbol* s = new Symbol(curr_type, offset--, curr_name);
                 tables->pushNewSymbol(s);
             }
@@ -654,9 +546,7 @@ void closeScope(DataStructures* globalTables, vector<string>* funcArgs){
     //print the top scope
     output::endScope();
     list<Symbol*>* scope = globalTables->getSymbolsTable()->top();
-    cout<<"closescope"<<endl;
     Symbol* s;
-    cout<<"the number of symbols in this scope is "<<scope->size()<<endl;
     list<Symbol*>::iterator it = scope->begin();
     for(it ; it != scope->end(); it++){
         s = *it;
@@ -669,7 +559,6 @@ void closeScope(DataStructures* globalTables, vector<string>* funcArgs){
 Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
     Parameter* p = dynamic_cast<Parameter*>(formalsList);
     if(p==nullptr){
-      //  cout <<"p is null"<< endl;
     }
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
@@ -681,13 +570,8 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     vector<string>::iterator it3 = funcArgs->begin();
     for(it3; it3 != funcArgs->end(); it3++){
         string k  = *it3;
-        cout<<"print out "<< k <<endl;
     }
-//    for(int i = 0; i < length; i++){
-//        cout<<*it1<<" "<<*it2<<endl;
-//        Symbol* s = new Symbol(*it2++, offset--, *it1++);
-//        tables->pushNewSymbol(s);
-//    }
+
     return p;
 }
 
@@ -701,39 +585,24 @@ Node* semantics11(Node *type, Node *id, DataStructures *tables) {
 }
 
 Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructures* tables, vector<string>* funcArgs) {
-    //cocongfl two lists to build the parameters list of the function
-    cout<<"semantics 10 "<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
     Parameter* parameter2 = dynamic_cast<Parameter*>(formalsList);
     string id1 = parameter1->getId();
 
     string type1 = parameter1->getTypeAsString(parameter1->getType());
     string id2 = parameter2->getId();
-    cout<<"id2 before appending is  "<<id2<< " and id 1 is " << id1<<endl;
-
     string type2 = parameter2->getTypeAsString(parameter2->getType());
-
-   // cout<<"length of type 2 +1 "<<(id2.append(",").append(id1)).size()<<endl;
     string s;
-    cout<<"max size "<<s.max_size()<<endl;
-
-    cout<<"before appending -type 2   "<<type2<<" type 1-  "<<type1<<endl;
-
-
     string tnew =type2+","+(type1);
     string idnew = id2+","+(id1);
-    cout<<"now they are  "<<tnew << " and    " <<idnew<<endl;
 
     Parameter* p = new Parameter(tnew,idnew);
-    cout<<"semantics parameter "<<endl;
 
     list<string>* names_temp = combineLists(parameter1->getNames(),parameter2->getNames());
     p->setNames(names_temp);
     list<string>* types_temp = combineLists(parameter1->getTypes(),parameter2->getTypes());
     auto it = types_temp->begin();
-    cout<<*it << " 1 "<< *(++it) << "2"<<endl;
     p->setTypes(types_temp);
-    //funcArgs->push_back(type1);
     funcArgs->insert(funcArgs->begin(), type1);
 
   //  delete parameter1->getNames();
@@ -745,7 +614,6 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 }
 
 Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
-    cout<<"semantics 9"<<endl;
     Parameter* parameter1 = dynamic_cast<Parameter*>(formalsDecl);
 
    // int s = parameter1->getTypes()->size();
@@ -754,15 +622,8 @@ Node *semantics9(Node *formalsDecl,vector<string>* funcArgs) {
     string id1 = (parameter1->getId());
     list<string>* names_temp = new list<string>();
     names_temp->push_back(id1);
-
-    if(parameter1->getType() == NULL_ENUM){
-        cout<<"null"<<endl;
-    }
     string type1 = parameter1->getTypeAsString(parameter1->getType());
-    cout<<"im in semantics 9 the type is "<<type1<<" and id is  "<<id1<<endl;
-
     funcArgs->push_back(type1);
-
     return parameter1;
 }
 
@@ -781,12 +642,9 @@ Node *semantics38(Node* num) {
 
 Node *semantics39(Node *num, Node *b) {
 
-  //  Byte* byte = dynamic_cast<Byte*>(num);
-
     Num* number = dynamic_cast<Num*>(num);
     int value = number->getValue();
     if(value<= 255 && value > 0){
-        cout<<"the byte value is "<<value<<endl;
         return num;
     } else {
         output::errorByteTooLarge(yylineno,number->getStrValue());
@@ -804,34 +662,25 @@ Node* semanticsFalse(){
 
 void setup(DataStructures* globalTables) {
     globalTables->pushNewScope();
-   // cout<<"1"<<std::endl;
     vector<string>* temp = new vector<string>();
     temp->push_back("STRING");
     Symbol* s1 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "print");
-    //maketemp->clear();
-  //  cout<<"2"<<std::endl;
     temp->clear();
     globalTables->pushNewSymbol(s1);
-   // cout<<"3"<<std::endl;
     temp->push_back("INT");
     Symbol* s2 = new Symbol(output::makeFunctionType("VOID", *temp), 0, "printi");
-  //  cout<<"1"<<std::endl;
     temp->clear();
-
     globalTables->pushNewSymbol(s2);
 
 }
 
 void cleanup(DataStructures* globalTables, vector<string>* funcArgs) {
-//    Id* i = new Id("main");
-//    string type = getIdType(i,globalTables);
-    //find main
+
     list<Symbol*>* list = globalTables->getSymbolsTable()->top();
     auto it = list->begin();
     bool is_main = false;
     for(it; it != list->end(); it++){
         Symbol* s = *it;
-        cout<<"check main "<<s->getName()<<"  "<<s->getType()<<endl;
         if(s->getName() == "main" && s->getType()=="()->VOID"){
             is_main = true;
             break;
@@ -841,10 +690,7 @@ void cleanup(DataStructures* globalTables, vector<string>* funcArgs) {
         output::errorMainMissing();
         exit(0);
     }
-
-    cout<<"cleanup"<<endl;
     closeScope(globalTables, funcArgs);
-  //  globalTables->popScope();
 
 }
 
@@ -976,7 +822,6 @@ Node *semantics46(Node *exp1, Node *RELOP, Node *exp2, DataStructures* tables) {
 Node *semantics35(Node *exp1, Node *BINOP, Node *exp2,DataStructures* tables) {
     checkLegalBinop(exp1, exp2,tables);
 
-    cout<<"back from check binop"<<endl;
 
     string t1;
     string t2;
@@ -1053,12 +898,9 @@ Node *semantics35(Node *exp1, Node *BINOP, Node *exp2,DataStructures* tables) {
 }
 
 Node *semantics40(Node *str) {
-   // cout<<"in 40"<<endl;
     String* s = dynamic_cast<String*>(str);
     Expression* e = new Expression(s->getStr(), "STRING");
-    //
     e->setTypes("STRING");
-    //
     return e;
 }
 
@@ -1067,15 +909,12 @@ Node *semantics34(Node *lparen, Node *exp, Node *rparen) {
 }
 
 Node *semantics36(Node *id,DataStructures* tables) {
-   // cout<<"exp->id"<<endl;
     string type = getIdType(id, tables);
     id->setTypes(type);
     return id;
 }
 
 Node *semantics37(Node *call) {
-   // cout<<"in 37"<<endl;
-
     return call;
 }
 
@@ -1098,7 +937,6 @@ Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs)
 }
 
 Node *semantics29(Node *exp) {
-   // cout<<"in 29"<<endl;
     return exp;
 }
 
@@ -1107,12 +945,8 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
    // Expression* e2 = dynamic_cast<Expression*>(explist);
 
     list<string>* l1 = exp->getTypes();
-
-
     list<string>* l2 = explist->getTypes();
-
     list<string>* temp = combineLists(l1, l2);
-
     exp->setTypesList(temp);
 
    // list<string>* temp = combineLists(e1->getTypes(), e2->getTypes());
@@ -1125,7 +959,6 @@ Node *semantics30(Node *exp, Node *COMMA, Node *explist) {
 
 Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStructures* tables, vector<string>* args) {
     //Expression* e = dynamic_cast<Expression*>(explist);
-   // cout<<"dynamic cast"<<endl;
     list<string>* types = explist->getTypes();
 
     list<Symbol*>* s = getFunctionsArgs(id, tables, args);
@@ -1135,13 +968,11 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     if(i->getIdName() != "print" && i->getIdName()!="printi"){
         string type_list = getIdType(id,tables);
         //type lis is (BOOL,INT,INT)->VOID . break the type list
-        cout<<type_list<<endl;
         int pos = type_list.find(")");      // position of "live" in str
 
         string ret_type = type_list.substr(1,pos-1);
         int len = ret_type.size();
         string param_type;
-        cout<<ret_type<<endl;
         pos = 0;
 
         while(pos<len){
@@ -1157,28 +988,12 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
             }
 
             arguments->push_back(param_type);
-            cout<<param_type<<endl;
-
-
         }
         arguments->push_back(ret_type);
     }
-
-
-    //cout<<"ofree: "<< symbol->getType()<<endl;
-
-    // cout<<"create s"<<endl;
-
     checkValidArgs(types,id, arguments); //throw error if mismatch
-  //  cout<<"valid args"<<endl;
-
-    //find the function in the symbol table
-    //get the retType of the function
-    //return New of this type
-    //return getFunctionRetType(id,tables);
     string retType = getFunctionRetType(id,tables);
     retType = retType.substr(2);
-    cout<<retType<<endl;
     Expression* expression= new Expression();
     expression->setTypes(retType);
     return expression;
@@ -1194,7 +1009,6 @@ void semantics26(Node *cont, Node *sc, int* inWhile) {
 }
 
 void semantics25(Node *BREAK, Node *sc, int* inWhile) {
-    cout<<"in whileeeeee " <<*inWhile<<endl;
 
     if(*inWhile == 0){
         output::errorUnexpectedBreak(yylineno);
@@ -1213,17 +1027,11 @@ void semantics17(Node *id, Node *assign, Node *exp, Node *sc,DataStructures* tab
 }
 
 void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataStructures* tables) {
-    cout<<"Semantics 16"<<endl;
     searchIfPreDefined(id, tables);
-
     TypesEnum t = dynamic_cast<Type*>(type)->getType();
-
     string typeString = type->getTypeAsString(t);
-
     string name = dynamic_cast<Id*>(id)->getIdName();
-
     checkLegalAssignmentWhenTypeGiven(type,exp);
-
     int offset;
     if(!tables->getOffsetsTable()->empty()){
        offset = tables->getOffsetsTable()->top();
@@ -1236,8 +1044,6 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
     Symbol* new_symbol = new Symbol(typeString, offset ,name );
     tables->pushNewSymbol(new_symbol);
 
-    //checkLegalAssignmentWhenTypeGiven(type,exp);
-
     //  delete(id);
   //  delete(exp);
   //  delete(type);
@@ -1246,11 +1052,8 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 
 void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
-    cout<<returnType<<endl;
     int pos = returnType.find("->");      // position of "live" in str
-
     string ret_type = returnType.substr(pos+2, returnType.size());
-    cout<<ret_type<<endl;
 
     if (ret_type != "VOID") {
         output::errorMismatch(yylineno);
@@ -1262,10 +1065,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
     int pos = returnType.find("->");      // position of "live" in str
-
     string ret_type = returnType.substr(pos+2, returnType.size());
-    cout<<ret_type<<endl;
-
     if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
@@ -1282,24 +1082,16 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
     Id* check = (dynamic_cast<Id*>(operand1));
     string type;
     if(!check){
-        cout<<"check is not an id"<<endl;
         type = operand1->getTypeAsString(operand1->getType());
     } else {
         type = getIdType(operand1, tables);
-
     }
 
-
-    //Bool* b = dynamic_cast<Bool*>(n);
     if(type != "BOOL"){
         output::errorMismatch(yylineno);
         exit(0);
     }
-    cout<<"id name is "<<type<<endl;
-    //if(check->getIdName() != "BOOL"){
-    //    output::errorMismatch(yylineno);
-     //   exit(0);
-    //}
+
 }
 
 
