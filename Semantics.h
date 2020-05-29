@@ -9,7 +9,6 @@
 //use the Node* definition of yystype
 
 #include "Tokens.h"
-#include "ScopesTable.h"
 #include "hw3_output.hpp"
 #include "DataStructures.h"
 

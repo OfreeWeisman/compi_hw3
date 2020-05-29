@@ -3,4 +3,4 @@ project(compi3)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(compi3 Tokens.cpp Enums.h Semantics.cpp NonTerminals.cpp DataStructures.cpp)
+add_executable(compi3 Tokens.cpp Enums.h Semantics.cpp DataStructures.cpp)

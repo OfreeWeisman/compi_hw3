@@ -4,7 +4,6 @@
 
 #include "Semantics.h"
 #include "Tokens.h"
-#include "NonTerminals.h"
 #include <iostream>
 using namespace std;
 extern int yylineno;
