@@ -1090,6 +1090,7 @@ Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs)
     string retType = getFunctionRetType(id,tables);
     Expression* expression= new Expression();
     expression->setTypes(retType);
+    return expression;
 
 
 }
@@ -1168,8 +1169,11 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //return New of this type
     //return getFunctionRetType(id,tables);
     string retType = getFunctionRetType(id,tables);
+
+    cout<<retType<<endl;
     Expression* expression= new Expression();
     expression->setTypes(retType);
+    return expression;
 
 
 }
