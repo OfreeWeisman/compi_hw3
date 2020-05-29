@@ -645,7 +645,9 @@ Node *semantics39(Node *num, Node *b) {
     Num* number = dynamic_cast<Num*>(num);
     int value = number->getValue();
     if(value<= 255 && value > 0){
-        return num;
+        Byte* byte = new Byte();
+        byte -> setValue(value);
+        return byte;
     } else {
         output::errorByteTooLarge(yylineno,number->getStrValue());
         exit(0);
