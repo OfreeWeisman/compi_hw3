@@ -507,7 +507,7 @@ bool checkIfWhileTypes(Node* exp){
 }
 
 string getFunctionRetTypeFromTable(DataStructures* tables){
-    cout<< "start of get function ret type from tables" << endl;
+//    cout<< "start of get function ret type from tables" << endl;
     list<Symbol*>* top_scope = tables->getSymbolsTable()->top();
    // cout<< top_scope->size() << endl;
 
@@ -520,13 +520,13 @@ string getFunctionRetTypeFromTable(DataStructures* tables){
     tables->getSymbolsTable()->pop();
     //
     list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
-    cout<< "inner scope" << endl;
+   // cout<< "inner scope" << endl;
    // cout<< inner_scope->size() << endl;
 
     auto it = inner_scope->back();
     Symbol* function = it;
 
-    cout << "in get function ret type from tables "<<function->getName()<<endl;
+ //   cout << "in get function ret type from tables "<<function->getName()<<endl;
     //Symbol* function = inner_scope->back();
     string type = function->getType();
     tables->getSymbolsTable()->push(top_scope3);
@@ -735,7 +735,7 @@ Node *semantics39(Node *num, Node *b) {
 
 Node* semanticsTrue(){
     //return new Bool(TRUE_ENUM);
-    cout<<"true?"<< endl;
+    //cout<<"true?"<< endl;
     return new Bool();
 }
 
@@ -1168,7 +1168,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
     //string returnType = getFunctionRetTypeFromTable(tables);
     string returnType = findClosestFunction(tables);
 
-    cout<< returnType<<endl;
+    //cout<< returnType<<endl;
 
 
     int pos = returnType.find("->");      // position of "live" in str
@@ -1182,18 +1182,18 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 }
 
 Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
-    cout<< "start of 20"<<endl;
+    //cout<< "start of 20"<<endl;
 
     //string returnType = getFunctionRetTypeFromTable(tables);
     string returnType = findClosestFunction(tables);
-    cout<< returnType<<endl;
-    cout<< "back from get function re type"<<endl;
+  //  cout<< returnType<<endl;
+  //  cout<< "back from get function re type"<<endl;
 
   //  cout<< returnType<<endl;
 
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
-    cout<< ret_type<<endl;
+  //  cout<< ret_type<<endl;
 
     if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
@@ -1227,11 +1227,11 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
 }
 
 void semantics21(Node *exp, Node* stmt, DataStructures* tables) {
-    cout<<"start of semantics 21"<<endl;
+   // cout<<"start of semantics 21"<<endl;
 
   //  cout<<exp->getTypeAsString(exp->getType());
     checkExpBool(exp, tables);
-    cout<<"end of semantics 21"<<endl;
+  //  cout<<"end of semantics 21"<<endl;
 
    // delete(exp);
 }
