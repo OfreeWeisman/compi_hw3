@@ -1094,7 +1094,6 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
 
 }
 
-
 void semantics21(Node *exp, DataStructures* tables) {
     checkExpBoolFromExpression(exp, tables);
    // delete(exp);

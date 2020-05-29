@@ -68,7 +68,7 @@ FuncDeclInsert :LBRACE Statements RBRACE Marker_close                       {}
 RetType		: Type															{$$ = semantics5($1);}
 			| VOID															{$$ = semantics6();}
 			;
-Formals		: /*epsilon*/													{cout<<"end of formals"<<endl;}
+Formals		: /*epsilon*/													{}
 			| FormalsList													{$$ = addParametersList($1,globalTables,funcArgs);}
 			;
 FormalsList	: FormalDecl													{$$ = semantics9($1,funcArgs);}
@@ -76,8 +76,8 @@ FormalsList	: FormalDecl													{$$ = semantics9($1,funcArgs);}
 			;
 FormalDecl	: Type ID														{ $$ = semantics11($1,$2,globalTables);}
 			;
-Statements	: Statement														{cout<<"the end of statement"<<endl;}
-			| Statements Statement											{cout<< "out of statments?"<<endl;}
+Statements	: Statement														{}
+			| Statements Statement											{}
 			;
 
 Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics21($3, globalTables);}
@@ -119,20 +119,19 @@ Exp			: LPAREN Exp RPAREN												{$$ = semantics34($1,$2,$3);}
 			| NOT Exp														{$$ = semantics43($2,globalTables);}
 			| Exp AND Exp													{$$ = semantics44($1,$2,$3,globalTables);}
 			| Exp OR Exp													{$$ = semantics45($1,$2,$3,globalTables);}
-			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3,globalTables);cout<<"out of 46"<<endl;}
+			| Exp RELOP Exp													{$$ = semantics46($1,$2,$3,globalTables);}
 			| Exp EQUALITY Exp												{$$ = semantics46($1,$2,$3,globalTables);}
 			;
 
 
 Marker1         : /*epsilon*/                                               {setup(globalTables);}
 Marker_open     : /*epsilon*/                                               {openScope(globalTables);}
-Marker_close    : /*epsilon*/                                               {closeScope(globalTables,funcArgs);cout<<"done closing"<<endl;}
+Marker_close    : /*epsilon*/                                               {closeScope(globalTables,funcArgs);}
 Marker_WHILE           : /*epsilon*/                                               {inWhile++;}
 
 %%
 
 int main(){
-    cout<<"in main"<<endl;
     funcArgs = new vector<string>();
     globalTables = new DataStructures();
     inWhile = 0;
