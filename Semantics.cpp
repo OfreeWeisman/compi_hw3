@@ -1088,7 +1088,7 @@ Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs)
     }
     //return getFunctionRetType(id, tables);
     string retType = getFunctionRetType(id,tables);
-    retType = retType.substr(2,retType.size());
+    retType = retType.substr(2);
 
     Expression* expression= new Expression();
     expression->setTypes(retType);
@@ -1171,7 +1171,7 @@ Node* semantics27(Node *id, Node *lparen, Node *explist, Node *rparen, DataStruc
     //return New of this type
     //return getFunctionRetType(id,tables);
     string retType = getFunctionRetType(id,tables);
-    retType = retType.substr(2,retType.size());
+    retType = retType.substr(2);
     cout<<retType<<endl;
     Expression* expression= new Expression();
     expression->setTypes(retType);
