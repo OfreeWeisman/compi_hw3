@@ -450,6 +450,8 @@ bool checkIfWhileTypes(Node* exp){
 string getFunctionRetTypeFromTable(DataStructures* tables){
     cout<< "start of get function ret type from tables" << endl;
     list<Symbol*>* top_scope = tables->getSymbolsTable()->top();
+    cout<< top_scope->size() << endl;
+
     tables->getSymbolsTable()->pop();
     list<Symbol*>* inner_scope = tables->getSymbolsTable()->top();
     cout<< "inner scope" << endl;
