@@ -1132,7 +1132,10 @@ void checkExpBoolFromExpression(Node* operand1, DataStructures* tables){
 }
 
 void semantics21(Node *exp, DataStructures* tables) {
-    checkExpBoolFromExpression(exp, tables);
+    cout<<exp->getTypeAsString(exp->getType());
+    checkExpBool(exp, tables);
+    cout<<"end of semantics 21"<<endl;
+
    // delete(exp);
 }
 
