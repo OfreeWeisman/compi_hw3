@@ -78,7 +78,7 @@ Node* semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
 void semantics21(Node* exp, Node* stmt, DataStructures* tables);
 
 //rule 22 : IF LPAREN Exp RPAREN Statement ELSE Statement
-void semantics22(Node* exp, DataStructures* tables);
+void semantics22(Node* exp,DataStructures* tables);
 
 //rule 23 : Statement -> WHILE LPAREN Exp RPAREN Statement
 void semantics23(Node* exp, DataStructures* tables,int* inWhile);
