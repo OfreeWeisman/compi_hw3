@@ -11,6 +11,56 @@ extern int yylineno;
 
 
 //-------------------------------------------------helper functions---------------------------------------------------//
+
+
+string findFuncInScope(list<Symbol*>* l){
+
+    Symbol* s;
+    auto it = l->begin();
+    for(it; it != l->end(); it++){
+        s = *it;
+        string type = s->getType();
+        if (type.find("->") != string::npos){
+            return type;
+
+        }
+    }
+
+
+}
+string findClosestFunction(DataStructures* tables){
+    int tables_num = tables->getSymbolsTable()->size();
+    stack<list<Symbol*>*>* stack = new stack<list<Symbol*>*>();
+    string type;
+
+    while(tables_num > 0){
+        list<Symbol*>* scope = tables->getSymbolsTable()->top();
+        tables_num--;
+        type = findFuncInScope(scope);
+        if (type != nullptr){
+
+            break;
+            //return type;
+        } else {
+            stack->push(scope);
+            tables->getSymbolsTable()->pop();
+        }
+
+    }
+
+    while(stack->size()>0){
+        list<Symbol*>* l = stack->top();
+        stack->pop();
+        tables->getSymbolsTable()->push(l);
+    }
+    return type;
+
+}
+
+
+
+
+
 /*
  * throws an error if that symbol already exists
  */
@@ -1106,7 +1156,8 @@ void semantics16(Node *type, Node *id, Node *assign, Node *exp, Node *sc, DataSt
 }
 
 void semantics19(Node *ret, Node *sc, DataStructures *tables) {
-    string returnType = getFunctionRetTypeFromTable(tables);
+    //string returnType = getFunctionRetTypeFromTable(tables);
+    string returnType = findClosestFunction(tables);
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
 
@@ -1120,7 +1171,9 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     cout<< "start of 20"<<endl;
 
-    string returnType = getFunctionRetTypeFromTable(tables);
+    //string returnType = getFunctionRetTypeFromTable(tables);
+    string returnType = findClosestFunction(tables);
+
     cout<< "back from get function re type"<<endl;
 
   //  cout<< returnType<<endl;
