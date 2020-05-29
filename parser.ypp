@@ -90,7 +90,7 @@ Statement : IF LPAREN Exp RPAREN Marker_open Statement Marker_close			{semantics
 			| ID ASSIGN Exp SC												{semantics17($1,$2,$3,$4,globalTables);}
 			| Call SC														{semantics18($1,$2);}
 			| RETURN SC														{semantics19($1,$2,globalTables);}
-			| RETURN Exp SC													{semantics20($1,$2,$3,globalTables);}
+			| RETURN Exp SC													{$$ = semantics20($1,$2,$3,globalTables);}
 			| BREAK SC														{semantics25($1,$2,&inWhile);}
 			| CONTINUE SC													{semantics26($1,$2,&inWhile);}
 			;

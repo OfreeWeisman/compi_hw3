@@ -1064,7 +1064,7 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
    // delete(ret);
 }
 
-void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
+Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     string returnType = getFunctionRetTypeFromTable(tables);
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
@@ -1072,6 +1072,7 @@ void semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
         output::errorMismatch(yylineno);
         exit(0);
     }
+    return exp;
   //  delete(ret);
  //   delete(exp);
 }

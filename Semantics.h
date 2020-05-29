@@ -72,7 +72,7 @@ void semantics18(Node* call, Node* sc);
 void semantics19(Node* ret, Node* sc, DataStructures* tables);
 
 //rule 20 : Statement -> RETURN Exp SC
-void semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
+Node* semantics20(Node* ret, Node* exp, Node* sc, DataStructures* tables);
 
 //rule 21 : Statement -> IF LPAREN Exp RPAREN Statement
 void semantics21(Node* exp, DataStructures* tables);
