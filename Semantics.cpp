@@ -700,15 +700,15 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
 
     string type2 = parameter2->getTypeAsString(parameter2->getType());
 
-    cout<<"length of type 2 +1 "<<(id2.append(",").append(id1)).size()<<endl;
+   // cout<<"length of type 2 +1 "<<(id2.append(",").append(id1)).size()<<endl;
     string s;
     cout<<"max size "<<s.max_size()<<endl;
 
     cout<<"before appending -type 2   "<<type2<<" type 1-  "<<type1<<endl;
 
 
-    string tnew =type2.append(",")+(type1);
-    string idnew = id2.append(",")+(id1);
+    string tnew =type2+","+(type1);
+    string idnew = id2+","+(id1);
     cout<<"now they are  "<<tnew << " and    " <<idnew<<endl;
 
     Parameter* p = new Parameter(tnew,idnew);
