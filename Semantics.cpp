@@ -1098,8 +1098,11 @@ void semantics19(Node *ret, Node *sc, DataStructures *tables) {
 }
 
 Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
+    cout<< "start of 20"<<endl;
 
     string returnType = getFunctionRetTypeFromTable(tables);
+    cout<< "back from get function re type"<<endl;
+
     cout<< returnType<<endl;
 
     int pos = returnType.find("->");      // position of "live" in str
