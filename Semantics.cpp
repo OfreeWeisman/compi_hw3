@@ -19,9 +19,9 @@ string findFuncInScope(list<Symbol*>* l){
     auto it = l->rbegin();
     for(it; it != l->rend(); it++){
         s = *it;
-//        if(s->getName() == "print" || s->getName()=="printi"){
-//            continue;
-//        }
+        if(s->getName() == "print" || s->getName()=="printi"){
+            break;
+        }
         string type = s->getType();
         if (type.find("->") != string::npos){
             return type;
@@ -34,7 +34,7 @@ string findFuncInScope(list<Symbol*>* l){
 }
 string findClosestFunction(DataStructures* tables){
     int tables_num = tables->getSymbolsTable()->size();
-    vector <list<Symbol*>*>* stack = new vector<list<Symbol*>*>();
+    list <list<Symbol*>*>* stack = new list<list<Symbol*>*>();
     string type;
 
     while(tables_num > 0){
@@ -51,12 +51,17 @@ string findClosestFunction(DataStructures* tables){
         }
 
     }
+    auto it = stack->rbegin();
+    for(it; it != stack->rend(); it++){
+        tables->getSymbolsTable()->push(*it);
 
-    while(stack->size()>0){
-        list<Symbol*>* l = *stack->end();
-        stack->pop_back();
-        tables->getSymbolsTable()->push(l);
     }
+    stack->clear();
+//    while(stack->size()>0){
+//        list<Symbol*>* l = *stack->end();
+//        stack->pop_back();
+//        tables->getSymbolsTable()->push(l);
+//    }
     return type;
 
 }
