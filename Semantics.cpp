@@ -25,12 +25,13 @@ string findFuncInScope(list<Symbol*>* l){
 
         }
     }
+    return nullptr;
 
 
 }
 string findClosestFunction(DataStructures* tables){
     int tables_num = tables->getSymbolsTable()->size();
-    stack<list<Symbol*>*>* stack = new stack<list<Symbol*>*>();
+    stack* stack = new stack<list<Symbol*>*>();
     string type;
 
     while(tables_num > 0){
