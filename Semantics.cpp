@@ -705,7 +705,11 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     string s;
     cout<<"max size "<<s.max_size()<<endl;
 
-    Parameter* p = new Parameter(type2.append(",").append(type1),id2.append(",").append(id1));
+    string tnew =type2.append(",").append(type1);
+    string idnew = id2.append(",").append(id1);
+    cout<<"now they are  "<<tnew << " and    " <<idnew<<endl;
+
+    Parameter* p = new Parameter(tnew,idnew);
     cout<<"semantics parameter "<<endl;
 
     list<string>* names_temp = combineLists(parameter1->getNames(),parameter2->getNames());
