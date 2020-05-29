@@ -489,7 +489,9 @@ void checkValidArgs(list<string>* types,Node* id, list<string>* args){
         cout<<"types  is "<<name<<endl;
         if(s == "INT" && name == "BYTE"){ ///changed this !!
             continue;
-        }else if(s!= name){
+        }
+
+        if(s!= name){
             output::errorPrototypeMismatch(yylineno,i->getIdName(),*vec);
             exit(0);
         }
