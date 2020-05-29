@@ -23,8 +23,6 @@ void DataStructures::pushNewScope() {
     }
     offsetsTable->push(last_offset);
 
-   // cout<<"offset is now "<<last_offset<<endl;
-
 }
 
 void DataStructures::popScope() {
@@ -41,7 +39,6 @@ void DataStructures::popScope() {
 }
 
 void DataStructures::pushNewSymbol(Symbol *s) {
-   // cout<<"check symbol " << s->getName()<<" " << s->getOffset()<<endl;
     list<Symbol*>* temp = symbolsTable->top();
     //check if needed (to pop and push or maybe just top
     symbolsTable->pop();
@@ -68,7 +65,6 @@ void DataStructures::setSymbolsTable(stack<list<Symbol *> *> *symbolsTable) {
 
 
 Symbol::Symbol(const string &type, int offset, const string &name) : type(type), offset(offset), name(name) {
-    cout<<"Symbol constructor with "<< name<<"    " << offset<<endl;
 }
 
 const string &Symbol::getType() const {
