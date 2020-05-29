@@ -1185,6 +1185,8 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
 
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
+    cout<< ret_type<<endl;
+
     if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
