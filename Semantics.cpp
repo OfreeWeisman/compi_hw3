@@ -31,7 +31,7 @@ string findFuncInScope(list<Symbol*>* l){
 }
 string findClosestFunction(DataStructures* tables){
     int tables_num = tables->getSymbolsTable()->size();
-    stack* stack = new stack<list<Symbol*>*>();
+    stack <list<Symbol*>*>* stack = new stack<list<Symbol*>*>();
     string type;
 
     while(tables_num > 0){
