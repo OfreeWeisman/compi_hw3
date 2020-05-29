@@ -1194,7 +1194,16 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     int pos = returnType.find("->");      // position of "live" in str
     string ret_type = returnType.substr(pos+2, returnType.size());
   //  cout<< ret_type<<endl;
-
+    string exp_type;
+    Id* i = dynamic_cast<Id*>(exp);
+    if(i){
+        exp_type = getIdType(exp, tables);
+    }
+      exp_type = exp->getTypeAsString(exp->getType());
+    if(exp_type != ret_type || !(exp_type=="BYTE" && ret_type == "INT")){
+        output::errorMismatch(yylineno);
+        exit(0);
+    }
     if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
         exit(0);
