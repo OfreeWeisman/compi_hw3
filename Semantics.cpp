@@ -934,6 +934,16 @@ Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs)
     Expression* expression= new Expression();
     expression->setTypes(retType);
     expression->setTypeStr(retType);
+
+    if(retType == "INT"){
+        expression->setType(INT_ENUM);
+
+    }else if(retType=="BOOL"){
+        expression->setType(BOOL_ENUM);
+
+    }else if(retType == "BYTE"){
+        expression->setType(BYTE_ENUM);
+    }
     return expression;
 
 
