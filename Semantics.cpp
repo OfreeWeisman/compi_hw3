@@ -1207,9 +1207,11 @@ Node* semantics20(Node *ret, Node *exp, Node *sc, DataStructures *tables) {
     }
 
     cout<<"Exp type "<<exp_type<<endl;
-    if(exp_type != ret_type || !(exp_type=="BYTE" && ret_type == "INT")){
+    if(exp_type != ret_type){
+        if(!(exp_type=="BYTE" && ret_type == "INT")){
         output::errorMismatch(yylineno);
         exit(0);
+        }
     }
     if (ret_type == "VOID") {
         output::errorMismatch(yylineno);
