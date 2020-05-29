@@ -931,6 +931,7 @@ Node* semantics28(Node *id, DataStructures* tables,vector<string>* functionArgs)
 
     Expression* expression= new Expression();
     expression->setTypes(retType);
+    expression->setTypeStr(retType);
     return expression;
 
 
