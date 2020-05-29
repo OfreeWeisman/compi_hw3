@@ -707,8 +707,8 @@ Node *semantics10(Node *formalsDecl, Node *comma, Node *formalsList, DataStructu
     cout<<"before appending -type 2   "<<type2<<" type 1-  "<<type1<<endl;
 
 
-    string tnew =type2.append(",").append(type1);
-    string idnew = id2.append(",").append(id1);
+    string tnew =type2.append(",")+(type1);
+    string idnew = id2.append(",")+(id1);
     cout<<"now they are  "<<tnew << " and    " <<idnew<<endl;
 
     Parameter* p = new Parameter(tnew,idnew);
