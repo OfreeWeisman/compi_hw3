@@ -640,14 +640,28 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     }
     list<string>* names = p->getNames();
     list<string>* types = p->getTypes();
-    list<string>::iterator it1 = names->begin();
-    list<string>::iterator it2 = types->begin();
+//    list<string>::iterator it1 = names->begin();
+//    list<string>::iterator it2 = types->begin();
 
     int offset = -1;
     int length = names->size();
-    vector<string>::iterator it3 = funcArgs->begin();
-    for(it3; it3 != funcArgs->end(); it3++){
-        string k  = *it3;
+//    vector<string>::iterator it3 = funcArgs->begin();
+//    for(it3; it3 != funcArgs->end(); it3++){
+//        string k  = *it3;
+//    }
+
+    auto it1 = names->begin();
+    auto it2 = names->begin();
+    string current;
+    for(it1 ; it1 != names->end(); it1++){
+        current = *it1;
+        it2++;
+        for(it2; it2!=names->end();it2++){
+            if(*it2 == current){
+                output::errorDef(yylineno, current);
+                exit(0);
+            }
+        }
     }
 
     return p;
