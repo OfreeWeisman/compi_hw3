@@ -655,6 +655,7 @@ Node* addParametersList(Node *formalsList, DataStructures* tables, vector<string
     string current;
     for(it1 ; it1 != names->end(); it1++){
         current = *it1;
+        it2 = it1;
         it2++;
         for(it2; it2!=names->end();it2++){
             if(*it2 == current){
